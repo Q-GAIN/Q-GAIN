@@ -132,7 +132,7 @@ class MetricControl:
         data : list of dicts or dicts or ndarray
             The data to use the metric method on to produce some results.
         metric_list : list
-            The models to run. Options depend on the specified metrics during initialization. If set to None the 
+            The models to run. Options depend on the specified metrics during initialization. If set to None the
             controller will apply every available metric.
             (default = None)
         metric_path : str
