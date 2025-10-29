@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qgain"
+description = "Q-GAIN is an evolution of the SolDet package, serving as the foundation of a growing modular architecture to support a wider range of machine learning and physically informed analysis applications. "
+version = "1.0.0"
+readme = "README.md"
+license = "LGPL-3.0-or-later"
+license-files = [
+    "license",
+]
+authors = [
+  {name = "Michael Doris"},
+  {name = "Shangjie Guo"},
+  {name = "Sophia M. Koh"},
+  {name = "Lisa Ritter"},
+  {name = "Amilson R. Fritsch"},
+  {name = "Ian B. Spielman"},
+  {name = "Justyna P. Zwolak"},
+]
+maintainers = [
+  {name = "Michael Doris", email = "mjdoris@terpmail.umd.edu"},
+  {name = "Justyna P. Zwolak", email = "justyna.zwolak@nist.gov"},
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+]
+requires-python = ">=3.8"
+dependencies = [
+        'numpy<2.0.0',
+        'scikit-learn>=1.3.2',
+        'scipy>=1.11.4',
+        'torch>=2.0.0',
+        'torchvision>=0.16.1',
+        'tqdm>=4.66.0',
+        'matplotlib>=3.8.3',
+        'lmfit>=1.2.2',
+        'h5py>=3.10.0',
+        'requests>=2.31.0',
+        'pandas',
+]
+
+[project.urls]
+Homepage = "https://github.com/mjdoris/Q-GAIN"
