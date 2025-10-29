@@ -132,3 +132,8 @@ data/data_info/data_roster_N.npy
 #Misc
 qgain/CONFIG.ini
 .vscode
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+*/*/*/.DS_Store
+*.pyc
