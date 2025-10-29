@@ -1,4 +1,4 @@
-r"""Q-GAIN library.
+"""Q-GAIN library.
 
 A modular architecture to support a range of machine learning and physically informed analysis applications.
 The main features of Q-GAIN are accessed with the `Detector` class, and some helper functions are available as part of
@@ -17,31 +17,44 @@ sd = soliton_detector.SolitonDetector()
 On import, or when creating the Detector object, Q-GAIN will check to confirm if a configuration file,
 CONFIG.ini, exists in its package path. If not this is created with default values.
 
-[PATHS]\
-data_path = \<path to home directory\>/qgain\
+[PATHS]
+
+data_path = [path to home directory]/qgain
+
 def_exp_name = default_ds
 
 These set up the target directories for the required folder structure to run Q-GAIN. The <em>data_path</em> points to
 the directory all experimental data folders will reside in. An experiment can be specified with <em>def_exp_name</em>,
 which will set the target directory for where Q-GAIN's class data will be saved to. The default structure is,
 
-data_path\
-|- def_exp_name\
-` `|- data\
-` ` ` `|- data_files\
-` ` ` `|- data_info\
-` `|- models\
+data_path/
+
+|- def_exp_name/
+
+` `|- data/
+
+` ` ` `|- data_files/
+
+` ` ` `|- data_info/
+
+` `|- models/
+
 |- ...
 
 Class folders reside within the <em>data_files</em> directory, and their naming depends on the information contained
 within the roster file, residing within the <em>data_info</em> directory. The default SolDet class structure is,
 
-data_files\
-` `|- class-0\
-` `|- class-1\
-` `|- class-2\
-` `|- class-8\
-` `|- class-9
+data_files/
+
+` `|- class-0/
+
+` `|- class-1/
+
+` `|- class-2/
+
+` `|- class-8/
+
+` `|- class-9/
 
 Multiple experiment folders can reside in the data path, and any detector objects created will reference the current
 def_exp_name. Changing to a different experiment folder requires creating another detector object. Although you can
@@ -72,11 +85,11 @@ Package Modules
 ---------------
 qgain.io
     The input/output functions for Q-GAIN.
-qgain.run\_classifier
+qgain.run_classifier
     The classifier controller.
-qgain.run\_metric
+qgain.run_metric
     The conventional analysis controller.
-qgain.run\_od
+qgain.run_od
     The object detection controller.
 qgain.utilities
     Support functions for Q-GAIN.
