@@ -313,7 +313,9 @@ class SolitonDetector(Detector):
             (default = ['classifier', 'object detector', 'pie classifier', 'quality estimator'])
         model_paths : list
             The names of the saved weights or model parameters. These should end in 'classifier.pt' for the classifier
-            and 'object.pt' for the object detector.
+            and 'object.pt' for the object detector. For conventional analysis methods these should be pickle files that
+            end with the name of the method. Passing an empty list, or a list lacking any saved metric files, to this
+            argument will attempt to run any defined metrics without loading files.
 
         """
         super().use_models(model_list=model_list, model_paths=model_paths)

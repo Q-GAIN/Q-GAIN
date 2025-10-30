@@ -83,6 +83,30 @@ class MetricControl:
             else:
                 self.metrics += [{"name": metric["name"], "metric": metric["metric"]()}]
 
+    def add_new_metric(self, pi_metrics: list[dict], pi_kwargs: list[dict] | None = None) -> None:
+        """Add a new analysis method to the existing list of metrics.
+
+        This function allows a user to add additional methods after the controller has been initialized.
+
+        Parameters
+        ----------
+        pi_metrics : list of dicts
+            A list of dictionaries specifying the statistical based metrics to use after the completion of the ML
+            models. This dictionary should have a 'name' key whose value is the name of the metric used to call it in
+            'use_models' and 'define_PI' and a 'metric' key whose value is a callable class with fit() and transform()
+            methods.
+        pi_kwargs : list of dicts
+            A list of dictionaries specifying any arguments needed to initialize the corresponding metric class object.
+            This should match the order of that found in the pi_metrics argument.
+            (Default = None)
+
+        """
+        for idx, metric in enumerate(pi_metrics):
+            if pi_kwargs is not None:
+                self.metrics += [{"name": metric["name"], "metric": metric["metric"](**pi_kwargs[idx])}]
+            else:
+                self.metrics += [{"name": metric["name"], "metric": metric["metric"]()}]
+
     def build_pi_metric(self, data: list[dict] | dict | np.ndarray, metric_list: list | None = None,
                         model_path: str | None = None, *, save_state: bool = False) -> None:
         """Fit to the data.
@@ -110,6 +134,7 @@ class MetricControl:
         save = False
         for metric in self.metrics:
             if metric_list is None or metric["name"] in metric_list:
+                print("Starting method: {}".format(metric["name"]))
                 metric["metric"].fit(data)
                 if save_state:
                     save = True
@@ -158,4 +183,5 @@ class MetricControl:
 
         for metric in self.metrics:
             if metric_list is None or metric["name"] in metric_list:
+                print("Starting method: {}".format(metric["name"]))
                 metric["res"] = metric["metric"].transform(data)
