@@ -1,5 +1,5 @@
 # Q-GAIN
-Q-GAIN is an evolution of the SolDet package, serving as the foundation of a growing modular architecture to support a wider range of machine learning and physically informed analysis applications. 
+Q-GAIN is a Python library serving as the foundation of a growing modular architecture to support a wider range of machine learning and physically informed analysis applications.
 
 It is featured with the original SolDet package as a submodule which includes classification, object detection, and physics informed metric methods. Technical details of the original package are explained in https://arxiv.org/abs/2111.04881. The dataset used to prepare the original SolDet and used by the modern SolDet module is available at https://data.nist.gov/od/id/mds2-2363. It also includes a vortex detector as a submodule for identifying the positions of vortices in Bose-Einstein Condensates.
 
@@ -262,7 +262,7 @@ class SolitonDetector(Detector):
 By passing in a callable function and a name to address it by to the controller via the *pi_metrics* argument, and any optional arguments to initialize the modules via the *pi_kwargs* argument, the controller automates its deployment in the Q-GAIN pipeline.
 
 These models require building a metric to transform the data before doing any of the relevant calculations. The fitting portion of these models can be invoked with the Q-GAIN detector method *build_pi*, which will work through every metric loaded into the controller and call their corresponding fit functions.
-Although not required, the SolDet subpackage invokes this method for each of its PIE classifier and quality estimator for convenience. For these functions the default values are sufficient, and the final result will be saved to the detector. Optionally, if the argument save is set to True these metrics can be saved as a file in the models folder of the experiment path.
+Although not required, the SolDet subpackage invokes this method for each of its PIE classifier and quality estimator methods for convenience. For these functions the default values are sufficient, and the final result will be saved to the detector. Optionally, if the argument save is set to True these metrics can be saved as a file in the models folder of the experiment path.
 
 ```python
 from qgain.soldet import soliton_detector
@@ -349,7 +349,7 @@ Currently you can modify the following:
 * The statistical based models to use for analysis, pi_metrics.
 
 ### Processing Data for Import
-The processing function should be written to import data such that it satisfies Q-GAIN's requirements to function, or the requirements of any modules you replace. When using Q-GAIN's processing function to import new data, such as labscript data from a different physical experiment, you can change the way the image data is retrieved by passing in new values to the arguments of [import_data()](qgain.detector.Detector.import_data) of Q-GAIN.
+The processing function should be written to import data such that it satisfies Q-GAIN's requirements to function, or the requirements of any modules you replace. When using Q-GAIN's processing function to import new data, such as labscript data organized differently, you can change the way the image data is retrieved by passing in new values to the arguments of [import_data()](qgain.detector.Detector.import_data) of Q-GAIN.
 
 ```python
 sd.import_data(path='../MOT_Exploration_2024/0001', target='images', atoms_name='MOT', bg_name='MOT_DARK', probe_name='MOT_PROBE', label=9, width=164, height=132)
@@ -406,7 +406,7 @@ params = {'dropout': 0.1, 'layers': 4, 'compression': [1, 16, 32, 64]}
 qd = Detector(od_model=DummyDetector, od_kwargs=params, od_loss_fn=torch.nn.MSELoss) 
 ```
 
-If the data expected by these models requires a custom dataset function, you can specify one with the *od_dataset_fn* and *cl_dataset_fn* arguments. At minimum these should contain __len__ and __getitem__ function definitions for proper functionality with a pytorch DataLoader. The ML controllers of Q-GAIN expect the output of the datasets to be in the form of (data, target). Note that if you do not have an argument called 'augment' you should specify augment = None when initializing a Detector object.
+If the data expected by these models requires a custom dataset function, you can specify one with the *od_dataset_fn* and *cl_dataset_fn* arguments. At minimum these should contain length and indexing magic function definitions for proper functionality with a pytorch DataLoader. The ML controllers of Q-GAIN expect the output of the datasets to be in the form of (data, target). Note that if you do not have an argument called 'augment' you should specify augment = None when initializing a Detector object.
 
 ```python
 from qgain.Detector import Detector 
