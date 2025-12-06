@@ -64,7 +64,7 @@ class VortexDetector(Detector):
         target_data = self.data if data is None else data
         for item in target_data:
             if "OD_pred" in item:
-                item["OD_pred"] = self.od_top.dataset_fn.labels_to_data(item["OD_pred"].cpu().numpy()[0])
+                item["OD_pred"] = vortex_labels_to_data(item["OD_pred"].cpu().numpy()[0], threshold=(0.5, 8.18))
         if data is None:
             self.data = target_data
 

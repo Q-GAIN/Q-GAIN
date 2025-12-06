@@ -16,7 +16,7 @@ from qgain.io import process_data
 from qgain.soldet.classifier_nn import MLST2021CNNmodern
 from qgain.soldet.object_nn import MetzLoss, ObjectDetector
 from qgain.soldet.pi_models import QE, PIEClassifier
-from qgain.soldet.soliton_datasets import SolitonClassDataset, SolitonODDataset
+from qgain.soldet.soliton_datasets import SolitonClassDataset, SolitonODDataset, pos_41labels_conversion
 
 
 class SolitonDetector(Detector):
@@ -331,7 +331,7 @@ class SolitonDetector(Detector):
         target_data = self.data if data is None else data
         for item in target_data:
             if "OD_pred" in item:
-                item["OD_pred"] = self.od_top.dataset_fn.labels_to_data(item["OD_pred"].cpu().numpy()[0])
+                item["OD_pred"] = pos_41labels_conversion(item["OD_pred"].cpu().numpy()[0])
             if "CL_pred" in item:
                 item["CL_pred"] = argmax(item["CL_pred"]).cpu().numpy()
         if data is None:
