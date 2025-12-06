@@ -47,6 +47,52 @@ class VortexDetector(Detector):
 
         self.od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
 
+    def use_models(self, model_paths: list, data: list | dict | None = None) -> None:
+        """Use the vortex detector to make predictions.
+
+        Parameters
+        ----------
+        model_paths : list
+            The names of the saved weights. These should end in 'object.pt'.
+        data : list or dict
+            The target data to use the model on. By default this will be the data loaded into the detector object. It
+            is possible to use external data by providing a list of dicts or dicts of dicts to this argument.
+            (default = None)
+
+        """
+        super().use_models(model_list=("object detector"), model_paths=model_paths, data=data)
+        target_data = self.data if data is None else data
+        for item in target_data:
+            if "OD_pred" in item:
+                item["OD_pred"] = self.od_top.dataset_fn.labels_to_data(item["OD_pred"].cpu().numpy()[0])
+        if data is None:
+            self.data = target_data
+
+    def vortex_counter(self, data: dict | np.ndarray, model_path: str) -> list:
+        """Count the number of identified objects.
+
+        Parameters
+        ----------
+        data : list or dict or ndarray
+            The data to make predictions on.
+        model_path : str
+            The path to the saved weights for the model.
+
+        Returns
+        -------
+        count_list : list
+            A list of counts for each provided image.
+
+        """
+        res = self.self.od_top.predict(data, model_path)
+
+        count_list = []
+
+        for item in res:
+            count_list.append(len(item))
+
+        return count_list
+
 
 class ObjectCell(torch.nn.Module):
     """Object cell for use in 2D Object Detector.

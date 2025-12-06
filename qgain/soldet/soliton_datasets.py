@@ -226,7 +226,27 @@ class SolitonClassDataset(torch.utils.data.Dataset):
         """
         image = self.imgs[idx]
         label = self.img_labels[idx]
-        return image, label
+        return image, label.long()
+
+    @staticmethod
+    def accu_metric(pred: torch.Tensor, targ: torch.Tensor) -> float:
+        """Calculate the number of correct predictions and give an accuracy score.
+
+        This is used during training of the SolDet CL to determine its accuracy during validation.
+
+        Paramters
+        ---------
+        pred : torch.Tensor
+            The output tensor of the object detector.
+        targ : torch.Tensor
+            The target label in cell space.
+
+        Returns
+        -------
+        correct : float
+
+        """
+        return (pred.argmax(1) == targ).to(torch.float).mean().item()
 
 
 class SolitonODDataset(torch.utils.data.Dataset):

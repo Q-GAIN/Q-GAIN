@@ -14,8 +14,8 @@ from tqdm import tqdm
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-class ClassifierControl:
-    """The Classifier Control class for the Q-GAIN package.
+class MLControl:
+    """The machine learning control class for the Q-GAIN package.
 
     Functionality can be modified with external modules by replacing them in the corresponding argument during class
     initialization.
@@ -52,11 +52,12 @@ class ClassifierControl:
     -------
     .. code-block:: python
 
-        kwargs = {'num_classes' : 3}
+        kwargs = {'label_shape' : (1, 41)}
 
-        cl_top = Classifier_Control(model = qgain.soldet.classifier_nn.MLST2021CNNmodern,
-        dataset_fn = qgain.soldet.soliton_datasets.SolitonClassDataset,
-        augment = True, device = 0, **kwargs)
+        od_top = Object_Control(model = qgain.soldet.object_nn.ObjectDetector,
+                                dataset_fn = qgain.soldet.soliton_datasets.SolitonODDataset,
+                                augment = True, device = 0, **kwargs)
+        od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
 
     """
 
@@ -102,11 +103,11 @@ class ClassifierControl:
         if metrics is not None:
             self.metrics = metrics
 
-    def train_class(self, train_data: list, test_data: list, optimizer_fn: torch.optim.Optimizer,
-                    loss_fn: torch.nn.Module, model_path: str | None = None, batch_size: int = 32, patience: int = 30,
-                    epochs: int = 30, lr: float = 1e-4, *, return_res: bool = False,
-                    save_weights: bool = False) -> dict | None:
-        """Train the object's classifier model on the given data.
+    def train(self, train_data: list, test_data: list, optimizer_fn: torch.optim.Optimizer,
+                     loss_fn: torch.nn.Module, model_path: str | None = None, batch_size: int = 32, patience: int = 30,
+                     epochs: int = 30, lr: float = 1e-4, *, return_res: bool = False,
+                     save_weights: bool = False) -> dict | None:
+        """Train the object's OD model on the given data.
 
         Parameters
         ----------
@@ -164,7 +165,7 @@ class ClassifierControl:
 
         if save_weights:
             save_path = Path(model_path).joinpath("models",
-                                                  datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + "_classifier.pt")
+                                                  datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + "_object.pt")
 
         optimizer = optimizer_fn(self.model.parameters(), lr=lr)
 
@@ -184,7 +185,7 @@ class ClassifierControl:
 
                     # compute error
                     pred = self.model(data)
-                    loss = loss_fn(pred, target.long())
+                    loss = loss_fn(pred, target)
 
                     # backpropagation
                     optimizer.zero_grad()
@@ -197,24 +198,21 @@ class ClassifierControl:
                 # VALIDATION
                 self.model.eval()
                 test_loss = torch.tensor(0, device=self.device, dtype=torch.float32)
-                correct = 0
                 for item in self.metrics:
                     item["res"] = 0
                 with torch.no_grad():
                     for (te_dat, te_tar) in test_dataloader:
                         data, target = te_dat.to(self.device), te_tar.to(self.device)
-                        pred = self.model(data)
-                        test_loss += loss_fn(pred, target.long()).detach()
-                        correct += (pred.argmax(1) == target).to(torch.float).mean().item()
+                        output = self.model(data)
+                        test_loss += loss_fn(output, target).detach()
                         for item in self.metrics:
-                            item["res"] += item["metric"](pred, target)
+                            item["res"] += item["metric"](output, target)
 
                 test_loss /= len(test_dataloader)
-                correct /= len(test_dataloader)
                 for item in self.metrics:
                     item["res"] /= len(test_dataloader)
 
-                test_metrics = {"Test Loss": test_loss, "Accuracy": correct}
+                test_metrics = {"Test Loss": test_loss}
                 for item in self.metrics:
                     test_metrics[item["name"]] = item["res"]
 
@@ -259,7 +257,7 @@ class ClassifierControl:
             return min_dict["Test Loss"].detach().cpu().item(), min_dict
         return None
 
-    def class_predict(self, data: list | dict | np.ndarray, model_path: str) -> np.ndarray:
+    def predict(self, data: list | dict | np.ndarray, model_path: str) -> list:
         """Make predictions using the object's model.
 
         Parameters
@@ -272,7 +270,7 @@ class ClassifierControl:
         Returns
         -------
         pos : list
-            A list of all classes found for each provided image.
+            A list of all positions found for each provided image.
 
         """
         if type(data) is dict:
@@ -281,13 +279,13 @@ class ClassifierControl:
             ds = self.dataset_fn(data, augment=False) if self.augment is not None else self.dataset_fn(data)
         elif type(data) is np.ndarray:
             data_list = []
-            if len(data.shape) >= 3:
+            if len(data.shape) == 3:
                 for i in range(data.shape[0]):
-                    data_list.append({"data": data[i]})
+                    data_list.append({"data": data[i, :, :]})
             elif len(data.shape) == 2:
                 data_list.append({"data": data})
             else:
-                msg = "Input data incorrect shape. Expected or 2D or greater data."
+                msg = "Input data incorrect shape. Expected 3D or 2D image data."
                 raise ValueError(msg)
 
             ds = self.dataset_fn(data_list, augment=False) if self.augment is not None else self.dataset_fn(data_list)
@@ -298,27 +296,26 @@ class ClassifierControl:
         with warnings.catch_warnings(record=True) as w:
             target = []
             for idx in range(len(ds)):
-                pred, _ = ds[idx]
-                pred = pred.to(self.device)
-                target.append(pred)
+                img, _ = ds[idx]
+                img = img.to(self.device)
+                target.append(img)
 
             checkpoint_dict = torch.load(model_path, map_location=torch.device(self.device), weights_only=True)
             self.model.load_state_dict(checkpoint_dict["model_state_dict"])
             self.model.eval()
-            print("Classifier model loaded.")
+            print("Model loaded.")
             res = []
             with torch.no_grad():
                 print("Running model, please wait..")
                 pbar = tqdm(range(len(target)), desc="Running..")
                 for sample in target:
-                    pred = self.model(sample.unsqueeze(0))
+                    pred = self.model(sample.unsqueeze(0)).detach()
+                    res.append(pred)
                     if len(w) > 0:
                         tqdm.write(str(w[0].message))
                         del w[0]
-                    res.append(torch.argmax(pred).detach().cpu().numpy())
                     pbar.update(1)
                 pbar.close()
-            labels = np.asarray(res)
         print("Finished.")
 
-        return labels
+        return res

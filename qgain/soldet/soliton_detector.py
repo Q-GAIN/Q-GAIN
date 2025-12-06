@@ -8,6 +8,7 @@ from __future__ import annotations
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import PowerTransformer
+from torch import argmax
 from torch.nn import NLLLoss
 
 from qgain.detector import Detector
@@ -79,6 +80,7 @@ class SolitonDetector(Detector):
                                       {"func": "modern", "transformer": PowerTransformer}])
 
         self.od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
+        self.class_top.metrics += [{"name": "Accuracy", "metric": self.class_top.dataset_fn.accu_metric}]
 
     def __plot_qe(self, qe_ground: list, qe_pred: list, qe_skip_count: int, *, style: str, save: bool) -> None:
         """Plot some metrics relevant for the quality estimator.
@@ -283,7 +285,7 @@ class SolitonDetector(Detector):
 
     def use_models(self, model_paths: list,
                    model_list: list | tuple = ("classifier", "object detector", "pie classifier", "quality estimator"),
-                   ) -> None:
+                   data: list | dict | None = None) -> None:
         """Use all models available in the SolDet module.
 
         Specifying any of the options 'classifier', 'object detector', 'pie classifier', or 'quality estimator' in the
@@ -316,9 +318,24 @@ class SolitonDetector(Detector):
             and 'object.pt' for the object detector. For conventional analysis methods these should be pickle files that
             end with the name of the method. Passing an empty list, or a list lacking any saved metric files, to this
             argument will attempt to run any defined metrics without loading files.
+        data : list or dict
+            The target data to use the models on. By default this will be the data loaded into the detector object. It
+            is possible to use external data by providing a list of dicts or dicts of dicts to this argument.
+            (default = None)
 
         """
-        super().use_models(model_list=model_list, model_paths=model_paths)
+        super().use_models(model_list=model_list, model_paths=model_paths, data=data)
+        # By default the Q-GAIN controller just passes through the output of the model.
+        # This is fine for training, but not inference. We want the human values.
+        # So we convert stuff here after inference since we didn't do that in the models themselves.
+        target_data = self.data if data is None else data
+        for item in target_data:
+            if "OD_pred" in item:
+                item["OD_pred"] = self.od_top.dataset_fn.labels_to_data(item["OD_pred"].cpu().numpy()[0])
+            if "CL_pred" in item:
+                item["CL_pred"] = argmax(item["CL_pred"]).cpu().numpy()
+        if data is None:
+            self.data = target_data
 
     def define_pie_classifier(self, *, save: bool = False) -> None:
         """Create a new metric on the object's data for the physics informed classifier.

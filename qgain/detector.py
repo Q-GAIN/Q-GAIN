@@ -15,9 +15,8 @@ from torch.optim import Adam
 from tqdm import tqdm
 
 from qgain.io import load_data, process_data
-from qgain.run_classifier import ClassifierControl
 from qgain.run_metric import MetricControl
-from qgain.run_od import ObjectControl
+from qgain.run_ml import MLControl
 from qgain.utilities import config
 
 if TYPE_CHECKING:
@@ -175,13 +174,13 @@ class Detector:
         self.data = []
         if cl_model is not None:
             cl_kwargs = {} if cl_kwargs is None else cl_kwargs
-            self.class_top = ClassifierControl(model=cl_model, dataset_fn=cl_dataset_fn, augment=augment, **cl_kwargs)
+            self.class_top = MLControl(model=cl_model, dataset_fn=cl_dataset_fn, augment=augment, **cl_kwargs)
         else:
             self.class_top = None
 
         if od_model is not None:
             od_kwargs = {} if od_kwargs is None else od_kwargs
-            self.od_top = ObjectControl(model=od_model, dataset_fn=od_dataset_fn, augment=augment, **od_kwargs)
+            self.od_top = MLControl(model=od_model, dataset_fn=od_dataset_fn, augment=augment, **od_kwargs)
         else:
             self.od_top = None
 
@@ -485,14 +484,14 @@ class Detector:
         tr_set, te_set = train_test_split(target_data, test_size=self.test, train_size=self.train)
         if "classifier" in model_list and self.class_top is not None:
             print("Initiating classifier training.")
-            self.class_top.train_class(train_data=tr_set, test_data=te_set, optimizer_fn=Adam,
+            self.class_top.train(train_data=tr_set, test_data=te_set, optimizer_fn=Adam,
                                        loss_fn=self.cl_loss_fn, model_path=self.exp_path, batch_size=32,
                                        patience=patience, epochs=epochs, lr=1e-4, return_res=False,
                                        save_weights=True)
 
         if "object detector" in model_list and self.od_top is not None:
             print("Initiating object detection training.")
-            self.od_top.train_object(train_data=tr_set, test_data=te_set, optimizer_fn=Adam,
+            self.od_top.train(train_data=tr_set, test_data=te_set, optimizer_fn=Adam,
                                      loss_fn=self.od_loss_fn, model_path=self.exp_path, batch_size=32,
                                      patience=patience, epochs=epochs, lr=1e-4, return_res=False,
                                      save_weights=True)
@@ -523,7 +522,8 @@ class Detector:
         self.pi_top.build_pi_metric(self.data if data is None else data, metric_list, model_path=self.exp_path,
                                     save_state=save)
 
-    def use_models(self, model_paths: list, model_list: list | tuple | None = None) -> None:
+    def use_models(self, model_paths: list, model_list: list | tuple | None = None,
+                   data: list | dict | None = None) -> None:
         """Use any specified models available in Q-GAIN.
 
         Specifying any of the options 'classifier', or 'object detector' in the argument model_list will make the
@@ -552,8 +552,13 @@ class Detector:
             and 'object.pt' for the object detector. For the PI metrics these should match the filenames for any saved
             fittings.
             (default = [])
+        data : list or dict
+            The target data to use the models on. By default this will be the data loaded into the detector object. It
+            is possible to use external data by providing a list of dicts or dicts of dicts to this argument.
+            (default = None)
 
         """
+        target_data = self.data if data is None else data
         weights = self.exp_path.joinpath("models")
         labels = None
         pos = None
@@ -567,21 +572,21 @@ class Detector:
         for f in model_paths:
             if f[-13:] == "classifier.pt" and "classifier" in tasks:
                 print("Starting ML Classifier.")
-                labels = self.class_top.class_predict(self.data, weights.joinpath(f))
+                labels = self.class_top.predict(target_data, weights.joinpath(f))
                 tasks.remove("classifier")
             elif f[-9:] == "object.pt" and "object detector" in tasks:
                 print("Starting ML Object Detector.")
-                pos = self.od_top.pos_predict(self.data, weights.joinpath(f))
+                pos = self.od_top.predict(target_data, weights.joinpath(f))
                 tasks.remove("object detector")
             else:
                 pi_list += [weights.joinpath(f)]
 
         if len(tasks) > 0:
             print("Starting PI methods.")
-            self.pi_top.apply_pi_metric(data=self.data, metric_list=tasks,
+            self.pi_top.apply_pi_metric(data=target_data, metric_list=tasks,
                                         metric_path=pi_list if len(pi_list) > 0 else None)
 
-        for idx, item in enumerate(self.data):
+        for idx, item in enumerate(target_data):
             if pos is not None:
                 item["OD_pred"] = pos[idx]
             if labels is not None:
@@ -590,6 +595,9 @@ class Detector:
                 for metric in self.pi_top.metrics:
                     if metric["name"] in tasks:
                         item[metric["metric"].__class__.__name__ + "_pred"] = metric["res"][idx]
+
+        if data is None:
+            self.data = target_data
 
     def plot_metrics(self, types: list | tuple = ("classifier", "object detector"), style: str | None = None,
                      *, save: bool = False, data: list | dict | None = None) -> None:
