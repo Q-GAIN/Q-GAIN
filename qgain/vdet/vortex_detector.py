@@ -84,7 +84,7 @@ class VortexDetector(Detector):
             A list of counts for each provided image.
 
         """
-        res = self.self.od_top.predict(data, model_path)
+        res = self.od_top.predict(data, model_path)
 
         count_list = []
 
