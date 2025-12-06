@@ -60,7 +60,7 @@ class VortexDetector(Detector):
             (default = None)
 
         """
-        super().use_models(model_list=("object detector"), model_paths=model_paths, data=data)
+        super().use_models(model_list=("object detector",), model_paths=model_paths, data=data)
         target_data = self.data if data is None else data
         for item in target_data:
             if "OD_pred" in item:

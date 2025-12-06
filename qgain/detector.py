@@ -174,13 +174,14 @@ class Detector:
         self.data = []
         if cl_model is not None:
             cl_kwargs = {} if cl_kwargs is None else cl_kwargs
-            self.class_top = MLControl(model=cl_model, dataset_fn=cl_dataset_fn, augment=augment, **cl_kwargs)
+            self.class_top = MLControl(model=cl_model, name="classifier", dataset_fn=cl_dataset_fn, augment=augment,
+                                       **cl_kwargs)
         else:
             self.class_top = None
 
         if od_model is not None:
             od_kwargs = {} if od_kwargs is None else od_kwargs
-            self.od_top = MLControl(model=od_model, dataset_fn=od_dataset_fn, augment=augment, **od_kwargs)
+            self.od_top = MLControl(model=od_model, name="object", dataset_fn=od_dataset_fn, augment=augment, **od_kwargs)
         else:
             self.od_top = None
 

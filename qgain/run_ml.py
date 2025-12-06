@@ -1,4 +1,4 @@
-"""Classification Controller."""
+"""Machine Learning Controller."""
 from __future__ import annotations
 
 import datetime
@@ -54,14 +54,14 @@ class MLControl:
 
         kwargs = {'label_shape' : (1, 41)}
 
-        od_top = Object_Control(model = qgain.soldet.object_nn.ObjectDetector,
+        od_top = MLControl(model = qgain.soldet.object_nn.ObjectDetector,
                                 dataset_fn = qgain.soldet.soliton_datasets.SolitonODDataset,
                                 augment = True, device = 0, **kwargs)
         od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
 
     """
 
-    def __init__(self, model: torch.nn.Module, dataset_fn: torch.utils.data.Dataset, device: int | None = None,
+    def __init__(self, model: torch.nn.Module, name: str, dataset_fn: torch.utils.data.Dataset, device: int | None = None,
                  metrics: list[dict] | None = None, *, augment: bool | None = True, **kwargs: dict) -> None:
         """Initialize the controller.
 
@@ -70,6 +70,8 @@ class MLControl:
         model : pytorch Module
             The type of model to be used. If using a custom module the output of the model should be in the same shape
             as the target tensors used during training and validation.
+        name : str
+            The name of the model. Used for checkpoint file names and GUI communication.
         dataset_fn : pytorch Dataset
             The dataset function used to provide data to the models. If using a custom function this should accept the
             shape and type of data you are providing to the framework. It should have an argument named augment
@@ -100,6 +102,7 @@ class MLControl:
         self.device = f"cuda:{device}" if device is not None else DEVICE
         self.model = model(**kwargs).float().to(self.device)
         self.metrics = []
+        self.name = name
         if metrics is not None:
             self.metrics = metrics
 
@@ -107,7 +110,7 @@ class MLControl:
                      loss_fn: torch.nn.Module, model_path: str | None = None, batch_size: int = 32, patience: int = 30,
                      epochs: int = 30, lr: float = 1e-4, *, return_res: bool = False,
                      save_weights: bool = False) -> dict | None:
-        """Train the object's OD model on the given data.
+        """Train the object's model on the given data.
 
         Parameters
         ----------
@@ -149,9 +152,8 @@ class MLControl:
         -------
         min_loss : float
             The minimum test loss found during training if return_res = True.
-        accu : float
-            The corresponding test accuracy if return_res = True. Here 'accuracy' is how many correct predictions
-            there were.
+        min_dict : dict
+            A dictionary containing additional loss metrics, if provided. This is returned if return_res = True.
 
         """
         train_ds = self.dataset_fn(train_data,
@@ -159,13 +161,14 @@ class MLControl:
         test_ds = self.dataset_fn(test_data,
                                   augment=self.augment) if self.augment is not None else self.dataset_fn(test_data)
 
-        print(f"Training with {len(train_ds)} samples and validating with {len(test_ds)} samples.")
+        print(f"Training {self.name} with {len(train_ds)} samples and validating with {len(test_ds)} samples.")
         train_dataloader = DataLoader(train_ds, shuffle=True, batch_size=batch_size)
         test_dataloader = DataLoader(test_ds, shuffle=True, batch_size=batch_size)
 
         if save_weights:
             save_path = Path(model_path).joinpath("models",
-                                                  datetime.datetime.now().strftime("%Y%m%d_%H%M%S") + "_object.pt")
+                                                  datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                                                  + "_" + self.name + ".pt")
 
         optimizer = optimizer_fn(self.model.parameters(), lr=lr)
 
