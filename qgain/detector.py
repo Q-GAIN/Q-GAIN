@@ -181,7 +181,8 @@ class Detector:
 
         if od_model is not None:
             od_kwargs = {} if od_kwargs is None else od_kwargs
-            self.od_top = MLControl(model=od_model, name="object", dataset_fn=od_dataset_fn, augment=augment, **od_kwargs)
+            self.od_top = MLControl(model=od_model, name="object", dataset_fn=od_dataset_fn, augment=augment,
+                                    **od_kwargs)
         else:
             self.od_top = None
 
