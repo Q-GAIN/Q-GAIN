@@ -43,7 +43,7 @@ class SolitonPIEClassDataset(torch.utils.data.Dataset):
         for sample in data:
             if sample["label"] == 1:
                 if sample["data"].shape[0] == sample["data"].shape[1]:
-                    msg = "Loaded image data is square. 1D SolDet module enforces rectangular data."
+                    msg = "Loaded image data is square. SolDet module enforces rectangular data."
                     raise ValueError(msg)
                 x.append(sample["data"])
                 y.append(sample["positions"])
@@ -108,7 +108,7 @@ class SolitonQEClassDataset(torch.utils.data.Dataset):
         for sample in data:
             if "excitation_PIE" in sample:
                 if sample["data"].shape[0] == sample["data"].shape[1]:
-                    msg = "Loaded image data is square. 1D SolDet module enforces rectangular data."
+                    msg = "Loaded image data is square. SolDet module enforces rectangular data."
                     raise ValueError(msg)
                 if sample["label"] == 1 and sample["excitation_PIE"] == [0]:
                     x.append(sample["data"])
@@ -180,7 +180,7 @@ class SolitonClassDataset(torch.utils.data.Dataset):
         for entry in data:
             x.append(entry["data"])
             if entry["data"].shape[0] == entry["data"].shape[1]:
-                msg = "Loaded image data is square. 1D SolDet module enforces rectangular data."
+                msg = "Loaded image data is square. SolDet module enforces rectangular data."
                 raise ValueError(msg)
 
             if "label" not in entry:
@@ -227,26 +227,6 @@ class SolitonClassDataset(torch.utils.data.Dataset):
         image = self.imgs[idx]
         label = self.img_labels[idx]
         return image, label.long()
-
-    @staticmethod
-    def accu_metric(pred: torch.Tensor, targ: torch.Tensor) -> float:
-        """Calculate the number of correct predictions and give an accuracy score.
-
-        This is used during training of the SolDet CL to determine its accuracy during validation.
-
-        Paramters
-        ---------
-        pred : torch.Tensor
-            The output tensor of the object detector.
-        targ : torch.Tensor
-            The target label in cell space.
-
-        Returns
-        -------
-        correct : float
-
-        """
-        return (pred.argmax(1) == targ).to(torch.float).mean().item()
 
 
 class SolitonODDataset(torch.utils.data.Dataset):
@@ -300,14 +280,14 @@ class SolitonODDataset(torch.utils.data.Dataset):
         y = []
         for entry in data:
             if entry["data"].shape[0] == entry["data"].shape[1]:
-                msg = "Loaded image data is square. 1D SolDet enforces rectangular data."
+                msg = "Loaded image data is square. SolDet enforces rectangular data."
                 raise ValueError(msg)
-
-            x.append(entry["data"])
-            if "positions" in entry:
+            if "positions" in entry and (entry["label"] == 2 or entry["label"] == 1):
                 y.append(entry["positions"])
-            else:
+                x.append(entry["data"])
+            elif entry["label"] == 0:
                 y.append([])
+                x.append(entry["data"])
 
         x = np.array(x)
         x = np.reshape(x, (x.shape[0], 1, x.shape[1], x.shape[2]))
@@ -368,35 +348,55 @@ class SolitonODDataset(torch.utils.data.Dataset):
         """
         return pos_41labels_conversion(sample, threshold=self.threshold)
 
-    @staticmethod
-    def accu_metric(pred: torch.Tensor, targ: torch.Tensor) -> float:
-        """Calculate the number of correct predictions and give an accuracy score.
 
-        This is used during training of the SolDet OD to determine its accuracy during validation.
+def od_accu_metric(pred: torch.Tensor, targ: torch.Tensor) -> float:
+    """Calculate the number of correct predictions and give an accuracy score.
 
-        Paramters
-        ---------
-        pred : torch.Tensor
-            The output tensor of the object detector.
-        targ : torch.Tensor
-            The target label in cell space.
+    This is used during training of the SolDet OD to determine its accuracy during validation.
 
-        Returns
-        -------
-        correct : float
+    Paramters
+    ---------
+    pred : torch.Tensor
+        The output tensor of the object detector.
+    targ : torch.Tensor
+        The target label in cell space.
 
-        """
-        batch_correct = 0
-        for idx, prediction in enumerate(pred):
-            if (targ[idx, 0] > 0.5).any():
-                num_exc = (targ[idx, 0] == torch.max(targ[idx, 0])).nonzero().shape[0]
-                t_loc = targ[idx, 0].flatten() > 0.5
-                p_loc = prediction[0].flatten() > 0.5
-                batch_correct += (torch.logical_and(t_loc, p_loc).nonzero().shape[0] / num_exc)
-            elif (prediction[0] < 0.5).all():
-                batch_correct += 1
+    Returns
+    -------
+    correct : float
 
-        return batch_correct / pred.shape[0]
+    """
+    batch_correct = 0
+    for idx, prediction in enumerate(pred):
+        if (targ[idx, 0] > 0.5).any():
+            num_exc = (targ[idx, 0] == torch.max(targ[idx, 0])).nonzero().shape[0]
+            t_loc = targ[idx, 0].flatten() > 0.5
+            p_loc = prediction[0].flatten() > 0.5
+            batch_correct += (torch.logical_and(t_loc, p_loc).nonzero().shape[0] / num_exc)
+        elif (prediction[0] < 0.5).all():
+            batch_correct += 1
+
+    return batch_correct / pred.shape[0]
+
+
+def cl_accu_metric(pred: torch.Tensor, targ: torch.Tensor) -> float:
+    """Calculate the number of correct predictions and give an accuracy score.
+
+    This is used during training of the SolDet CL to determine its accuracy during validation.
+
+    Paramters
+    ---------
+    pred : torch.Tensor
+        The output tensor of the object detector.
+    targ : torch.Tensor
+        The target label in cell space.
+
+    Returns
+    -------
+    correct : float
+
+    """
+    return (pred.argmax(1) == targ).to(torch.float).mean().item()
 
 
 def augment_w_pos(images: np.ndarray, positions: list) -> tuple[torch.Tensor, list]:
@@ -733,7 +733,7 @@ def download_ds() -> None:
 
 
 def soldet_to_h5(path: str, *, delete_old: bool = True) -> None:
-    """Convert the original SolDet dataset into the new h5 version.
+    """Convert the original SolDet dataset into the HDF version.
 
     Parameters
     ----------

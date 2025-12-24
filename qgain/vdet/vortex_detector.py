@@ -42,10 +42,10 @@ class VortexDetector(Detector):
                          od_model=ObjectDetector2D,
                          od_dataset_fn=VortexODDataset,
                          od_loss_fn=MetzLoss2D,
-                         augment=True,
+                         od_aug=True,
                          **kwargs)
-
-        self.od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
+        self.ml_top.tools[self.ml_top.get_id(name="OD")]["tool"].metrics += [{"name": "Accuracy",
+                                                                "metric": accu_metric}]
 
     def use_models(self, model_paths: list, data: list | dict | None = None) -> None:
         """Use the vortex detector to make predictions.
@@ -516,38 +516,6 @@ class VortexODDataset(torch.utils.data.Dataset):
 
         return image, pos
 
-    @staticmethod
-    def accu_metric(pred: Tensor, targ: Tensor) -> float:
-        """Accuracy metric for vortex object detector.
-
-        This checks the probability cell for the presence of an excitation and tracks how many are correct.
-
-        Parameters
-        ----------
-        pred : Tensor
-            The output tensor of the model
-        targ : Tensor
-            The target labels
-
-        Returns
-        -------
-        correct : float
-            The accuracy of correctly identified vortices.
-
-        """
-        batch_correct = 0
-        threshold = 0.5
-        for idx, prediction in enumerate(pred):
-            if (targ[idx, 0] > threshold).any():
-                num_exc = (targ[idx, 0] == torch.max(targ[idx, 0])).nonzero().shape[0]
-                t_loc = targ[idx, 0].flatten() > threshold
-                p_loc = prediction[0].flatten() > threshold
-                batch_correct += (torch.logical_and(t_loc, p_loc).nonzero().shape[0] / num_exc)
-            elif (prediction[0] < threshold).all():
-                batch_correct += 1
-
-        return batch_correct / pred.shape[0]
-
     def labels_to_data(self, label_out: np.ndarray) -> list[float]:
         """Convert the labels in cell space to positions in pixel space.
 
@@ -838,3 +806,35 @@ def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | 
         data_samples += [sample]
 
     return data_samples
+
+
+def accu_metric(pred: Tensor, targ: Tensor) -> float:
+    """Accuracy metric for vortex object detector.
+
+    This checks the probability cell for the presence of an excitation and tracks how many are correct.
+
+    Parameters
+    ----------
+    pred : Tensor
+        The output tensor of the model
+    targ : Tensor
+        The target labels
+
+    Returns
+    -------
+    correct : float
+        The accuracy of correctly identified vortices.
+
+    """
+    batch_correct = 0
+    threshold = 0.5
+    for idx, prediction in enumerate(pred):
+        if (targ[idx, 0] > threshold).any():
+            num_exc = (targ[idx, 0] == torch.max(targ[idx, 0])).nonzero().shape[0]
+            t_loc = targ[idx, 0].flatten() > threshold
+            p_loc = prediction[0].flatten() > threshold
+            batch_correct += (torch.logical_and(t_loc, p_loc).nonzero().shape[0] / num_exc)
+        elif (prediction[0] < threshold).all():
+            batch_correct += 1
+
+    return batch_correct / pred.shape[0]

@@ -118,7 +118,7 @@ def get_raw_data(directory: str, target: str, atoms_name: str, bg_name: str, pro
 def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_name: str,
                  width: int, height: int, label: int, camera_angle: float = 0, meta_list: list | tuple = (),
                  *, return_metadata: bool = False, return_files_names: bool = True) -> list[dict]:
-    """Obtain image data, meta data, and filenames and then pre-processes it for use in Q-GAIN.
+    """Obtain image data, meta data, and filenames and then pre-process it for use in Q-GAIN.
 
     Given a directory of labscript experimental h5 files, this obtains image data, meta data, and filenames and then
     pre-processes it for use in Q-GAIN.
@@ -212,7 +212,7 @@ def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_na
     return data_samples
 
 
-def load_data(path: str, labels: list, minmax: list | None = None, *, scale: bool = True) -> list[dict]:
+def load_data(path: str, labels: list, *, minmax: list | None = None, scale: bool = True) -> list[dict]:
     """Load data from the class directories listed in the roster file of the currently set experimental folder.
 
     Parameters
@@ -221,9 +221,6 @@ def load_data(path: str, labels: list, minmax: list | None = None, *, scale: boo
         The path to the experimental folder.
     labels : list
         The classes to load. Labels specified here will load all files in the corresponding class folder.
-    masked : bool
-        Whether to load the masked or unmasked image data.
-        (default = True)
     scale : boolean
         If True the data will be scaled so it is bounded between 0 and 1.
         (default = True)

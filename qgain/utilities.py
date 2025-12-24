@@ -416,7 +416,6 @@ def in_ellipse(arr: np.ndarray, pts: list) -> np.ndarray:
                         for x in range(arr.shape[1])]).reshape(arr.shape)
 
 
-# TODO(mjdoris): #001 Add ability to reset CONFIG file
 def config() -> tuple[Path, str]:
     """Configure Q-GAIN.
 
@@ -427,13 +426,13 @@ def config() -> tuple[Path, str]:
     Returns
     -------
     exp_path : Path
-        A pathlib object pointing to where the experimental folders for SolDet are located.
+        A pathlib object pointing to where the experimental folders for Q-GAIN are located.
     exp_name : str
         The name of the currently set experiment.
 
     """
-    soldet_path = Path(__file__).parent
-    user_path = soldet_path.joinpath("CONFIG.ini")
+    qgain_path = Path(__file__).parent
+    user_path = qgain_path.joinpath("CONFIG.ini")
 
     if not user_path.is_file():
         print("Warning: No configuration file found. Creating.")
@@ -477,8 +476,8 @@ def change_exp(value: str) -> None:
         The name of the experiment to switch to.
 
     """
-    soldet_path = Path(__file__).parent
-    user_path = soldet_path.joinpath("CONFIG.ini")
+    qgain_path = Path(__file__).parent
+    user_path = qgain_path.joinpath("CONFIG.ini")
     if not user_path.is_file():
         msg = "No configuration file found."
         raise FileNotFoundError(msg)
@@ -499,8 +498,8 @@ def change_path(value: str) -> None:
         The path of the destination folder.
 
     """
-    soldet_path = Path(__file__).parent
-    user_path = soldet_path.joinpath("CONFIG.ini")
+    qgain_path = Path(__file__).parent
+    user_path = qgain_path.joinpath("CONFIG.ini")
     if not user_path.is_file():
         msg = "No configuration file found."
         raise FileNotFoundError(msg)

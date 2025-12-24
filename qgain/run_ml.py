@@ -10,12 +10,187 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+from qgain.control import Control
+
 # specify cpu or gpu device for training
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-class MLControl:
-    """The machine learning control class for the Q-GAIN package.
+class MLControl(Control):
+    """The machine learning (ML) control class for the Q-GAIN package.
+
+    Functionality can be modified with external modules by replacing them in the corresponding argument when adding new
+    ML models.
+
+    When creating a new tool the controller will pass any initialization arguments to the MLTool which sets up
+    the model. A tool to the ML controller is a seperate ML model it must run data through. This will be added as an
+    entry in the member attribute list called tools.
+    Adding additional ML tools can be accomplished with the listed Parameters in the add_new_tool method.
+
+    Example:
+    -------
+    .. code-block:: python
+
+        kwargs = {'label_shape' : (1, 41)}
+
+        od_top = MLControl()
+        od_top.add_new_tool(model = qgain.soldet.object_nn.ObjectDetector,
+                            name="ObjectDetector"
+                            dataset_fn = qgain.soldet.soliton_datasets.SolitonODDataset,
+                            augment = True, device = 0,
+                            metrics=[{"name": "Accuracy", "metric": accu_metric}],
+                            **kwargs)
+
+    """
+
+    def __init__(self) -> None:
+        """Initialize the class."""
+        super().__init__()
+
+    def add_new_tool(self, model: torch.nn.Module, name: str, dataset_fn: torch.utils.data.Dataset,
+                 loss_fn: torch.nn.Module, device: int | None = None, metrics: list[dict] | None = None,
+                 *, augment: bool | None = True, kwargs: dict) -> None:
+        """Add a new tool to the controller.
+
+        Functionality can be modified with external modules by replacing them in the corresponding argument.
+
+        Parameters
+        ----------
+        model : pytorch Module
+            The type of model to be used. If using a custom module the output of the model should be in the same shape
+            as the target tensors used during training and validation.
+        name : string
+            The name of the model. Used for checkpoint file names and GUI communication.
+        dataset_fn : pytorch Dataset
+            The dataset function used to provide data to the models. If using a custom function this should accept the
+            shape and type of data you are providing to the framework. It should have an argument named augment
+            to indicate whether or not to augment the data if augment is not set to None.
+        augment : bool or None
+            A flag to indicate whether or not to augment the provided data in the dataset function.
+            (default = True)
+        device : int
+            Which device to use. An integer provided here will specify which GPU to run the model on. If none is
+            provided then either GPU 0 will be selected, or the CPU will be used if no CUDA compatible device is
+            detected. This also influences the output of the GUI. Worker progress will be printed to the terminal on
+            lines that correspond to the device. For GPU 0 updates will be printed to position 0, for GPU 1 updates will
+            be printed to position 1, and so on.
+            (default = None)
+        loss_fn : pytorch loss Module
+            The loss function to use during training.
+        metrics : list of dicts
+            An optional list of loss metrics to use during validation. This argument expects a list of dictionaries with
+            a key 'name' whose value gives the name of the metric and a key 'metric' whose value is a callable function
+            that can be invoked by the controller to calculate a loss value. These will be listed during training and
+            reported along with the built in metrics.
+            (default = None)
+        kwargs : dict
+            A dictionary of arguments to pass to the specified model.
+
+        """
+        if metrics is not None and type(metrics) is not list:
+            msg = "metrics must be a list of dictionaries."
+            raise ValueError(msg)
+        super().add_new_tool(name=name, tool=MLTool, kwargs={"model": model, "name": name, "dataset_fn": dataset_fn,
+                                                             "loss_fn": loss_fn, "device": device, "metrics": metrics,
+                                                             "augment": augment, "kwargs": kwargs})
+
+    def train(self, train_data: list, test_data: list, optimizer_fn: torch.optim.Optimizer,
+              task_list: list[str] | None = None, model_path: str | None = None, batch_size: int = 32,
+              patience: int = 30, epochs: int = 30, lr: float = 1e-4, *, return_res: bool = False,
+              save_weights: bool = False) -> list | None:
+        """Train a tool's model.
+
+        Specifying None in task_list trains all available models. Otherwise the controller will only train the model
+        specified.
+
+        Parameters
+        ----------
+        train_data : list
+            The data to train the model off of. By default this expects a list of dictionaries containing the N samples.
+            If a custom dataset has been specified, this data should be of the expected type and shape for that pytorch
+            dataset function.
+        test_data : list
+            The data to test the model with. By default this expects a list of dictionaries containing the N samples.
+            If a custom dataset has been specified, this data should be of the expected type and shape for that pytorch
+            dataset function.
+        task_list : list of strings
+            The list of models to train. If None will train all available models.
+            (default = None)
+        optimizer_fn : pytorch Optimizer
+            The optimizing function to use during training.
+        model_path : str
+            The path to where weights should be saved to if save_weights = True.
+            (default = None)
+        save_weights : bool
+            Whether to save the best weights or not.
+            (default = False)
+        batch_size : int
+            The batch size to use during training.
+            (default = 32)
+        patience : int
+            How many epochs to wait with no improvement before terminating.
+            (default = 30)
+        epochs : int
+            The number of iterations to train and test over all batches in their respective sets.
+            (default = 30)
+        lr : float
+            The learning rate to use in the optimizer.
+            (default = 1e-4)
+        return_res : bool
+            Whether to return the best loss and accuracy metrics.
+            (default = False)
+
+        Returns
+        -------
+        results : list
+            If return_res = True then function will return a list holding the results for each model. Each entry will be
+            a tuple containing the minimum test loss found during training and a dictionary containing additional
+            loss metrics, if provided.
+
+        """
+        results = []
+        for tool in self.tools:
+            if task_list is None or tool["name"] in task_list:
+                print("Initiating training of: {} model.".format(tool["name"]))
+                if return_res:
+                    results += [tool["tool"].train(train_data=train_data, test_data=test_data,
+                                                   optimizer_fn=optimizer_fn, model_path=model_path,
+                                                   batch_size=batch_size, patience=patience, epochs=epochs, lr=lr,
+                                                   return_res=return_res, save_weights=save_weights)]
+                else:
+                    tool["tool"].train(train_data=train_data, test_data=test_data,
+                                                   optimizer_fn=optimizer_fn, model_path=model_path,
+                                                   batch_size=batch_size, patience=patience, epochs=epochs, lr=lr,
+                                                   return_res=return_res, save_weights=save_weights)
+        if return_res:
+            return results
+        return None
+
+    def predict(self, data: list | dict | np.ndarray, model_paths: list, task_list: list[str] | None = None) -> None:
+        """Make predictions using the tool's model.
+
+        Runs all available models if task_list is set to None.
+
+        Parameters
+        ----------
+        data : list or dict or ndarray
+            The data to make predictions on.
+        model_paths : list
+            A list of Path objects that point to the saved weights for the model.
+        task_list : list of strings
+            The list of models to train. If None will train all available models.
+            (default = None)
+
+        """
+        for tool in self.tools:
+            if task_list is None or tool["name"] in task_list:
+                for f in model_paths:
+                    if tool["name"] in f.stem:
+                        tool["res"] = tool["tool"].predict(data=data, model_path=f)
+
+
+class MLTool:
+    """A tool class intended to handle training and inference tasks for Pytorch models.
 
     Functionality can be modified with external modules by replacing them in the corresponding argument during class
     initialization.
@@ -39,6 +214,8 @@ class MLControl:
         correspond to the device. For GPU 0 updates will be printed to position 0, for GPU 1 updates will be printed to
         position 1, and so on.
         (default = None)
+    loss_fn : pytorch loss Module
+            The loss function to use during training.
     metrics : list of dicts
         An optional list of loss metrics to use during validation. This argument expects a list of dictionaries with a
         key 'name' whose value gives the name of the metric and a key 'metric' whose value is a callable function that
@@ -48,22 +225,12 @@ class MLControl:
     kwargs : dict
         A dictionary of arguments to pass to the specified model.
 
-    Example
-    -------
-    .. code-block:: python
-
-        kwargs = {'label_shape' : (1, 41)}
-
-        od_top = MLControl(model = qgain.soldet.object_nn.ObjectDetector,
-                                dataset_fn = qgain.soldet.soliton_datasets.SolitonODDataset,
-                                augment = True, device = 0, **kwargs)
-        od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
-
     """
 
-    def __init__(self, model: torch.nn.Module, name: str, dataset_fn: torch.utils.data.Dataset, device: int | None = None,
-                 metrics: list[dict] | None = None, *, augment: bool | None = True, **kwargs: dict) -> None:
-        """Initialize the controller.
+    def __init__(self, model: torch.nn.Module, name: str, dataset_fn: torch.utils.data.Dataset,
+                 loss_fn: torch.nn.Module, device: int | None = None, metrics: list[dict] | None = None,
+                 *, augment: bool | None = True, kwargs: dict | None = None) -> None:
+        """Initialize the tool.
 
         Parameters
         ----------
@@ -86,6 +253,8 @@ class MLControl:
             lines that correspond to the device. For GPU 0 updates will be printed to position 0, for GPU 1 updates will
             be printed to position 1, and so on.
             (default = None)
+        loss_fn : pytorch loss Module
+            The loss function to use during training.
         metrics : list of dicts
             An optional list of loss metrics to use during validation. This argument expects a list of dictionaries with
             a key 'name' whose value gives the name of the metric and a key 'metric' whose value is a callable function
@@ -97,19 +266,22 @@ class MLControl:
 
         """
         self.dataset_fn = dataset_fn
+        self.loss_fn = loss_fn
         self.augment = augment
         self.rank = device if device is not None else 0
         self.device = f"cuda:{device}" if device is not None else DEVICE
-        self.model = model(**kwargs).float().to(self.device)
+        if kwargs is None:
+            self.model = model().float().to(self.device)
+        else:
+            self.model = model(**kwargs).float().to(self.device)
         self.metrics = []
         self.name = name
         if metrics is not None:
             self.metrics = metrics
 
     def train(self, train_data: list, test_data: list, optimizer_fn: torch.optim.Optimizer,
-                     loss_fn: torch.nn.Module, model_path: str | None = None, batch_size: int = 32, patience: int = 30,
-                     epochs: int = 30, lr: float = 1e-4, *, return_res: bool = False,
-                     save_weights: bool = False) -> dict | None:
+              model_path: str | None = None, batch_size: int = 32, patience: int = 30, epochs: int = 30,
+              lr: float = 1e-4, *, return_res: bool = False, save_weights: bool = False) -> dict | None:
         """Train the object's model on the given data.
 
         Parameters
@@ -124,8 +296,6 @@ class MLControl:
             dataset function.
         optimizer_fn : pytorch Optimizer
             The optimizing function to use during training.
-        loss_fn : pytorch loss Module
-            The loss function to use during training.
         model_path : str
             The path to where weights should be saved to if save_weights = True.
             (default = None)
@@ -171,6 +341,7 @@ class MLControl:
                                                   + "_" + self.name + ".pt")
 
         optimizer = optimizer_fn(self.model.parameters(), lr=lr)
+        get_loss = self.loss_fn()
 
         patience_count = 0
         pbar = tqdm(range(epochs),
@@ -188,7 +359,7 @@ class MLControl:
 
                     # compute error
                     pred = self.model(data)
-                    loss = loss_fn(pred, target)
+                    loss = get_loss(pred, target)
 
                     # backpropagation
                     optimizer.zero_grad()
@@ -207,7 +378,7 @@ class MLControl:
                     for (te_dat, te_tar) in test_dataloader:
                         data, target = te_dat.to(self.device), te_tar.to(self.device)
                         output = self.model(data)
-                        test_loss += loss_fn(output, target).detach()
+                        test_loss += get_loss(output, target).detach()
                         for item in self.metrics:
                             item["res"] += item["metric"](output, target)
 
@@ -222,21 +393,18 @@ class MLControl:
                 if len(w) > 0:
                     tqdm.write("Warning: " + str(w[-1].message))
 
-            checkpoint_dict = {
-                "epoch": t,
-                "train_metrics": train_metrics, "test_metrics": test_metrics,
-                "model_state_dict": self.model.state_dict()}
-
             if t == 0:
                 min_dict.update(test_metrics)
                 if save_weights:
-                    torch.save(checkpoint_dict, save_path)
+                    torch.save({"epoch": t, "train_metrics": train_metrics, "test_metrics": test_metrics,
+                                "model_state_dict": self.model.state_dict()}, save_path)
 
             elif test_metrics["Test Loss"] < min_dict["Test Loss"]:
                 patience_count = 0
                 min_dict.update(test_metrics)
                 if save_weights:
-                    torch.save(checkpoint_dict, save_path)
+                    torch.save({"epoch": t, "train_metrics": train_metrics, "test_metrics": test_metrics,
+                                "model_state_dict": self.model.state_dict()}, save_path)
 
             else:
                 patience_count += 1
@@ -293,7 +461,7 @@ class MLControl:
 
             ds = self.dataset_fn(data_list, augment=False) if self.augment is not None else self.dataset_fn(data_list)
         else:
-            msg = "Input data is invalid type. Epected list, dictionary, or numpy.ndarray"
+            msg = "Input data is invalid type. Expected list, dictionary, or numpy.ndarray"
             raise TypeError(msg)
 
         with warnings.catch_warnings(record=True) as w:
@@ -306,7 +474,7 @@ class MLControl:
             checkpoint_dict = torch.load(model_path, map_location=torch.device(self.device), weights_only=True)
             self.model.load_state_dict(checkpoint_dict["model_state_dict"])
             self.model.eval()
-            print("Model loaded.")
+            print(self.name + " model loaded.")
             res = []
             with torch.no_grad():
                 print("Running model, please wait..")

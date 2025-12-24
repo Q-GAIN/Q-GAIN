@@ -26,7 +26,7 @@ def fit_soliton(vec_x: np.ndarray, roixwithoutbackg: np.ndarray, res: dict, inti
         The initial positions of the solitonic excitations. Used to set the 'cen' and 'amp' parameters.
         (default = None)
     func : string
-        The fitting function used for the fit. Choices are gaussian, original (SOLDET 1.0), or modern (SOLDET 2.0).
+        The fitting function used. Choices are gaussian, original (SOLDET 1.0), or modern (SOLDET 2.0 Module).
         (default = 'gaussian1D')
     n : integer
         The number of excitations in the region of interest.

@@ -16,7 +16,13 @@ from qgain.io import process_data
 from qgain.soldet.classifier_nn import MLST2021CNNmodern
 from qgain.soldet.object_nn import MetzLoss, ObjectDetector
 from qgain.soldet.pi_models import QE, PIEClassifier
-from qgain.soldet.soliton_datasets import SolitonClassDataset, SolitonODDataset, pos_41labels_conversion
+from qgain.soldet.soliton_datasets import (
+    SolitonClassDataset,
+    SolitonODDataset,
+    cl_accu_metric,
+    od_accu_metric,
+    pos_41labels_conversion,
+)
 
 
 class SolitonDetector(Detector):
@@ -41,12 +47,12 @@ class SolitonDetector(Detector):
     .. code-block:: python
 
         qgain.change_exp('soldet_ds')
-        qgain.soldet.soliton_detector.download_ds()
-        qgain.soldet.soliton_detector.soldet_to_h5(soldet.config()[0])
+        qgain.soldet.soliton_datasets.download_ds()
+        qgain.soldet.soliton_datasets.soldet_to_h5(soldet.config()[0])
         sd = soldet.soliton_detector.SolitonDetector()
-        sd.load_data(labels = [0, 1], masked = True)
-        sd.train_ML(['classifier'])
-        sd.use_models(model_list = ['classifier'], model_paths = ['classifier.pt'])
+        sd.load_data(labels = [0, 1])
+        sd.train_nn(['classifier'])
+        sd.use_models(model_list = ['classifier'], model_paths = ['CL.pt'])
 
     """
 
@@ -73,14 +79,16 @@ class SolitonDetector(Detector):
 
         super().__init__(process_fn=process_data, od_model=ObjectDetector, od_dataset_fn=SolitonODDataset,
                          od_loss_fn=MetzLoss, cl_model=MLST2021CNNmodern, cl_dataset_fn=SolitonClassDataset,
-                         cl_loss_fn=NLLLoss, augment=augment, od_kwargs=od_kwargs, cl_kwargs=cl_kwargs,
+                         cl_loss_fn=NLLLoss, cl_aug=augment, od_aug=augment, od_kwargs=od_kwargs, cl_kwargs=cl_kwargs,
                          pi_metrics=[{"name": "pie classifier", "metric": PIEClassifier},
                                        {"name": "quality estimator", "metric": QE}],
                          pi_kwargs=[{"func": "modern", "transformer": PowerTransformer},
                                       {"func": "modern", "transformer": PowerTransformer}])
 
-        self.od_top.metrics += [{"name": "Accuracy", "metric": self.od_top.dataset_fn.accu_metric}]
-        self.class_top.metrics += [{"name": "Accuracy", "metric": self.class_top.dataset_fn.accu_metric}]
+        idx = self.ml_top.get_id(name="OD")
+        self.ml_top.tools[idx]["tool"].metrics += [{"name": "Accuracy", "metric": od_accu_metric}]
+        idx = self.ml_top.get_id(name="CL")
+        self.ml_top.tools[idx]["tool"].metrics += [{"name": "Accuracy", "metric": cl_accu_metric}]
 
     def __plot_qe(self, qe_ground: list, qe_pred: list, qe_skip_count: int, *, style: str, save: bool) -> None:
         """Plot some metrics relevant for the quality estimator.
@@ -159,7 +167,7 @@ class SolitonDetector(Detector):
         classes = np.arange(6).tolist()
         gmatrix = np.zeros((len(classes), len(classes)), dtype=int)
         for ground, pred in zip(pie_ground, pie_pred):
-            gmatrix[int(ground), int(pred)] += 1
+            gmatrix[int(pred), int(ground)] += 1
         if style is not None:
             with plt.style.context(style):
                 fig, ax = plt.subplots()
@@ -173,8 +181,8 @@ class SolitonDetector(Detector):
                         _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
 
                 ax.set_title("Dataset PIE Labels Vs. PIE Predictions")
-                ax.set_xlabel("PIE Labels")
-                ax.set_ylabel("Dataset Labels")
+                ax.set_ylabel("PIE Predictions")
+                ax.set_xlabel("Dataset Labels")
                 plt.tight_layout()
 
                 if save:
@@ -192,8 +200,8 @@ class SolitonDetector(Detector):
                     _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
 
             ax.set_title("Dataset PIE Labels Vs. PIE Predictions")
-            ax.set_xlabel("PIE Labels")
-            ax.set_ylabel("Dataset Labels")
+            ax.set_ylabel("PIE Predictions")
+            ax.set_xlabel("Dataset Labels")
             plt.tight_layout()
 
             if save:
@@ -271,7 +279,7 @@ class SolitonDetector(Detector):
 
             args = {'target': 'xy', 'atoms_name': 'atoms', 'bg_name': 'background', 'probe_name': 'probe', 'label': 9}
             sd.import_data(path='../BEC_data_2023_0613/0001', **args)
-            sd.load_data(labels= [9], masked = True, data_frac = 0.9, minmax = [-1, 3])
+            sd.load_data(labels= [9], data_frac = 0.9, minmax = [-1, 3])
 
         """
         if kwargs is None:
@@ -314,12 +322,12 @@ class SolitonDetector(Detector):
 
             (default = ['classifier', 'object detector', 'pie classifier', 'quality estimator'])
         model_paths : list
-            The names of the saved weights or model parameters. These should end in 'classifier.pt' for the classifier
-            and 'object.pt' for the object detector. For conventional analysis methods these should be pickle files that
+            The names of the saved weights or model parameters. These should end in '_CL.pt' for the classifier
+            and '_OD.pt' for the object detector. For conventional analysis methods these should be pickle files that
             end with the name of the method. Passing an empty list, or a list lacking any saved metric files, to this
             argument will attempt to run any defined metrics without loading files.
         data : list or dict
-            The target data to use the models on. By default this will be the data loaded into the detector object. It
+            The external data to use the models on. By default the target is the data loaded into a detector object. It
             is possible to use external data by providing a list of dicts or dicts of dicts to this argument.
             (default = None)
 
@@ -355,7 +363,7 @@ class SolitonDetector(Detector):
         """
         super().define_pi(metric_list=["quality estimator"], save=save)
 
-    def export(self, export_type: str = "csv", keys: list | None = None) -> None:
+    def export(self, export_type: str = "csv", keys: list | None = None, data: list | dict | None = None) -> None:
         """Export the ground (if available) and predicted (if available) labels in the currently loaded dataset.
 
         Will export the ground and predicted labels for the object detector, classifier, quality estimator and PIE
@@ -383,12 +391,16 @@ class SolitonDetector(Detector):
             Additional keys to pull from each sample's dictionary in the dataset. This could potentially cause errors
             when attempting to export datatypes that are incompatible with the chosen output format.
             (default = None)
+        data : list or dict
+            The external target data to export keys from which will be used instead of the data loaded into the soliton
+            detector.
+            (default = None)
 
         """
         export_keys = ["excitation_PIE", "excitation_quality", "QE_pred", "PIEClassifier_pred"]
         if keys is not None:
             export_keys.extend(keys)
-        super().export(export_type=export_type, keys=export_keys)
+        super().export(export_type=export_type, keys=export_keys, data=data)
 
     def plot_metrics(self, types: list = ("classifier", "object detector", "pie classifier", "quality estimator"),
                      style: str | None = None, *, save: bool = False, data: list | dict | None = None) -> None:

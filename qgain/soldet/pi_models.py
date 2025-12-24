@@ -75,6 +75,8 @@ class PIEClassifier:
                 func: str = "modern", transformer: Callable[..., Any] = PowerTransformer) -> None:
         """Initialize the PIE classifier.
 
+        Further information can be found in the SolDet paper https://arxiv.org/abs/2111.04881
+
         Parameters
         ----------
         par0_cutoff : float
@@ -113,8 +115,6 @@ class PIEClassifier:
             combined with par4_soft_l_cutoff serves as the cut off values for "clockwise solitonic vortex"
             categorization if an earlier cut did not.
             (default = 1.14)
-
-        Further information can be found in the SolDet paper https://arxiv.org/abs/2111.04881
         func : string
             The fitting function to be used. Can be 'gaussian1D', 'original' (SOLDET 1.0),
             or 'modern' (SOLDET 2.0 module).
@@ -297,8 +297,8 @@ class PIEClassifier:
             pos = None
             if "positions" in item:
                 pos = item["positions"]
-            elif "soldet_CL" in item and item["soldet_CL"] > 0 and "soldet_OD" in item and len(item["soldet_OD"]) > 0:
-                pos = item["soldet_OD"]
+            elif "CL_pred" in item and item["CL_pred"] > 0 and "OD_pred" in item and len(item["OD_pred"]) > 0:
+                pos = item["OD_pred"]
             elif not warned:
                 tqdm.write("Warning: ML or position labels not found in an entry.")
                 warned = True
@@ -358,6 +358,8 @@ class PIEClassifier:
                     class_return = self.__cutter(top_metrics=top_metrics,
                                                           bottom_metrics=bottom_metrics,
                                                           idx=None)
+            else:
+                class_return = None
             res += [class_return]
             pbar.update(1)
         pbar.close()
@@ -459,8 +461,8 @@ class QE:
             pos = None
             if "positions" in item:
                 pos = item["positions"]
-            elif "soldet_CL" in item and item["soldet_CL"] > 0 and "soldet_OD" in item and len(item["soldet_OD"]) > 0:
-                pos = item["soldet_OD"]
+            elif "CL_pred" in item and item["CL_pred"] > 0 and "OD_pred" in item and len(item["OD_pred"]) > 0:
+                pos = item["OD_pred"]
             elif not warned:
                 tqdm.write("Warning: ML or position labels not found in an entry.")
                 warned = True
@@ -492,6 +494,8 @@ class QE:
                             pred.append(apply_metric(process_params_per_image, transformer=self.QE_pt,
                                                      sigma=self.QE_cov, mu=self.QE_means, return_dist=False))
                             process_params.append(process_params_per_image)
+            else:
+                pred = None
             res += [pred]
             pbar.update(1)
         pbar.close()
