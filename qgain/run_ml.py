@@ -148,6 +148,15 @@ class MLControl(Control):
             loss metrics, if provided.
 
         """
+        # Check if all items in task list are in the controller.
+        names = []
+        for tool in self.tools:
+            names += [tool["name"]]
+        for task in task_list:
+            if task not in names:
+                msg = "Invalid task name given to controller."
+                raise ValueError(msg)
+
         results = []
         for tool in self.tools:
             if task_list is None or tool["name"] in task_list:
@@ -182,6 +191,16 @@ class MLControl(Control):
             (default = None)
 
         """
+        # Check if all items in task list are in the controller.
+        if task_list is not None:
+            names = []
+            for tool in self.tools:
+                names += [tool["name"]]
+            for task in task_list:
+                if task not in names:
+                    msg = "Invalid task name given to controller."
+                    raise ValueError(msg)
+
         for tool in self.tools:
             if task_list is None or tool["name"] in task_list:
                 for f in model_paths:

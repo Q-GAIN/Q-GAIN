@@ -138,6 +138,13 @@ class MetricControl(Control):
         for metric in self.tools:
             metric_names += [metric["name"]]
 
+        # Check if all items in metric list are in the controller.
+        if metric_list is not None:
+            for metric in metric_list:
+                if metric not in metric_names:
+                    msg = "Invalid metric name given to controller."
+                    raise ValueError(msg)
+
         if metric_path is not None:
             for file in metric_path:
                 with file.open("rb") as f:

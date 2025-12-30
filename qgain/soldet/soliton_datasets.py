@@ -183,10 +183,10 @@ class SolitonClassDataset(torch.utils.data.Dataset):
                 msg = "Loaded image data is square. SolDet module enforces rectangular data."
                 raise ValueError(msg)
 
-            if "label" not in entry:
-                msg = "Data must be labeled with class numbers."
-                raise ValueError(msg)
-            y.append(entry["label"])
+            if "label" in entry:
+                y.append(entry["label"])
+            else:
+                y.append(9)
 
         x = np.array(x)
         x = np.reshape(x, (x.shape[0], 1, x.shape[1], x.shape[2]))
@@ -282,10 +282,10 @@ class SolitonODDataset(torch.utils.data.Dataset):
             if entry["data"].shape[0] == entry["data"].shape[1]:
                 msg = "Loaded image data is square. SolDet enforces rectangular data."
                 raise ValueError(msg)
-            if "positions" in entry and (entry["label"] == 2 or entry["label"] == 1):
+            if "positions" in entry:
                 y.append(entry["positions"])
                 x.append(entry["data"])
-            elif entry["label"] == 0:
+            else:
                 y.append([])
                 x.append(entry["data"])
 
