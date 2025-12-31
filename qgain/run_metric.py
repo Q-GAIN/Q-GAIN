@@ -25,7 +25,7 @@ class MetricControl(Control):
     class name as the prefix and '_pred' as the suffix.
 
     Example:
-    -------
+    --------
     .. code-block:: python
 
         class dummy_PI_class():

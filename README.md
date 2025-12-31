@@ -287,3 +287,35 @@ class DummyDetector(Detector):
         self.ml_top.add_new_tool(model=DummyModel, name="DummyModel", 
                                  dataset_fn=DummyDataset, loss_fn=torch.nn.SmoothL1Loss)
 ```
+
+### Replacing Statistical Based Models
+The Q-GAIN library also has a controller class that maintains all functionality for the statistical based analysis tools. These can be replaced by passing dictionaries to the detector initialization arguments *pi_metrics* and *pi_kwargs*. A callable function should be provided to the key "metric" and a name given to the tool provided to the "name" key for the *pi_metrics* dictionary. Any required function argument parameters should be passed as a keyword dictionary to *pi_kwargs*
+
+The metric controller treats new metrics as instances of analysis tools. These should either be classes which wrap the analysis algorithm or any classes which contain fit and transform methods. The controller expects that the transform method return its results in a list like object which Q-GAIN will use to assign results to its data entries.
+```python
+from qgain import Detector
+import numpy as np
+from sklearn.cluster import KMeans
+
+class DummyMetric:
+    def __init__(self, clusters: int):
+        self.clusters = clusters
+        self.kmeans = KMeans(n_clusters=self.clusters)
+    def fit(self, data: list[dict]) -> None:
+        x = []
+        for item in data:
+            x += [item['data'].flatten()]
+        self.kmeans.fit(np.array(x))
+    def transform(self, data: list[dict]) -> list:
+        res = []
+        for item in data:
+            res += [self.kmeans.transform(item['data'].flatten().reshape(1, -1))]   
+        return res
+
+class DummyDetector(Detector):
+    def __init__:
+        super().__init__(pi_metrics=[{"name": "KMeans", "metric": DummyMetric}],
+                         pi_kwargs=[{"clusters":5}])
+```
+
+These analysis methods can also be added by using the controller's add_new_metric() method in a similar fashion to the ML models. When invoking this method it uses the same arguments and constraints as outlined previously for *pi_metrics* and *pi_kwargs*.

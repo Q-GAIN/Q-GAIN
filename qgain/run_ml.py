@@ -28,7 +28,7 @@ class MLControl(Control):
     Adding additional ML tools can be accomplished with the listed Parameters in the add_new_tool method.
 
     Example:
-    -------
+    --------
     .. code-block:: python
 
         kwargs = {'label_shape' : (1, 41)}
