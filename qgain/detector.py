@@ -753,11 +753,11 @@ class Detector:
         od_skip_count = 0
 
         for item in target:
-            if "classifier" in types and "label" in item and self.class_top is not None:
+            if "classifier" in types and "label" in item and self.ml_top is not None:
                 cl_ground.append(item["label"])
                 cl_pred.append(item["CL_pred"])
 
-            if "object detector" in types and "positions" in item and self.od_top is not None:
+            if "object detector" in types and "positions" in item and self.ml_top is not None:
                 if len(item["positions"]) == len(item["OD_pred"]):
                     sorted_ground = np.sort(item["positions"], axis=0, kind="stable")
                     sorted_pred = np.sort(item["OD_pred"], axis=0, kind="stable")
@@ -772,10 +772,10 @@ class Detector:
                 else:
                     od_skip_count += 1
 
-        if "classifier" in types and self.class_top is not None:
+        if "classifier" in types and self.ml_top is not None:
             self.__cl_plotter(cl_ground, cl_pred, style, save=save)
 
-        if "object detector" in types and self.od_top is not None:
+        if "object detector" in types and self.ml_top is not None:
             self.__od_plotter(od_ground, od_pred, od_skip_count, style, save=save)
 
     def export(self, export_type: str = "csv", keys: list | None = None, data: list | dict | None = None) -> None:
