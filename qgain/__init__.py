@@ -15,7 +15,7 @@ def_exp_name = default_ds
 
 These set up the target directories for the required folder structure to run Q-GAIN. The <em>data_path</em> points to
 the directory all experimental data folders will reside in. An experiment can be specified with <em>def_exp_name</em>,
-which will set the target directory for where Q-GAIN's class data will be saved to. The default structure is,
+which will set the target directory for where Q-GAIN's data will be saved to. The default structure is,
 
 data_path/
 
@@ -31,8 +31,8 @@ data_path/
 
 |- ...
 
-Class folders reside within the <em>data_files</em> directory, and their naming depends on the information contained
-within the roster file, residing within the <em>data_info</em> directory.
+Data folders reside within the <em>data_files</em> directory which hold all experimental data. A roster file which keeps
+track of these files resides within the <em>data_info</em> directory.
 
 Multiple experiment folders can reside in the data path, and any detector objects created will reference the current
 def_exp_name. Although you can modify the configuration file manually, helper functions exist to do this for you.
@@ -60,16 +60,23 @@ print(EXP_NAME)
 
 Package Modules
 ---------------
+qgain.control
+    The base controller class for Q-GAIN.
+qgain.detector
+    The Detector class required to create detector subclasses.
 qgain.io
     The input/output functions for Q-GAIN.
+qgain.models
+    Base object detection and classification architectures which can be configured for their respective tasks.
 qgain.run_ml
     The machine learning controller.
-qgain.run_metric
+qgain.run_plot
+    The plotting controller.
+qgain.run_stat
     The statistical analysis controller.
 qgain.utilities
     Support functions for Q-GAIN.
-qgain.detector
-    The Detector class required to create detector subclasses.
+
 
 Subpackage Modules
 ------------------

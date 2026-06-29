@@ -5,14 +5,14 @@ This file supports the input/output of Q-GAIN.
 """
 from __future__ import annotations
 
-import random
 from pathlib import Path
-
-import h5py
-import numpy as np
-from tqdm import tqdm
+import random
 
 from qgain.utilities import apply_mask, combine_data_probe_bg, get_cloud_fit, rotate_crop
+
+from tqdm import tqdm
+import h5py
+import numpy as np
 
 
 def get_raw_data(directory: str, target: str, atoms_name: str, bg_name: str, probe_name: str,
@@ -71,7 +71,7 @@ def get_raw_data(directory: str, target: str, atoms_name: str, bg_name: str, pro
         if_shuffle = False
 
     directory = Path(directory)
-    files = list(directory.glob("*.h5"))
+    files = list(directory.rglob("*.h5"))
     if if_shuffle:
         random.Random(seed).shuffle(files)
 
@@ -116,8 +116,9 @@ def get_raw_data(directory: str, target: str, atoms_name: str, bg_name: str, pro
 
 
 def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_name: str,
-                 width: int, height: int, label: int, camera_angle: float = 0, meta_list: list | tuple = (),
-                 *, return_metadata: bool = False, return_files_names: bool = True) -> list[dict]:
+                 width: int, height: int, tag: int | str, *, camera_angle: float = 0, meta_list: list | tuple = (),
+                 labels: dict | None = None, return_metadata: bool = False,
+                 return_files_names: bool = True) -> list[dict]:
     """Obtain image data, meta data, and filenames and then pre-process it for use in Q-GAIN.
 
     Given a directory of labscript experimental h5 files, this obtains image data, meta data, and filenames and then
@@ -131,21 +132,22 @@ def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_na
     path : string
         The target directory of h5 files.
     target : string
-        The directory name in the h5 file containing the cloud images.
+        The directory name in the h5 file containing the images.
     atoms_name : string
-        The full or partial name for images containing the atoms, probe, and background.
+        The full or partial name for images containing the atoms.
     bg_name : string
         The full or partial name for images of only the background, no atoms or probe light.
     probe_name : string
         The full or partial name for images of only the probe light.
     width : int
-        The target width of the cloud images after processing.
+        The target width of the images after processing.
     height : int
-        The target height of the cloud images after processing.
-    label : int
-        The class label for the image.
+        The target height of the images after processing.
+    tag : int or string
+        A descriptive label for the data.
     camera_angle : float
-        The angle between the camera and the elongated axis of the atom cloud.
+        The angle between the camera and the elongated axis of the atom cloud, if any.
+        (default = 0)
     return_files_names: boolean
         If True, appends the list of filenames to the returned list of data.
         (default = True)
@@ -155,7 +157,11 @@ def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_na
     meta_list : list
         An optional list of metadata attributes to retrieve from the globals folder of a labscript h5 file.
         These are appended to the data list as a separate list if return_metadata is True.
-        (default = [])
+        (default = ())
+    labels: dict or None
+        An optional list or tuple of dictionaries holding additional descriptive labels for the data. The keys and their
+        values are copied to the sample's dictionary entry.
+        (default = None)
 
     Returns
     -------
@@ -163,9 +169,9 @@ def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_na
         A list of dictionaries containing the collected pre-processed data.
         Each dictionary contains, at minimum:
 
-            - The masked and unmasked image data of shape (height, width).
-            - The class label.
-            - The class directory.
+            - The data of shape (height, width).
+            - A descriptive tag of the data.
+            - The sub directory it should be stored in.
             - The 2D TF fit parameters.
             - The rotation angle.
             - The original image size.
@@ -205,25 +211,27 @@ def process_data(path: str, target: str, atoms_name: str, bg_name: str, probe_na
         cloud_data = rotate_crop(naive_od, full_image_fit, xdim=width, ydim=height)
         sample["cloud_data"] = cloud_data
         sample["data"] = apply_mask(cloud_data, full_image_fit, img[0].shape)
-        sample["label"] = label
-        sample["class_dir"] = f"class-{label}"
+        sample["tag"] = tag
+        sample["sub_dir"] = f"class-{tag}"
+        if labels is not None:
+            sample.update(labels)
         data_samples += [sample]
 
     return data_samples
 
 
-def load_data(path: str, labels: list, *, minmax: list | None = None, scale: bool = True) -> list[dict]:
-    """Load data from the class directories listed in the roster file of the currently set experimental folder.
+def load_data(path: str, tags: list, *, minmax: list | None = None, scale: bool = False) -> list[dict]:
+    """Load data from the sub directories listed in the roster file of the currently set experimental folder.
 
     Parameters
     ----------
     path : string
         The path to the experimental folder.
-    labels : list
-        The classes to load. Labels specified here will load all files in the corresponding class folder.
+    tags : list
+        The data to load. Labels specified here will load all files in the corresponding folder.
     scale : boolean
         If True the data will be scaled so it is bounded between 0 and 1.
-        (default = True)
+        (default = False)
     minmax : list
         If scale is set to True the data will be scaled given the minimum and maximum values specified in minmax.
         This expects [MIN, MAX], if none is previded then the global minimum and maximum values found in the set are
@@ -254,7 +262,7 @@ def load_data(path: str, labels: list, *, minmax: list | None = None, scale: boo
     targets = []
     with h5py.File(roster_path, "r") as h5_file:
         for sample in h5_file:
-            if h5_file[sample].attrs["label"] in labels:
+            if h5_file[sample].attrs["tag"] in tags:
                 targets.append(sample)
 
         for sample in tqdm(targets, desc="Loading processed data.."):
@@ -263,41 +271,46 @@ def load_data(path: str, labels: list, *, minmax: list | None = None, scale: boo
                 attr_keys = list(sample_file.attrs.keys())
                 sample_keys = list(sample_file.keys())
                 try:
-                    data_sample["data"] = sample_file["data"][()]
+                    if "_dtype" in sample_file["data"].attrs and sample_file["data"].attrs["_dtype"] == "dict":
+                        # This is a dictionary.
+                        data_sample["data"] = {}
+                        for item in sample_file["data"].attrs:
+                            data_sample["data"][item] = sample_file["data"].attrs[item]
+                    elif "_dtype" in sample_file["data"].attrs and sample_file["data"].attrs["_dtype"] == "list":
+                        # This is a list.
+                        if h5py.check_string_dtype(sample_file["data"].dtype) is not None:
+                            data_sample["data"] = sample_file["data"].asstr()[()].tolist()
+                        else:
+                            data_sample["data"] = sample_file["data"][()].tolist()
+                    elif h5py.check_string_dtype(sample_file["data"].dtype) is not None:
+                        # This is a string.
+                        data_sample["data"] = sample_file["data"].asstr()[()]
+                    else:
+                        data_sample["data"] = sample_file["data"][()]
                     sample_keys.remove("data")
 
-                    if minmax is None:
+                    if minmax is None and scale:
                         min_val = np.min([min_val, np.min(data_sample["data"])])
                         max_val = np.max([max_val, np.max(data_sample["data"])])
 
-                    data_sample["label"] = sample_file.attrs["label"]
-                    attr_keys.remove("label")
-
-                    if "excitation_position" in sample_file.attrs:
-                        data_sample["positions"] = sample_file.attrs["excitation_position"].tolist()
-                        attr_keys.remove("excitation_position")
-                    elif "excitation_positions" in sample_file.attrs:
-                        data_sample["positions"] = sample_file.attrs["excitation_positions"].tolist()
-                        attr_keys.remove("excitation_position")
-                    elif "position" in sample_file.attrs:
-                        data_sample["positions"] = sample_file.attrs["position"].tolist()
-                        attr_keys.remove("position")
-                    elif "positions" in sample_file.attrs:
-                        data_sample["positions"] = sample_file.attrs["positions"].tolist()
-                        attr_keys.remove("positions")
+                    data_sample["tag"] = sample_file.attrs["tag"]
+                    attr_keys.remove("tag")
 
                     for attr in attr_keys:
                         data_sample[str(attr)] = sample_file.attrs[attr]
 
-                    for attr in sample_keys:
-                        if sample_file[attr][()].shape is None:
+                    for key in sample_keys:
+                        if sample_file[key][()].shape is None:
                             # Dictionary
-                            data_sample[str(attr)] = {}
-                            for item in sample_file[attr].attrs:
-                                data_sample[str(attr)][item] = sample_file[attr].attrs[item]
+                            data_sample[str(key)] = {}
+                            for item in sample_file[key].attrs:
+                                data_sample[str(key)][item] = sample_file[key].attrs[item]
+                        elif h5py.check_string_dtype(sample_file[key].dtype) is not None:
+                            # string
+                            data_sample[str(key)][item] = sample_file[str(key)].asstr()[()]
                         else:
                             # Array
-                            data_sample[str(attr)] = sample_file[attr][()]
+                            data_sample[str(key)] = sample_file[key][()]
                     data_sample["path"] = h5_file[sample].attrs["path"]
 
                     data_roster.append(data_sample)
@@ -306,8 +319,8 @@ def load_data(path: str, labels: list, *, minmax: list | None = None, scale: boo
                         raise
                     tqdm.write("Error. Skipping entry because: " + str(e))
 
-    min_val = np.floor(min_val) if minmax is None else min_val
-    max_val = np.ceil(max_val) if minmax is None else max_val
+    min_val = np.floor(min_val) if minmax is None and scale else min_val
+    max_val = np.ceil(max_val) if minmax is None and scale else max_val
 
     if scale:
         for sample in tqdm(data_roster, desc="Normalizing Data.."):

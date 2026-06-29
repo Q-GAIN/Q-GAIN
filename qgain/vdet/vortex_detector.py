@@ -5,16 +5,18 @@ This uses the Q-GAIN detector module to set up a detector suitable for detecting
 """
 from __future__ import annotations
 
-import numpy as np
-import torch
+from copy import deepcopy
+
+from qgain.detector import Detector
+
 from scipy.ndimage import rotate
 from skimage.filters import threshold_mean
 from skimage.measure import label as meas_label
 from skimage.measure import regionprops
 from torch import Tensor
 from tqdm import tqdm
-
-from qgain.detector import Detector
+import numpy as np
+import torch
 
 
 class VortexDetector(Detector):
@@ -44,8 +46,8 @@ class VortexDetector(Detector):
                          od_loss_fn=MetzLoss2D,
                          od_aug=True,
                          **kwargs)
-        self.ml_top.tools[self.ml_top.get_id(name="OD")]["tool"].metrics += [{"name": "Accuracy",
-                                                                "metric": accu_metric}]
+        idx = self.controllers["ML Controller"].get_id(name="OD")
+        self.controllers["ML Controller"].tools[idx]["tool"].metrics += [{"name": "Accuracy", "metric": accu_metric}]
 
     def use_models(self, model_paths: list, data: list | dict | None = None) -> None:
         """Use the vortex detector to make predictions.
@@ -64,16 +66,47 @@ class VortexDetector(Detector):
         target_data = self.data if data is None else data
         for item in target_data:
             if "OD_pred" in item:
-                item["OD_pred"] = vortex_labels_to_data(item["OD_pred"].cpu().numpy()[0], threshold=(0.5, 8.18))
+                item["OD_pred"] = vortex_labels_to_data(item["OD_pred"][0], threshold=(0.5, 8))
         if data is None:
             self.data = target_data
 
-    def vortex_counter(self, data: dict | np.ndarray, model_path: str) -> list:
+    def plot_metrics(self, types: list | tuple = ("object detector"),
+                     *, style: str | None = None, save: bool = False,
+                     plot_kwargs: dict[dict] | None = None, data: list | dict | None = None) -> None:
+        """Run plotting routines and display the results.
+
+        Parameters
+        ----------
+        types : list
+            The plotting tools to use.
+            (default = ('object detector'))
+        style : str
+            An optional argument to specify a matplotlib style file and change the overall look of the plots.
+            (default = None)
+        save : bool
+            An optional argument that will save the output rather than display it.
+            (default = False)
+        plot_kwargs : dict of dicts
+            Optional arguments to be passed to the tool's callable function. This dictionary should contain the name of
+            the plotting tool as a key with its value being the keyword dictionary to pass to the function.
+            (default = None)
+        data : list or dict
+            The data to generate plots from. By default this is the data loaded into the detector object. If using a
+            different target the function expects a similar structure to that of the SolDet module.
+            (default = None)
+
+        """
+        plotter_kwargs = {"OD": {"ground_keys": ["positions"]}}
+        if plot_kwargs is not None:
+            plotter_kwargs.update(plot_kwargs)
+        super().plot_metrics(types=types, style=style, save=save, plot_kwargs=plotter_kwargs, data=data)
+
+    def vortex_counter(self, data: dict | list | np.ndarray, model_path: str) -> list:
         """Count the number of identified objects.
 
         Parameters
         ----------
-        data : list or dict or ndarray
+        data : list or dict or numpy array
             The data to make predictions on.
         model_path : str
             The path to the saved weights for the model.
@@ -84,12 +117,18 @@ class VortexDetector(Detector):
             A list of counts for each provided image.
 
         """
-        res = self.od_top.predict(data, model_path)
+        if type(data) is np.ndarray:
+            res = [{"data": deepcopy(data)}]
+        elif type(data) is dict:
+            res = [deepcopy(data)]
+        else:
+            res = deepcopy(data)
+
+        self.use_models(model_paths=[model_path], data=res)
 
         count_list = []
-
         for item in res:
-            count_list.append(len(item))
+            count_list.append(len(item["OD_pred"]))
 
         return count_list
 
@@ -140,11 +179,18 @@ class ObjectCell(torch.nn.Module):
         super().__init__()
 
         # Network Layers
-        self.conv_lay1 = torch.nn.Conv2d(in_channels, out_channels, kernel, padding="same", groups=in_channels)
-        self.conv_lay2 = torch.nn.Conv2d(out_channels, out_channels, kernel, padding="same", groups=in_channels)
-        self.conv_lay_act1 = torch.nn.PReLU()
-        self.conv_lay_act2 = torch.nn.PReLU()
-        self.bypass_conv = torch.nn.Conv2d(in_channels, out_channels, (1, 1), padding="same", groups=1)
+        self.conv_lay1 = torch.nn.Sequential(
+            torch.nn.Conv2d(in_channels, in_channels, kernel, padding="same", groups=in_channels, bias=False),
+            torch.nn.Conv2d(in_channels, out_channels, 1, padding="same", groups=1, bias=False),
+            torch.nn.ReLU(),
+            torch.nn.BatchNorm2d(out_channels))
+        self.conv_lay2 = torch.nn.Sequential(
+            torch.nn.Conv2d(out_channels, out_channels, kernel, padding="same", groups=out_channels, bias=False),
+            torch.nn.Conv2d(out_channels, out_channels, 1, padding="same", groups=1, bias=False),
+            torch.nn.ReLU(),
+            torch.nn.BatchNorm2d(out_channels))
+
+        self.skip = torch.nn.Conv2d(in_channels, out_channels, 1, padding="same", groups=1, bias=False)
 
         # Functional Layers
         self.dropout = torch.nn.Dropout(dropout)
@@ -152,11 +198,6 @@ class ObjectCell(torch.nn.Module):
             self.pool = torch.nn.MaxPool2d(pool)
         else:
             self.pool = None
-        self.norm = torch.nn.BatchNorm2d(out_channels)
-
-        # Weight Init
-        torch.nn.init.kaiming_normal_(self.conv_lay1.weight)
-        torch.nn.init.kaiming_normal_(self.conv_lay2.weight)
 
     def forward(self, x: Tensor) -> Tensor:
         """Perform a single pass through the network.
@@ -172,14 +213,12 @@ class ObjectCell(torch.nn.Module):
             The result of the forward pass
 
         """
-        bypass = x
-
-        x = self.conv_lay_act1(self.conv_lay1(x))
-        x = self.conv_lay_act2(self.conv_lay2(x))
-        x = self.norm(x)
+        x_dw = self.conv_lay1(x)
+        x_dw = self.conv_lay2(x_dw)
+        x = torch.add(x_dw, self.skip(x))
         x = self.dropout(x)
 
-        return x + self.bypass_conv(bypass) if self.pool is None else self.pool(x) + self.pool(self.bypass_conv(bypass))
+        return x if self.pool is None else self.pool(x)
 
 
 class ObjectDetector2D(torch.nn.Module):
@@ -195,10 +234,10 @@ class ObjectDetector2D(torch.nn.Module):
         (default = 4)
     in_channels : list or tuple
         A list of input channels to the 2D convolutions for each layer.
-        (default = (1, 16, 32, 64))
+        (default = (1, 8, 16, 32))
     out_channels : list or tuple
         A list of output channels to the 2D convolutions for each layer.
-        (default = (16, 32, 64, 128))
+        (default = (8, 16, 32, 64))
     pool : list or tuple
         A list of pooling kernel sizes for each layer.
         (default = (None, (2,2), None, (2,2)))
@@ -207,8 +246,6 @@ class ObjectDetector2D(torch.nn.Module):
         (default = (7, 7))
     label_shape : list or tuple
         The size of the position labels after converting from real positions to the compressed cell representation.
-        For 2D this shape is typically (height // 4, width // 4), where 4 is the number of pixels for each cell in
-        the array.
         (default = (33, 33))
     dropout : float
         How often neurons should drop out.
@@ -216,8 +253,8 @@ class ObjectDetector2D(torch.nn.Module):
 
     """
 
-    def __init__(self, dropout: float = 0.1, layers: int = 4, in_channels: list | tuple = (1, 16, 32, 64),
-                 out_channels: list | tuple = (16, 32, 64, 128), pool: list | tuple = (None, (2, 2), None, (2, 2)),
+    def __init__(self, dropout: float = 0.1, layers: int = 4, in_channels: list | tuple = (1, 8, 16, 32),
+                 out_channels: list | tuple = (8, 16, 32, 64), pool: list | tuple = (None, (2, 2), None, (2, 2)),
                  kernel: list | tuple = (7, 7), label_shape: list | tuple = (33, 33)) -> None:
         """Initialize the model.
 
@@ -228,10 +265,10 @@ class ObjectDetector2D(torch.nn.Module):
             (default = 4)
         in_channels : list or tuple
             A list of input channels to the 2D convolutions for each layer.
-            (default = (1, 16, 32, 64))
+            (default = (1, 8, 16, 32))
         out_channels : list or tuple
             A list of output channels to the 2D convolutions for each layer.
-            (default = (16, 32, 64, 128))
+            (default = (8, 16, 32, 64))
         pool : list or tuple
             A list of pooling kernel sizes for each layer.
             (default = (None, (2,2), None, (2,2)))
@@ -240,8 +277,6 @@ class ObjectDetector2D(torch.nn.Module):
             (default = (7, 7))
         label_shape : list or tuple
             The size of the position labels after converting from real positions to the compressed cell representation.
-            For 2D this shape is typically (height // 4, width // 4), where 4 is the number of pixels for each cell in
-            the array.
             (default = (33, 33))
         dropout : float
             How often neurons should drop out.
@@ -257,7 +292,10 @@ class ObjectDetector2D(torch.nn.Module):
 
         # Output Layers
         self.pool = torch.nn.AdaptiveMaxPool2d(label_shape)
-        self.output = torch.nn.Conv2d(in_channels=out_channels[-1], out_channels=3, kernel_size=(1, 1), padding="same")
+        self.final = torch.nn.Conv2d(in_channels=out_channels[-1], out_channels=out_channels[-1] * 2,
+                                     kernel_size=kernel, padding="same")
+        self.output = torch.nn.Conv2d(in_channels=out_channels[-1] * 2, out_channels=3, kernel_size=kernel,
+                                      padding="same")
         self.output_act = torch.nn.Sigmoid()
         torch.nn.init.xavier_uniform_(self.output.weight)
 
@@ -285,7 +323,7 @@ class ObjectDetector2D(torch.nn.Module):
             x = layer(x)
         x = self.pool(x)
 
-        return self.output_act(self.output(x))
+        return self.output_act(self.output(self.final(x)))
 
 
 class MetzLoss2D(torch.nn.Module):
@@ -305,7 +343,7 @@ class MetzLoss2D(torch.nn.Module):
 
     """
 
-    def __init__(self, ce_weight: float = 1, mse_weight: float = 1) -> None:
+    def __init__(self, ce_weight: float = 3, mse_weight: float = 1) -> None:
         """Initialize the loss functionality."""
         super().__init__()
         self.CE_weight = ce_weight
@@ -344,14 +382,14 @@ class VortexODDataset(torch.utils.data.Dataset):
 
     Parameters
     ----------
-    data : list or dict
+    data : list of dicts
             The data to build a dataset from.
     threshold : list or tuple
         A list of values that influence the conversion between real positions and cell positions.
         Threshold[0] is the minimum value to consider an excitation is present.
         Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this
         value is considered the same excitation.
-        (default = (0.5, 8.18))
+        (default = (0.5, 8))
     dims : list or tuple
         The shape of the image data.
         (default = (132, 132))
@@ -361,20 +399,20 @@ class VortexODDataset(torch.utils.data.Dataset):
 
     """
 
-    def __init__(self, data: dict, threshold: list | tuple = (0.5, 8.18), dims: list | tuple = (132, 132),
+    def __init__(self, data: list[dict], threshold: list | tuple = (0.5, 8), dims: list | tuple = (132, 132),
                  *, augment: bool = False) -> None:
         """Initialize the dataset functionality.
 
         Parameters
         ----------
-        data : list or dict
+        data : list of dicts
             The data to build a dataset from.
         threshold : list or tuple
             A list of values that influence the conversion between real positions and cell positions.
             Threshold[0] is the minimum value to consider an excitation is present.
             Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this
             value is considered the same excitation.
-            (default = (0.5, 8.18))
+            (default = (0.5, 8))
         dims : list or tuple
             The shape of the image data in the form (height, width).
             (default = (132, 132))
@@ -403,23 +441,21 @@ class VortexODDataset(torch.utils.data.Dataset):
                 # Rotation
                 angle = np.random.default_rng().random() * 2 * np.pi
                 rot = np.array([[np.cos(angle), np.sin(angle)], [-np.sin(angle), np.cos(angle)]])
-                aug_img = rotate(entry["data"], angle * (180 / np.pi), reshape=False, order=2)
+                aug_img = rotate(deepcopy(entry["data"]), angle * (180 / np.pi), reshape=False, order=2)
                 img_data.append(aug_img)
                 if "positions" in entry:
-                    aug_pos = []
-                    for coord in entry["positions"]:
-                        xy_rot = rot @ (np.array(coord) - (np.array(entry["data"].shape) - 1) / 2)
-                        xy_rot += (np.array(entry["data"].shape) - 1) / 2
-                        aug_pos.append(xy_rot.tolist())
-                    label_data.append(aug_pos)
+                    rot = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
+                    xy_rot = (deepcopy(np.array(entry["positions"])) - ((np.array(aug_img.shape) - 1) / 2)) @ rot
+                    xy_rot += (np.array(aug_img.shape) - 1) / 2
+                    label_data.append(xy_rot.tolist())
                 else:
                     label_data.append([])
 
                 # hflip of rotation
-                img_data.append(np.flip(aug_img, 1))
+                img_data.append(np.flip(deepcopy(aug_img), 1))
                 if "positions" in entry:
                     flip_pos = []
-                    for coord in aug_pos:
+                    for coord in deepcopy(xy_rot.tolist()):
                         xy_flip = np.array(coord)
                         xy_flip[0] = (np.array(entry["data"].shape) - 1)[1] - xy_flip[0]
                         flip_pos.append(xy_flip.tolist())
@@ -428,10 +464,10 @@ class VortexODDataset(torch.utils.data.Dataset):
                     label_data.append([])
 
                 # vflip of rotation
-                img_data.append(np.flip(aug_img, 0))
+                img_data.append(np.flip(deepcopy(aug_img), 0))
                 if "positions" in entry:
                     flip_pos = []
-                    for coord in aug_pos:
+                    for coord in deepcopy(xy_rot.tolist()):
                         xy_flip = np.array(coord)
                         xy_flip[1] = (np.array(entry["data"].shape) - 1)[0] - xy_flip[1]
                         flip_pos.append(xy_flip.tolist())
@@ -452,7 +488,7 @@ class VortexODDataset(torch.utils.data.Dataset):
                                                         (entry["data"].shape[1] // 2)] == 0).nonzero()[0].shape[0])
                 max_tr_y = int(np.round(max_tr_y * 0.25))
 
-                for taugment, tpos in zip(img_data[-4:], label_data[-4:]):
+                for taugment, tpos in zip(deepcopy(img_data[-4:]), deepcopy(label_data[-4:]), strict=True):
                     trans_x = np.random.default_rng().integers(-max_tr_x, max_tr_x)
                     trans_y = np.random.default_rng().integers(-max_tr_y, max_tr_y)
                     img_data.append(np.roll(taugment, (trans_x, trans_y), (1, 0)))
@@ -469,19 +505,16 @@ class VortexODDataset(torch.utils.data.Dataset):
                         label_data.append([])
 
                 # Noise
-                noise = np.random.default_rng().normal(0, 0.05, entry["data"].shape)
+                noise = np.random.default_rng().normal(0.5, 0.25, entry["data"].shape) * 0.05
                 noise[entry["data"] == 0] = 0
-                aug_img = entry["data"] + noise
+                aug_img = deepcopy(entry["data"]) + noise
                 img_data.append(aug_img)
                 if "positions" in entry:
                     label_data.append(entry["positions"])
                 else:
                     label_data.append([])
 
-        img_data = np.array(img_data)
-        img_data = np.reshape(img_data, (img_data.shape[0], 1, img_data.shape[1], img_data.shape[2]))
-
-        self.imgs = torch.from_numpy(img_data).float()
+        self.imgs = torch.from_numpy(np.array(img_data)).float().unsqueeze(1)
         self.pos = torch.from_numpy(self.data_to_labels(label_data)).float()
         self.og_labels = label_data
 
@@ -547,7 +580,7 @@ class VortexODDataset(torch.utils.data.Dataset):
         Returns
         -------
         labels: ndarray
-            The positions in the cell space. This is an array of (3,)
+            The positions and probabilities in the cell space.
 
         """
         if type(label_in) is not list:
@@ -563,7 +596,7 @@ def vortex_labels_to_data(label_in: np.ndarray, threshold: list) -> list:
     Convert between vortex positions in pixel space and cell space. This new space is a compressed representation of
     the positions in pixel space and the probability of them being present in a cell. The new space is a (3, 33, 33)
     array of values with the first (33, 33) entries representing the probability of an excitation being located in a
-    cell, and the second (33, 33) entries representing the fractional position of the excitation in that cell.
+    cell, and the other two (33, 33) entries representing the fractional position of the excitation in that cell.
     Each cell represents a window of 4 x 4 pixels (H x W).
 
     This will convert from cell space to pixel space.
@@ -642,7 +675,7 @@ def vortex_data_to_labels(label_in: list, xdim: int = 132, ydim: int = 132) -> n
     Convert between vortex positions in pixel space and cell space. This new space is a compressed representation of
     the positions in pixel space and the probability of them being present in a cell. The new space is a (3, 33, 33)
     array of values with the first (33, 33) entries representing the probability of an excitation being located in a
-    cell, and the second (33, 33) entries representing the fractional position of the excitation in that cell.
+    cell, and the other two (33, 33) entries representing the fractional position of the excitation in that cell.
     Each cell represents a window of 4 x 4 pixels (H x W).
 
     This will convert from pixel space to cell space.
@@ -669,29 +702,28 @@ def vortex_data_to_labels(label_in: list, xdim: int = 132, ydim: int = 132) -> n
 
     # Positions to Label
     label_out = np.zeros((3, 33, 33))
-    if len(label_in[0]) == 0:
+    if len(label_in) == 0:
         pass
-    elif type(label_in[0][0]) in {float, np.float32, np.float64, int}:
-        for coord in label_in:
-            if coord[0] < dims[0] and coord[0] > 0:
-                if coord[1] < dims[1] and coord[1] > 0:
-                    # Probability a soliton is present
-                    label_out[0, int(coord[1] // 4), int(coord[0] // 4)] = 1
-                    # Fractional position along x direction of cell
-                    label_out[1, int(coord[1] // 4), int(coord[0] // 4)] = (coord[0] % 4) / 4
-                    # Fractional position along y direction of cell
-                    label_out[2, int(coord[1] // 4), int(coord[0] // 4)] = (coord[1] % 4) / 4
+    elif len(label_in) == 1:
+        if len(label_in[0]) != 0:
+            for coord in label_in[0]:
+                if coord[0] < dims[0] and coord[0] > 0:
+                    if coord[1] < dims[1] and coord[1] > 0:
+                        # Probability a soliton is present
+                        label_out[0, int(coord[1] // 4), int(coord[0] // 4)] = 1
+                        # Fractional position along x direction of cell
+                        label_out[1, int(coord[1] // 4), int(coord[0] // 4)] = (coord[0] % 4) / 4
+                        # Fractional position along y direction of cell
+                        label_out[2, int(coord[1] // 4), int(coord[0] // 4)] = (coord[1] % 4) / 4
+                    else:
+                        print("vortex positon beyond image dimensions.")
                 else:
-                    print("soliton positon beyond image dimensions.")
-            else:
-                print("soliton positon beyond image dimensions.")
+                    print("vortex positon beyond image dimensions.")
 
-    elif type(label_in[0][0]) in {list, tuple}:  # A list of postions on many images
+    elif len(label_in) > 1:
         label_out = np.zeros((len(label_in), 3, 33, 33))
         for i, pos in enumerate(label_in):
-            if len(pos[0]) == 0:
-                pass
-            else:
+            if len(pos) != 0:
                 for coord in pos:
                     if coord[0] < dims[0] and coord[0] > 0:
                         if coord[1] < dims[1] and coord[1] > 0:
@@ -702,31 +734,37 @@ def vortex_data_to_labels(label_in: list, xdim: int = 132, ydim: int = 132) -> n
                             # Fractional position along y direction of cell
                             label_out[i, 2, int(coord[1] // 4), int(coord[0] // 4)] = (coord[1] % 4) / 4
                         else:
-                            print("soliton positon beyond image dimensions.")
+                            print("vortex positon beyond image dimensions.")
                     else:
-                        print("soliton positon beyond image dimensions.")
+                        print("vortex positon beyond image dimensions.")
 
     return label_out
 
 
-def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | int = "unlabeled") -> list[dict]:
+def vortex_process_fn(data_path: str, pos_path: str | None = None, tag: str | int = "unlabeled",
+                      scale: list | None = None) -> list[dict]:
     """Process function for vortex data.
 
-    Similar to the SolDet module's default processing function,
-    this will load in a target data file and prepare it for use by the vortex detector.
+    This will load in a target numpy data file containing image arrays and prepare it for use by the vortex detector.
+    Corresponding position labels can be provided which expects a numpy array containing position data for each entry in
+    the image array data.
 
     Parameters
     ----------
     data_path : string
-        The target file containing the image data. This should be a numpy file of an array of image data of shape
+        The target file containing the image data. This should be a numpy file of arrays of image data of shape
         (N, H, W).
     pos_path : string
         The target file containing the position data for vortex locations. This should be a numpy object file of a
         list or array of N lists or tuples containing the X, Y positions for each vortex.
         (default = None)
-    label : string or int
-        The class label for the image.
+    tag : string or int
+        A descriptive label for the image.
         (default = 'unlabeled')
+    scale : list or None
+        Specifies the min max values to use for scaling the data to lay between 0 and 1.
+        If None then no scaling is performed on the data.
+        (default = None)
 
     Returns
     -------
@@ -735,8 +773,8 @@ def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | 
 
         Each dictionary contains, at minimum:
             The masked and unmasked image data of shape (132, 132).
-            The class label.
-            The class directory.
+            The tag value.
+            The sub-directory.
             The original image size.
             The original data path.
 
@@ -744,11 +782,11 @@ def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | 
 
     """
     data = np.load(data_path)
-    pos = np.load(pos_path, allow_pickle=True).tolist() if pos_path is not None else None
+    labels = np.load(pos_path, allow_pickle=True).tolist() if pos_path is not None else None
 
     data_samples = []
 
-    for idx, image in enumerate(tqdm(data, desc="Processing vortex data..")):
+    for (image, pos) in tqdm((zip(data, labels, strict=True)), desc="Processing vortex data..", total=data.shape[0]):
         sample = {}
 
         fullimgsize = image.shape
@@ -758,24 +796,26 @@ def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | 
         if yhigh != xhigh:
             if xhigh > yhigh:
                 crop = (xhigh - yhigh) // 2
-                od_image = image[:, crop:-crop]
-                fullimgsize = od_image.shape
-                yhigh = fullimgsize[0]
-                xhigh = fullimgsize[1]
-                if pos is not None:
-                    for i in range(len(pos[idx])):
-                        pos[idx][i] = [pos[idx][i][0] - crop, pos[idx][i][1]]
+                od_image = deepcopy(image[:, crop:-crop])
+                yhigh = od_image.shape[0]
+                xhigh = od_image.shape[1]
+                positions = deepcopy(np.array(pos))
+                positions[:, 0] -= crop
+                positions = positions.tolist()
             else:
                 crop = (yhigh - xhigh) // 2
-                od_image = image[crop:-crop, :]
-                fullimgsize = od_image.shape
-                yhigh = fullimgsize[0]
-                xhigh = fullimgsize[1]
-                if pos is not None:
-                    for i in range(len(pos[idx])):
-                        pos[idx][i] = [pos[idx][i][0], pos[idx][i][1] - crop]
+                od_image = deepcopy(image[crop:-crop, :])
+                yhigh = od_image.shape[0]
+                xhigh = od_image.shape[1]
+                positions = deepcopy(np.array(pos))
+                positions[:, 1] -= crop
+                positions = positions.tolist()
         else:
-            od_image = image
+            od_image = deepcopy(image)
+            positions = deepcopy(pos)
+
+        if scale is not None:
+            od_image = (od_image - scale[0]) / (scale[1] - scale[0])
 
         yc, xc = np.ogrid[:yhigh, :xhigh]
         regions = regionprops(meas_label(od_image > threshold_mean(od_image)))
@@ -787,7 +827,7 @@ def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | 
         region = regions[(area == np.max(area)).nonzero()[0][0]]
 
         ceny, cenx = region.centroid
-        circ_r = region.major_axis_length / 2
+        circ_r = region.axis_major_length / 2
 
         mask = np.sqrt((xc - cenx)**2 + (yc - ceny)**2) <= circ_r
         cropped_od_image = od_image * mask
@@ -795,13 +835,12 @@ def vortex_process_fn(data_path: str, pos_path: str | None = None, label: str | 
         sample["Original Data Size"] = fullimgsize
         sample["cloud_data"] = od_image
         sample["data"] = cropped_od_image
-        sample["label"] = label
-        sample["filename"] = data_path
-        sample["class_dir"] = "Vortex_" + str(label)
+        sample["tag"] = tag
+        sample["sub_dir"] = "Vortex_" + str(tag)
         if pos is not None:
             # re-sort to make the position ordering match that of the labeling function
-            labels = vortex_data_to_labels(pos[idx], xdim=fullimgsize[1], ydim=fullimgsize[0])
-            sample["positions"] = vortex_labels_to_data(labels, threshold=[0.5, 8.18])
+            labels = vortex_data_to_labels([positions], xdim=fullimgsize[1], ydim=fullimgsize[0])
+            sample["positions"] = vortex_labels_to_data(labels, threshold=[0.5, 8])
 
         data_samples += [sample]
 

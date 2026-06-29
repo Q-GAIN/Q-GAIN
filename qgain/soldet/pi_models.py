@@ -1,15 +1,19 @@
 """The models for the PIE classifier and Quality Estimator."""
 from __future__ import annotations
 
-from typing import Any, Callable
-
-import numpy as np
-from scipy import stats
-from sklearn.preprocessing import PowerTransformer
-from tqdm import tqdm
+from typing import TYPE_CHECKING, Any
 
 from qgain.soldet.mhat_metric import find_soliton, preprocess_mhat_params
 from qgain.soldet.soliton_datasets import SolitonPIEClassDataset, SolitonQEClassDataset
+from qgain.soldet.soliton_datasets import pos_41labels_conversion as labels_conv
+
+from scipy import stats
+from sklearn.preprocessing import PowerTransformer
+from tqdm import tqdm
+import numpy as np
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class PIEClassifier:
@@ -60,7 +64,7 @@ class PIEClassifier:
     Further information can be found in the SolDet paper https://arxiv.org/abs/2111.04881
     func : string
         The fitting function to be used. Can be 'gaussian1D', 'original' (SOLDET 1.0),
-        or 'modern' (SOLDET 2.0 module).
+        or 'modern' (modern SOLDET module).
         (default = 'modern')
     transformer : Callable function
         The type of transform to use on the parameters.
@@ -117,7 +121,7 @@ class PIEClassifier:
             (default = 1.14)
         func : string
             The fitting function to be used. Can be 'gaussian1D', 'original' (SOLDET 1.0),
-            or 'modern' (SOLDET 2.0 module).
+            or 'modern' (modern SOLDET module).
             (default = 'modern')
         transformer : Callable function
             The type of transform to use on the parameters.
@@ -291,14 +295,19 @@ class PIEClassifier:
 
         """
         res = []
+        self.top_metrics = []
+        self.bottom_metrics = []
         pbar = tqdm(range(len(data)), desc="PIE Classifier running..")
         warned = False
         for item in data:
             pos = None
             if "positions" in item:
                 pos = item["positions"]
-            elif "CL_pred" in item and item["CL_pred"] > 0 and "OD_pred" in item and len(item["OD_pred"]) > 0:
-                pos = item["OD_pred"]
+            elif "CL_pred" in item and "OD_pred" in item:
+                cl_pred = np.argmax(item["CL_pred"]) if item["CL_pred"].flatten().shape[0] > 1 else item["CL_pred"]
+                od_pred = labels_conv(item["OD_pred"][0]) if type(item["OD_pred"]) is np.ndarray else item["OD_pred"]
+                if cl_pred > 0 and len(od_pred) > 0:
+                    pos = od_pred
             elif not warned:
                 tqdm.write("Warning: ML or position labels not found in an entry.")
                 warned = True
@@ -358,6 +367,8 @@ class PIEClassifier:
                     class_return = self.__cutter(top_metrics=top_metrics,
                                                           bottom_metrics=bottom_metrics,
                                                           idx=None)
+                self.top_metrics += [top_metrics]
+                self.bottom_metrics += [bottom_metrics]
             else:
                 class_return = None
             res += [class_return]
@@ -377,7 +388,7 @@ class QE:
     ----------
     func : string
         The fitting function to be used. Can be 'gaussian1D', 'original' (SOLDET 1.0),
-        or 'modern' (SOLDET 2.0 module).
+        or 'modern' (modern SOLDET module).
         (default = 'modern')
     transformer : Callable function
         The type of transform to use on the parameters.
@@ -392,7 +403,7 @@ class QE:
         ----------
         func : string
             The fitting function to be used. Can be 'gaussian1D', 'original' (SOLDET 1.0),
-            or 'modern' (SOLDET 2.0 module).
+            or 'modern' (modern SOLDET module).
             (default = 'modern')
         transformer : Callable function
             The type of transform to use on the parameters.
@@ -461,8 +472,11 @@ class QE:
             pos = None
             if "positions" in item:
                 pos = item["positions"]
-            elif "CL_pred" in item and item["CL_pred"] > 0 and "OD_pred" in item and len(item["OD_pred"]) > 0:
-                pos = item["OD_pred"]
+            elif "CL_pred" in item and "OD_pred" in item:
+                cl_pred = np.argmax(item["CL_pred"]) if item["CL_pred"].flatten().shape[0] > 1 else item["CL_pred"]
+                od_pred = labels_conv(item["OD_pred"][0]) if type(item["OD_pred"]) is np.ndarray else item["OD_pred"]
+                if cl_pred > 0 and len(od_pred) > 0:
+                    pos = item["OD_pred"]
             elif not warned:
                 tqdm.write("Warning: ML or position labels not found in an entry.")
                 warned = True

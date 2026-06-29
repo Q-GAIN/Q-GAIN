@@ -1,16 +1,19 @@
 """Machine Learning Controller."""
 from __future__ import annotations
 
+from pathlib import Path
+from typing import TYPE_CHECKING
 import datetime
 import warnings
-from pathlib import Path
-
-import numpy as np
-import torch
-from torch.utils.data import DataLoader
-from tqdm import tqdm
 
 from qgain.control import Control
+
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+import torch
+
+if TYPE_CHECKING:
+    import numpy as np
 
 # specify cpu or gpu device for training
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -19,33 +22,16 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 class MLControl(Control):
     """The machine learning (ML) control class for the Q-GAIN package.
 
-    Functionality can be modified with external modules by replacing them in the corresponding argument when adding new
-    ML models.
-
     When creating a new tool the controller will pass any initialization arguments to the MLTool which sets up
     the model. A tool to the ML controller is a seperate ML model it must run data through. This will be added as an
     entry in the member attribute list called tools.
-    Adding additional ML tools can be accomplished with the listed Parameters in the add_new_tool method.
-
-    Example:
-    --------
-    .. code-block:: python
-
-        kwargs = {'label_shape' : (1, 41)}
-
-        od_top = MLControl()
-        od_top.add_new_tool(model = qgain.soldet.object_nn.ObjectDetector,
-                            name="ObjectDetector"
-                            dataset_fn = qgain.soldet.soliton_datasets.SolitonODDataset,
-                            augment = True, device = 0,
-                            metrics=[{"name": "Accuracy", "metric": accu_metric}],
-                            **kwargs)
+    Adding additional ML tools can be accomplished with the listed parameters in the add_new_tool method.
 
     """
 
     def __init__(self) -> None:
         """Initialize the class."""
-        super().__init__()
+        super().__init__(call_fn=self.predict)
 
     def add_new_tool(self, model: torch.nn.Module, name: str, dataset_fn: torch.utils.data.Dataset,
                  loss_fn: torch.nn.Module, device: int | None = None, metrics: list[dict] | None = None,
@@ -96,8 +82,8 @@ class MLControl(Control):
 
     def train(self, train_data: list, test_data: list, optimizer_fn: torch.optim.Optimizer,
               task_list: list[str] | None = None, model_path: str | None = None, batch_size: int = 32,
-              patience: int = 30, epochs: int = 30, lr: float = 1e-4, *, return_res: bool = False,
-              save_weights: bool = False) -> list | None:
+              patience: int = 30, epochs: int = 30, lr: float = 1e-4, checkpoints: list | None = None,
+              *, return_res: bool = False, save_weights: bool = False) -> list | None:
         """Train a tool's model.
 
         Specifying None in task_list trains all available models. Otherwise the controller will only train the model
@@ -124,6 +110,9 @@ class MLControl(Control):
         save_weights : bool
             Whether to save the best weights or not.
             (default = False)
+        checkpoints: list
+            If set to a list of saved weight files this will initialize the model with these weights before training.
+            (default = None)
         batch_size : int
             The batch size to use during training.
             (default = 32)
@@ -161,21 +150,29 @@ class MLControl(Control):
         for tool in self.tools:
             if task_list is None or tool["name"] in task_list:
                 print("Initiating training of: {} model.".format(tool["name"]))
+                checkpoint = None
+                if checkpoints is not None:
+                    for file in checkpoints:
+                        if torch.load(file, weights_only=True)["name"] == tool["name"]:
+                            checkpoint = file
+
                 if return_res:
                     results += [tool["tool"].train(train_data=train_data, test_data=test_data,
                                                    optimizer_fn=optimizer_fn, model_path=model_path,
                                                    batch_size=batch_size, patience=patience, epochs=epochs, lr=lr,
-                                                   return_res=return_res, save_weights=save_weights)]
+                                                   checkpoint=checkpoint, return_res=return_res,
+                                                   save_weights=save_weights)]
                 else:
                     tool["tool"].train(train_data=train_data, test_data=test_data,
                                                    optimizer_fn=optimizer_fn, model_path=model_path,
                                                    batch_size=batch_size, patience=patience, epochs=epochs, lr=lr,
-                                                   return_res=return_res, save_weights=save_weights)
+                                                   checkpoint=checkpoint, return_res=return_res,
+                                                   save_weights=save_weights)
         if return_res:
             return results
         return None
 
-    def predict(self, data: list | dict | np.ndarray, model_paths: list, task_list: list[str] | None = None) -> None:
+    def predict(self, data: list | dict | np.ndarray, tool_path: Path, tool: str) -> None:
         """Make predictions using the tool's model.
 
         Runs all available models if task_list is set to None.
@@ -184,28 +181,15 @@ class MLControl(Control):
         ----------
         data : list or dict or ndarray
             The data to make predictions on.
-        model_paths : list
-            A list of Path objects that point to the saved weights for the model.
-        task_list : list of strings
-            The list of models to train. If None will train all available models.
-            (default = None)
+        tool : str
+            The ML tool to run.
+        tool_path : Path object
+            A Path object that points to the saved weights for the model.
 
         """
-        # Check if all items in task list are in the controller.
-        if task_list is not None:
-            names = []
-            for tool in self.tools:
-                names += [tool["name"]]
-            for task in task_list:
-                if task not in names:
-                    msg = "Invalid task name given to controller."
-                    raise ValueError(msg)
-
-        for tool in self.tools:
-            if task_list is None or tool["name"] in task_list:
-                for f in model_paths:
-                    if tool["name"] in f.stem:
-                        tool["res"] = tool["tool"].predict(data=data, model_path=f)
+        for ml_tool in self.tools:
+            if ml_tool["name"] == tool:
+                ml_tool["res"] = ml_tool["tool"].predict(data=data, model_path=tool_path)
 
 
 class MLTool:
@@ -290,9 +274,9 @@ class MLTool:
         self.rank = device if device is not None else 0
         self.device = f"cuda:{device}" if device is not None else DEVICE
         if kwargs is None:
-            self.model = model().float().to(self.device)
+            self.model = model().float()
         else:
-            self.model = model(**kwargs).float().to(self.device)
+            self.model = model(**kwargs).float()
         self.metrics = []
         self.name = name
         if metrics is not None:
@@ -300,7 +284,8 @@ class MLTool:
 
     def train(self, train_data: list, test_data: list, optimizer_fn: torch.optim.Optimizer,
               model_path: str | None = None, batch_size: int = 32, patience: int = 30, epochs: int = 30,
-              lr: float = 1e-4, *, return_res: bool = False, save_weights: bool = False) -> dict | None:
+              lr: float = 1e-4, checkpoint: Path | None = None, *, return_res: bool = False,
+              save_weights: bool = False) -> dict | None:
         """Train the object's model on the given data.
 
         Parameters
@@ -321,6 +306,9 @@ class MLTool:
         save_weights : bool
             Whether to save the best weights or not.
             (default = False)
+        checkpoint: Path
+            If set to a saved weights file this will initialize the model with these weights before training.
+            (default = None)
         batch_size : int
             The batch size to use during training.
             (default = 32)
@@ -361,6 +349,11 @@ class MLTool:
 
         optimizer = optimizer_fn(self.model.parameters(), lr=lr)
         get_loss = self.loss_fn()
+        self.model = self.model.to(self.device)
+        if checkpoint is not None:
+            self.model.load_state_dict(torch.load(checkpoint, map_location=torch.device(self.device),
+                                                  weights_only=True)["model_state_dict"])
+            print("Loaded previous checkpoint.")
 
         patience_count = 0
         pbar = tqdm(range(epochs),
@@ -416,14 +409,14 @@ class MLTool:
                 min_dict.update(test_metrics)
                 if save_weights:
                     torch.save({"epoch": t, "train_metrics": train_metrics, "test_metrics": test_metrics,
-                                "model_state_dict": self.model.state_dict()}, save_path)
+                                "model_state_dict": self.model.state_dict(), "name": self.name}, save_path)
 
             elif test_metrics["Test Loss"] < min_dict["Test Loss"]:
                 patience_count = 0
                 min_dict.update(test_metrics)
                 if save_weights:
                     torch.save({"epoch": t, "train_metrics": train_metrics, "test_metrics": test_metrics,
-                                "model_state_dict": self.model.state_dict()}, save_path)
+                                "model_state_dict": self.model.state_dict(), "name": self.name}, save_path)
 
             else:
                 patience_count += 1
@@ -453,7 +446,7 @@ class MLTool:
         Parameters
         ----------
         data : list or dict or ndarray
-            The data to make predictions on.
+            The data to make predictions on. This should be in the format your Dataset function supports.
         model_path : str
             The path to the saved weights for the model.
 
@@ -463,34 +456,17 @@ class MLTool:
             A list of all positions found for each provided image.
 
         """
-        if type(data) is dict:
-            ds = self.dataset_fn([data], augment=False) if self.augment is not None else self.dataset_fn([data])
-        elif type(data) is list:
-            ds = self.dataset_fn(data, augment=False) if self.augment is not None else self.dataset_fn(data)
-        elif type(data) is np.ndarray:
-            data_list = []
-            if len(data.shape) == 3:
-                for i in range(data.shape[0]):
-                    data_list.append({"data": data[i, :, :]})
-            elif len(data.shape) == 2:
-                data_list.append({"data": data})
-            else:
-                msg = "Input data incorrect shape. Expected 3D or 2D image data."
-                raise ValueError(msg)
-
-            ds = self.dataset_fn(data_list, augment=False) if self.augment is not None else self.dataset_fn(data_list)
-        else:
-            msg = "Input data is invalid type. Expected list, dictionary, or numpy.ndarray"
-            raise TypeError(msg)
+        ds = self.dataset_fn(data, augment=False) if self.augment is not None else self.dataset_fn(data)
 
         with warnings.catch_warnings(record=True) as w:
             target = []
             for idx in range(len(ds)):
-                img, _ = ds[idx]
-                img = img.to(self.device)
-                target.append(img)
+                x, _ = ds[idx]
+                x = x.to(self.device)
+                target.append(x)
 
             checkpoint_dict = torch.load(model_path, map_location=torch.device(self.device), weights_only=True)
+            self.model = self.model.to(self.device)
             self.model.load_state_dict(checkpoint_dict["model_state_dict"])
             self.model.eval()
             print(self.name + " model loaded.")
@@ -500,6 +476,9 @@ class MLTool:
                 pbar = tqdm(range(len(target)), desc="Running..")
                 for sample in target:
                     pred = self.model(sample.unsqueeze(0)).detach()
+                    if "cpu" not in str(pred.device):
+                        pred = pred.cpu()
+                    pred = pred.numpy()
                     res.append(pred)
                     if len(w) > 0:
                         tqdm.write(str(w[0].message))

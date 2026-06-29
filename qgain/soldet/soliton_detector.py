@@ -5,15 +5,9 @@ This uses the Q-GAIN detector module to set up a detector suitable for detecting
 """
 from __future__ import annotations
 
-import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.preprocessing import PowerTransformer
-from torch import argmax
-from torch.nn import NLLLoss
-
 from qgain.detector import Detector
 from qgain.io import process_data
-from qgain.soldet.classifier_nn import MLST2021CNNmodern
+from qgain.soldet.classifier_nn import SolDetClassifier
 from qgain.soldet.object_nn import MetzLoss, ObjectDetector
 from qgain.soldet.pi_models import QE, PIEClassifier
 from qgain.soldet.soliton_datasets import (
@@ -23,6 +17,11 @@ from qgain.soldet.soliton_datasets import (
     od_accu_metric,
     pos_41labels_conversion,
 )
+
+from sklearn.preprocessing import PowerTransformer
+from torch.nn import NLLLoss
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 class SolitonDetector(Detector):
@@ -50,7 +49,7 @@ class SolitonDetector(Detector):
         qgain.soldet.soliton_datasets.download_ds()
         qgain.soldet.soliton_datasets.soldet_to_h5(soldet.config()[0])
         sd = soldet.soliton_detector.SolitonDetector()
-        sd.load_data(labels = [0, 1])
+        sd.load_data(tags = [0, 1])
         sd.train_nn(['classifier'])
         sd.use_models(model_list = ['classifier'], model_paths = ['CL.pt'])
 
@@ -78,143 +77,170 @@ class SolitonDetector(Detector):
         cl_kwargs = {"num_classes": 3} if cl_kwargs is None else cl_kwargs
 
         super().__init__(process_fn=process_data, od_model=ObjectDetector, od_dataset_fn=SolitonODDataset,
-                         od_loss_fn=MetzLoss, cl_model=MLST2021CNNmodern, cl_dataset_fn=SolitonClassDataset,
+                         od_loss_fn=MetzLoss, cl_model=SolDetClassifier, cl_dataset_fn=SolitonClassDataset,
                          cl_loss_fn=NLLLoss, cl_aug=augment, od_aug=augment, od_kwargs=od_kwargs, cl_kwargs=cl_kwargs,
-                         pi_metrics=[{"name": "pie classifier", "metric": PIEClassifier},
-                                       {"name": "quality estimator", "metric": QE}],
-                         pi_kwargs=[{"func": "modern", "transformer": PowerTransformer},
+                         stat_tools=[{"name": "pie classifier", "tool": PIEClassifier},
+                                       {"name": "quality estimator", "tool": QE}],
+                         stats_kwargs=[{"func": "modern", "transformer": PowerTransformer},
                                       {"func": "modern", "transformer": PowerTransformer}])
 
-        idx = self.ml_top.get_id(name="OD")
-        self.ml_top.tools[idx]["tool"].metrics += [{"name": "Accuracy", "metric": od_accu_metric}]
-        idx = self.ml_top.get_id(name="CL")
-        self.ml_top.tools[idx]["tool"].metrics += [{"name": "Accuracy", "metric": cl_accu_metric}]
+        self.controllers["ML Controller"].get_tool("OD").metrics += [{"name": "Accuracy", "metric": od_accu_metric}]
+        self.controllers["ML Controller"].get_tool("CL").metrics += [{"name": "Accuracy", "metric": cl_accu_metric}]
 
-    def __plot_qe(self, qe_ground: list, qe_pred: list, qe_skip_count: int, *, style: str, save: bool) -> None:
-        """Plot some metrics relevant for the quality estimator.
+        self.controllers["Plot Controller"].add_new_tool(plot_tools=[{"name": "pie classifier",
+                                                                      "tool": self.__plot_pie}])
+        self.controllers["Plot Controller"].add_new_tool(plot_tools=[{"name": "quality estimator",
+                                                                      "tool": self.__plot_qe}])
 
-        Support function for plot_metrics.
+    @staticmethod
+    def __plot_qe(data: list[dict]) -> list:
+        """Plot a basic scatter plot and histogram for the quality estimates.
+
+        This function will use the output of the QE and the SolDet dataset label to generate the plots. Like in the
+        QGAIN version the resulting figures are returned so they can be saved.
+
+
+        Parameters
+        ----------
+        data : list of dicts
+                The data to generate plots from. This expects the data to be a list of dicts with the proper keys.
+
+        Returns
+        -------
+        figs : list
+            Returns a list containing the generated figures.
+
         """
+        figs = []
+        qe_ground = []
+        qe_pred = []
+        qe_total_count = 0
+        qe_skip_count = 0
+
+        for sample in data:
+            if "excitation_quality" in sample:
+                qe_total_count += 1
+                key = "excitation_quality"
+                gnd = np.array(sample[key]) if type(sample[key]) is not np.ndarray else sample[key]
+                key = "quality estimator_pred"
+                pred = np.array(sample[key]) if type(sample[key]) is not np.ndarray else sample[key]
+                if len(pred) == len(gnd):
+                    for g, p in zip(gnd, pred, strict=True):
+                        qe_ground.append(g)
+                        qe_pred.append(p)
+                else:
+                    qe_skip_count += 1
+
         if qe_skip_count > 0:
-            print(f"Warning: {qe_skip_count} number of prediction values did not match length of QE ground labels.")
+            print(f"Warning for QE: There were {qe_skip_count} samples skipped due to mismatched lengths."
+                  f"\nThis was {100 * (qe_skip_count / len(qe_total_count)):.3f}% of the total set of PIE data.")
+
         min_val = np.min([np.min(qe_ground), np.min(qe_pred)])
         max_val = np.max([np.max(qe_ground), np.max(qe_pred)])
         bins = np.linspace(min_val, max_val, 20)
         m, b = np.polyfit(qe_ground, qe_pred, 1)
         x = np.array(qe_ground)
         y = m * x + b
-        if style is not None:
-            with plt.style.context(style):
-                fig, ax = plt.subplots()
-                _, bins, _ = ax.hist(qe_ground, bins=bins, edgecolor="black", label="Dataset Quality Score")
-                _ = ax.hist(qe_pred, bins=bins, edgecolor="black", label="Predicted Quality Score", alpha=0.5)
-                ax.set_title("Quality Estimate Histogram")
-                ax.set_ylabel("Counts")
-                ax.set_xlabel("Score")
-                ax.tick_params(axis="both", which="major")
-                ax.legend()
-                plt.tight_layout()
 
-                if save:
-                    fig.savefig(self.exp_path.joinpath("qe_hist.png"))
+        fig, ax = plt.subplots()
+        _, bins, _ = ax.hist(qe_ground, bins=bins, edgecolor="black", label="Dataset Quality Score")
+        _ = ax.hist(qe_pred, bins=bins, edgecolor="black", label="Predicted Quality Score", alpha=0.5)
+        ax.set_title("Quality Estimate Histogram")
+        ax.set_ylabel("Counts")
+        ax.set_xlabel("Score")
+        ax.tick_params(axis="both", which="major")
+        ax.legend()
+        plt.tight_layout()
+        plt.show()
 
-                fig, ax = plt.subplots()
-                ax.set_title("Quality Estimate Scatter Plot")
-                ax.scatter(qe_ground, qe_pred, label="(Dataset QE, Predicted QE) Values", alpha=0.5)
-                ax.plot(x, y, color="red", label=f"Fitted Line\nm = {m}\nb = {b}")
-                ax.set_ylabel("Predicted Quality Score")
-                ax.set_xlabel("Dataset Quality Score")
-                ax.legend()
-                plt.tight_layout()
+        figs += [fig]
 
-                if save:
-                    fig.savefig(self.exp_path.joinpath("qe_scatter.png"))
-            plt.show()
-        else:
-            fig, ax = plt.subplots()
-            _, bins, _ = ax.hist(qe_ground, bins=bins, edgecolor="black", label="Dataset Quality Score")
-            _ = ax.hist(qe_pred, bins=bins, edgecolor="black", label="Predicted Quality Score", alpha=0.5)
-            ax.set_title("Quality Estimate Histogram")
-            ax.set_ylabel("Counts")
-            ax.set_xlabel("Score")
-            ax.tick_params(axis="both", which="major")
-            ax.legend()
-            plt.tight_layout()
+        fig, ax = plt.subplots()
+        ax.set_title("Quality Estimate Scatter Plot")
+        ax.scatter(qe_ground, qe_pred, label="(Dataset QE, Predicted QE) Values", alpha=0.5)
+        ax.plot(x, y, color="red", label=f"Fitted Line\nm = {m}\nb = {b}")
+        ax.set_ylabel("Predicted Quality Score")
+        ax.set_xlabel("Dataset Quality Score")
+        ax.legend()
+        plt.tight_layout()
+        plt.show()
 
-            if save:
-                fig.savefig(self.exp_path.joinpath("qe_hist.png"))
+        figs += [fig]
 
-            fig, ax = plt.subplots()
-            ax.set_title("Quality Estimate Scatter Plot")
-            ax.scatter(qe_ground, qe_pred, label="(Dataset QE, Predicted QE) Values", alpha=0.5)
-            ax.plot(x, y, color="red", label=f"Fitted Line\nm = {m}\nb = {b}")
-            ax.set_ylabel("Predicted Quality Score")
-            ax.set_xlabel("Dataset Quality Score")
-            ax.legend()
-            plt.tight_layout()
+        return figs
 
-            if save:
-                fig.savefig(self.exp_path.joinpath("qe_scatter.png"))
+    @staticmethod
+    def __plot_pie(data: list[dict]) -> list:
+        """Plot a confusion matrix table for the PIE Classifier.
 
-    def __plot_pie(self, pie_ground: list, pie_pred: list, pie_skip_count: int, *, style: str, save: bool) -> None:
-        """Plot some metrics relevant for the PIE classifier.
-
-        Support function for plot_metrics.
-        """
-        if pie_skip_count > 0:
-            print(f"Warning: {pie_skip_count} number of prediction values did not match length of PIE ground labels.")
-
-        classes = np.arange(6).tolist()
-        gmatrix = np.zeros((len(classes), len(classes)), dtype=int)
-        for ground, pred in zip(pie_ground, pie_pred):
-            gmatrix[int(pred), int(ground)] += 1
-        if style is not None:
-            with plt.style.context(style):
-                fig, ax = plt.subplots()
-                _ = ax.imshow(gmatrix)
-
-                ax.set_xticks(classes)
-                ax.set_yticks(classes)
-
-                for i in range(len(classes)):
-                    for j in range(len(classes)):
-                        _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
-
-                ax.set_title("Dataset PIE Labels Vs. PIE Predictions")
-                ax.set_ylabel("PIE Predictions")
-                ax.set_xlabel("Dataset Labels")
-                plt.tight_layout()
-
-                if save:
-                    fig.savefig(self.exp_path.joinpath("pie_truthTable.png"))
-            plt.show()
-        else:
-            fig, ax = plt.subplots()
-            _ = ax.imshow(gmatrix)
-
-            ax.set_xticks(classes)
-            ax.set_yticks(classes)
-
-            for i in range(len(classes)):
-                for j in range(len(classes)):
-                    _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
-
-            ax.set_title("Dataset PIE Labels Vs. PIE Predictions")
-            ax.set_ylabel("PIE Predictions")
-            ax.set_xlabel("Dataset Labels")
-            plt.tight_layout()
-
-            if save:
-                fig.savefig(self.exp_path.joinpath("pie_truthTable.png"))
-
-    def load_data(self, labels: list | tuple = (0, 1, 2, 8, 9), data_frac: float = 0.9, minmax: list | tuple = (-1, 3),
-                  *, scale: bool = True, keep: bool = True) -> None:
-        """Load the data corresponding to the given labels in the data roster to the SolitonDetector.
+        This function will use the output of the PIE classifier and the SolDet dataset label to generate the plots. Like
+        in the QGAIN version the resulting figure is returned so it can be saved.
 
         Parameters
         ----------
-        labels : list
-            The classes to load. Labels specified here will load all files in the corresponding class folder.
+        data : list of dicts
+                The data to generate plots from. This expects the data to be a list of dicts with the proper keys.
+
+        Returns
+        -------
+        fig : list
+            Return a list containing the generated figure.
+
+        """
+        pie_ground = []
+        pie_pred = []
+        pie_total_count = 0
+        pie_skip_count = 0
+
+        for sample in data:
+            if "excitation_PIE" in sample:
+                pie_total_count += 1
+                key = "excitation_PIE"
+                gnd = np.array(sample[key]) if type(sample[key]) is not np.ndarray else sample[key]
+                key = "pie classifier_pred"
+                pred = np.array(sample[key]) if type(sample[key]) is not np.ndarray else sample[key]
+                if len(pred) == len(gnd):
+                    for g, p in zip(gnd, pred, strict=True):
+                        pie_ground.append(g)
+                        pie_pred.append(p)
+                else:
+                    pie_skip_count += 1
+
+        if pie_skip_count > 0:
+            print(f"Warning for PIE Classifier: There were {pie_skip_count} samples skipped due to mismatched lengths."
+                  f"\nThis was {100 * (pie_skip_count / len(pie_total_count)):.3f}% of the total set of PIE data.")
+
+        classes = np.arange(6).tolist()
+        gmatrix = np.zeros((len(classes), len(classes)), dtype=int)
+        for ground, pred in zip(pie_ground, pie_pred, strict=True):
+            gmatrix[int(pred), int(ground)] += 1
+
+        fig, ax = plt.subplots()
+        _ = ax.imshow(gmatrix)
+
+        ax.set_xticks(classes)
+        ax.set_yticks(classes)
+
+        for i in range(len(classes)):
+            for j in range(len(classes)):
+                _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
+
+        ax.set_title("Dataset PIE Labels Vs. PIE Predictions")
+        ax.set_ylabel("PIE Predictions")
+        ax.set_xlabel("Dataset Labels")
+        plt.tight_layout()
+        plt.show()
+
+        return [fig]
+
+    def load_data(self, tags: list | tuple = (0, 1, 2, 8, 9), data_frac: float = 0.9, minmax: list | tuple = (-1, 3),
+                  *, scale: bool = True, keep: bool = True) -> None:
+        """Load the data corresponding to the given tags in the data roster to the SolitonDetector.
+
+        Parameters
+        ----------
+        tags : list
+            The classes to load. Tags specified here will load all files in the corresponding class folder.
             These labels should match the ones listed in the data.
             (default = [0, 1, 2, 8, 9])
         data_frac : float
@@ -232,7 +258,7 @@ class SolitonDetector(Detector):
             overwritten.
 
         """
-        super().load_data(labels=labels, data_frac=data_frac, minmax=minmax, scale=scale, keep=keep)
+        super().load_data(tags=tags, data_frac=data_frac, minmax=minmax, scale=scale, keep=keep)
 
     def import_data(self, path: str, target: str = "xy", atoms_name: str = "atoms", bg_name: str = "background",
                     probe_name: str = "probe", label: int = 9, width: int = 164, height: int = 132,
@@ -277,17 +303,17 @@ class SolitonDetector(Detector):
         -------
         .. code-block:: python
 
-            args = {'target': 'xy', 'atoms_name': 'atoms', 'bg_name': 'background', 'probe_name': 'probe', 'label': 9}
+            args = {'target': 'xy', 'atoms_name': 'atoms', 'bg_name': 'background', 'probe_name': 'probe', 'tag': 9}
             sd.import_data(path='../BEC_data_2023_0613/0001', **args)
-            sd.load_data(labels= [9], data_frac = 0.9, minmax = [-1, 3])
+            sd.load_data(tags=[9], data_frac=0.9, minmax=[-1, 3])
 
         """
         if kwargs is None:
             kwargs = {"target": target, "atoms_name": atoms_name, "bg_name": bg_name, "probe_name": probe_name,
-                  "label": label, "width": width, "height": height}
+                  "tag": label, "width": width, "height": height, "labels": {"label": label}}
         else:
             kwargs.update({"target": target, "atoms_name": atoms_name, "bg_name": bg_name, "probe_name": probe_name,
-                  "label": label, "width": width, "height": height})
+                  "tag": label, "width": width, "height": height, "labels": {"label": label}})
 
         super().import_data(path, **kwargs)
 
@@ -338,30 +364,30 @@ class SolitonDetector(Detector):
         # So we convert stuff here after inference since we didn't do that in the models themselves.
         target_data = self.data if data is None else data
         for item in target_data:
-            if "OD_pred" in item:
-                item["OD_pred"] = pos_41labels_conversion(item["OD_pred"].cpu().numpy()[0])
-            if "CL_pred" in item:
-                item["CL_pred"] = argmax(item["CL_pred"]).cpu().numpy()
+            if "OD_pred" in item and type(item["OD_pred"]) is np.ndarray:
+                item["OD_pred"] = pos_41labels_conversion(item["OD_pred"][0])
+            if "CL_pred" in item and item["CL_pred"].flatten().shape[0] > 1:
+                item["CL_pred"] = np.argmax(item["CL_pred"])
         if data is None:
             self.data = target_data
 
-    def define_pie_classifier(self, *, save: bool = False) -> None:
+    def define_pie_classifier(self, *, save: bool = True) -> None:
         """Create a new metric on the object's data for the physics informed classifier.
 
         save : bool
             If true this saves the metric and cuts.
             (default = False)
         """
-        super().define_pi(metric_list=["pie classifier"], save=save)
+        super().define_stat(tool_list=["pie classifier"], save=save)
 
-    def define_quality_estimate(self, *, save: bool = False) -> None:
+    def define_quality_estimate(self, *, save: bool = True) -> None:
         """Create a new metric on the object's data for the physics informed quality scorer.
 
         save : bool
             If true this saves the metric and cuts.
             (default = False)
         """
-        super().define_pi(metric_list=["quality estimator"], save=save)
+        super().define_stat(tool_list=["quality estimator"], save=save)
 
     def export(self, export_type: str = "csv", keys: list | None = None, data: list | dict | None = None) -> None:
         """Export the ground (if available) and predicted (if available) labels in the currently loaded dataset.
@@ -374,18 +400,6 @@ class SolitonDetector(Detector):
         ----------
         export_type : str
             Choosing a type here will save the data to the corresponding file format.
-            You can choose from the following options:
-
-                - 'csv': The output will be saved in table form to a csv file.
-                - 'hdf': The output will be saved to a HDF format. This will allow the export of additional data types
-                  such as dictionaries and arrays. Each sample will be saved to a group with its labels saved as
-                  attributes. Any keys referencing dictionaries will be saved as an empty dataset in the group whose
-                  entries will become attributes to the dataset. Any keys referencing arrays will be saved as datasets
-                  in the group.
-                - 'html': The output will be saved in table form to a html file.
-                - 'pkl': The output will be pickled as a pandas dataframe object.
-                - 'numpy': The output will be converted to a numpy record array and saved as a npy file.
-
             (default = csv)
         keys : list
             Additional keys to pull from each sample's dictionary in the dataset. This could potentially cause errors
@@ -397,13 +411,15 @@ class SolitonDetector(Detector):
             (default = None)
 
         """
-        export_keys = ["excitation_PIE", "excitation_quality", "QE_pred", "PIEClassifier_pred"]
+        export_keys = ["quality estimator_pred", "pie classifier_pred"]
         if keys is not None:
             export_keys.extend(keys)
         super().export(export_type=export_type, keys=export_keys, data=data)
 
-    def plot_metrics(self, types: list = ("classifier", "object detector", "pie classifier", "quality estimator"),
-                     style: str | None = None, *, save: bool = False, data: list | dict | None = None) -> None:
+    def plot_metrics(self,
+                     types: list | tuple = ("classifier", "object detector", "pie classifier", "quality estimator"),
+                     *, style: str | None = None, save: bool = False,
+                     plot_kwargs: dict[dict] | None = None, data: list | dict | None = None) -> None:
         """Run various plotting routines and display the results.
 
         The types of plots shown depend on the entries in the list argument.
@@ -411,59 +427,25 @@ class SolitonDetector(Detector):
         Parameters
         ----------
         types : list
-            Choosing a model type here will show appropriate plots for the data you'd typically expect from them.
-            (default = ['classifier', 'object detector', 'pie classifier', 'quality estimator'])
+            The plotting tools to use.
+            (default = ('classifier', 'object detector', 'pie classifier', 'quality estimator'))
         style : str
             An optional argument to specify a matplotlib style file and change the overall look of the plots.
             (default = None)
         save : bool
             An optional argument that will save the output rather than display it.
             (default = False)
+        plot_kwargs : dict of dicts
+            Optional arguments to be passed to the tool's callable function. This dictionary should contain the name of
+            the plotting tool as a key with its value being the keyword dictionary to pass to the function.
+            (default = None)
         data : list or dict
             The data to generate plots from. By default this is the data loaded into the detector object. If using a
             different target the function expects a similar structure to that of the SolDet module.
             (default = None)
 
         """
-        super().plot_metrics(types=types, style=style, save=save, data=data)
-        target = self.data if data is None else data
-
-        qe_ground = []
-        qe_pred = []
-        pie_ground = []
-        pie_pred = []
-        pie_skip_count = 0
-        qe_skip_count = 0
-
-        for item in target:
-            if "pie classifier" in types and "excitation_PIE" in item:
-                if len(item["excitation_PIE"]) == len(item["PIEClassifier_pred"]):
-                    for i in range(len(item["excitation_PIE"])):
-                        if type(item["excitation_PIE"][i]) in {list, tuple, np.ndarray}:
-                            for j in range(len(item["excitation_PIE"][i])):
-                                pie_ground.append(item["excitation_PIE"][i][j])
-                                pie_pred.append(item["PIEClassifier_pred"][i][j])
-                        else:
-                            pie_ground.append(item["excitation_PIE"][i])
-                            pie_pred.append(item["PIEClassifier_pred"][i])
-                else:
-                    pie_skip_count += 1
-
-            if "quality estimator" in types and "excitation_quality" in item:
-                if len(item["excitation_quality"]) == len(item["QE_pred"]):
-                    for i in range(len(item["excitation_quality"])):
-                        if type(item["excitation_quality"][i]) in {list, tuple, np.ndarray}:
-                            for j in range(len(item["excitation_quality"][i])):
-                                qe_ground.append(item["excitation_quality"][i][j])
-                                qe_pred.append(item["QE_pred"][i][j])
-                        else:
-                            qe_ground.append(item["excitation_quality"][i])
-                            qe_pred.append(item["QE_pred"][i])
-                else:
-                    qe_skip_count += 1
-
-        if "pie classifier" in types:
-            self.__plot_pie(pie_ground, pie_pred, pie_skip_count, style=style, save=save)
-
-        if "quality estimator" in types:
-            self.__plot_qe(qe_ground, qe_pred, qe_skip_count, style=style, save=save)
+        plotter_kwargs = {"OD": {"ground_keys": ["positions"]}, "CL": {"ground_keys": ["label"]}}
+        if plot_kwargs is not None:
+            plotter_kwargs.update(plot_kwargs)
+        super().plot_metrics(types=types, style=style, save=save, plot_kwargs=plotter_kwargs, data=data)

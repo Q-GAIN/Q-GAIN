@@ -1,18 +1,18 @@
 """Dataset class definitions for preparing data to be used by their respective models."""
 from __future__ import annotations
 
+from pathlib import Path
 import contextlib
 import zipfile
-from pathlib import Path
 
+from qgain.utilities import config
+
+from torchvision.transforms.functional import hflip, vflip
+from tqdm import tqdm
 import h5py
 import numpy as np
 import requests
 import torch
-from torchvision.transforms.functional import hflip, vflip
-from tqdm import tqdm
-
-from qgain.utilities import config
 
 
 class SolitonPIEClassDataset(torch.utils.data.Dataset):
@@ -544,8 +544,7 @@ def pos_to_41labels_conversion(label_in: list) -> np.ndarray:
     This new space is a compressed representation of the positions in pixel space and the probability of them being
     present in a cell. The new space is a (2, 1, 41) array of values with the first 41 entries representing the
     probability of an excitation being located in a cell, and the second 41 entries representing the fractional position
-    of the excitation in that cell. Each cell represents 4 pixels in length, so each cell essentially represents a
-    window of 132 x 4 pixels (H x W).
+    of the excitation in that cell. Each cell represents 4 pixels in length..
 
     Parameters
     ----------
@@ -559,26 +558,27 @@ def pos_to_41labels_conversion(label_in: list) -> np.ndarray:
         An array of (2, 1, 41) values in cell space.
 
     """
-    if label_in == []:
+    if len(label_in) == 0:
         label_out = np.zeros((2, 1, 41))
-    elif type(label_in[0]) in {float, np.float64}:  # Postions on Single image
+    elif len(label_in) == 1:  # Postions on Single image
         label_out = np.zeros((2, 1, 41))
-        for sub_l_in in label_in:
-            if sub_l_in < 164 and sub_l_in > 0:
-                label_out[0, 0, int(sub_l_in // 4)] = 1
-                label_out[1, 0, int(sub_l_in // 4)] = (sub_l_in % 4) / 4
-            else:
-                print("soliton position beyond [0, 164].")
-
-    elif type(label_in[0]) is list:  # A list of postions on many images
-        label_out = np.zeros((len(label_in), 2, 1, 41))
-        for i, pos in enumerate(label_in):
-            for sub_l_in in pos:
+        if len(label_in[0]) != 0:
+            for sub_l_in in label_in:
                 if sub_l_in < 164 and sub_l_in > 0:
-                    label_out[i, 0, 0, int(sub_l_in // 4)] = 1
-                    label_out[i, 1, 0, int(sub_l_in // 4)] = (sub_l_in % 4) / 4
+                    label_out[0, 0, int(sub_l_in // 4)] = 1
+                    label_out[1, 0, int(sub_l_in // 4)] = (sub_l_in % 4) / 4
                 else:
                     print("soliton position beyond [0, 164].")
+    elif len(label_in) > 1:  # A list of postions on many images
+        label_out = np.zeros((len(label_in), 2, 1, 41))
+        for i, pos in enumerate(label_in):
+            if len(pos) > 0:
+                for sub_l_in in pos:
+                    if sub_l_in < 164 and sub_l_in > 0:
+                        label_out[i, 0, 0, int(sub_l_in // 4)] = 1
+                        label_out[i, 1, 0, int(sub_l_in // 4)] = (sub_l_in % 4) / 4
+                    else:
+                        print("soliton position beyond [0, 164].")
     return label_out
 
 
@@ -589,7 +589,7 @@ def labels_to_pos_conversion(label_in: np.ndarray, threshold: list | tuple = (0.
     the positions in pixel space and the probability of them being present in a cell. The new space is a (2, 1, 41)
     array of values with the first 41 entries representing the probability of an excitation being located in a cell,
     and the second 41 entries representing the fractional position of the excitation in that cell.
-    Each cell represents 4 pixels in length, so each cell essentially represents a window of 132 x 4 pixels (H x W).
+    Each cell represents 4 pixels in length.
 
     The behavior of this function depends on the data type of label_in.
 
@@ -653,8 +653,7 @@ def pos_41labels_conversion(label_in: list | np.ndarray, threshold: list | tuple
     This new space is a compressed representation of the positions in pixel space and the probability of them being
     present in a cell. The new space is a (2, 1, 41) array of values with the first 41 entries representing the
     probability of an excitation being located in a cell, and the second 41 entries representing the fractional position
-    of the excitation in that cell. Each cell represents 4 pixels in length, so each cell essentially represents a
-    window of 132 x 4 pixels (H x W).
+    of the excitation in that cell. Each cell represents 4 pixels in length.
 
     The behavior of this function depends on the data type of label_in.
 
@@ -708,7 +707,7 @@ def download_ds() -> None:
                 "https://data.nist.gov/od/ds/ark:/88434/mds2-2363/data_files.zip"]
         files = ["data_info.zip", "data_files.zip"]
         subdir = data_path.joinpath("data")
-        for url, file in zip(urls, files):
+        for url, file in zip(urls, files, strict=True):
             response = requests.get(url, stream=True, timeout=30)
             if response.status_code != 200:
                 response.raise_for_status()
@@ -755,9 +754,10 @@ def soldet_to_h5(path: str, *, delete_old: bool = True) -> None:
         roster_orig = np.load(data_roster_dir.joinpath("data_roster.npy"), allow_pickle=True).item()
     except FileNotFoundError as err:
         if data_roster_dir.joinpath("data_roster.h5").is_file():
-            msg = "Roster file data_roster.npy not found, but data_roster.h5 was found. Did you already convert?"
-            raise UserWarning(msg) from err
-        msg = "Roster file data_roster.npy  not found."
+            print("Warning: Roster file data_roster.npy not found, "
+                  "but data_roster.h5 was found. Did you already convert?")
+            return
+        msg = "Roster file data_roster.npy not found."
         raise FileNotFoundError(msg) from err
     data_roster = {**data_roster, **roster_orig}
     if delete_old:
@@ -774,7 +774,8 @@ def soldet_to_h5(path: str, *, delete_old: bool = True) -> None:
 
     for sample in tqdm(data_roster, desc="Converting data.."):
         label = None
-        sample_name = target.name + f"_{i}"
+        pos = None
+        sample_name = Path(sample).stem
         data_dir = target.joinpath("data", "data_files")
         numpy_file = Path(sample).name
         with contextlib.suppress(KeyError):
@@ -788,11 +789,18 @@ def soldet_to_h5(path: str, *, delete_old: bool = True) -> None:
             raise ValueError(msg)
         class_dir = Path(f"class-{label}")
         soldet_h5 = data_dir.joinpath(class_dir, sample_name + ".h5")
+        with contextlib.suppress(KeyError):
+            pos = data_roster[sample]["excitation_position"] if pos is None else pos
+        with contextlib.suppress(KeyError):
+            pos = data_roster[sample]["excitation_positions"] if pos is None else pos
+        with contextlib.suppress(KeyError):
+            pos = data_roster[sample]["position"] if pos is None else pos
+        with contextlib.suppress(KeyError):
+            pos = data_roster[sample]["positions"] if pos is None else pos
 
         with h5py.File(roster_path, mode, meta_block_size=8000) as h5_file:
             ds = h5_file.create_dataset(sample_name, data=h5py.Empty("f"), dtype="f", shape=None)
-            ds.attrs["label"] = label
-            ds.attrs["original_file"] = sample
+            ds.attrs["tag"] = label
             ds.attrs["path"] = str(class_dir.joinpath(sample_name + ".h5"))
 
         data_loaded = np.load(data_dir.joinpath(class_dir, numpy_file), allow_pickle=True).item()
@@ -800,8 +808,11 @@ def soldet_to_h5(path: str, *, delete_old: bool = True) -> None:
             data_dir.joinpath(class_dir, numpy_file).unlink()
 
         with h5py.File(soldet_h5, "w") as h5_file:
+            h5_file.attrs["tag"] = label
             h5_file.attrs["label"] = label
             h5_file.attrs["original_file"] = Path(sample).name
+            if pos is not None:
+                h5_file.attrs["positions"] = pos
             for item in data_roster[sample]:
                 if "file_name" in item:
                     pass

@@ -2,24 +2,29 @@
 
 from __future__ import annotations
 
-import datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
+import datetime
+import pickle
 
-import h5py
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
+from qgain.io import load_data, process_data
+from qgain.run_ml import MLControl
+from qgain.run_plot import PlotControl, cl_plotter, od_plotter
+from qgain.run_stat import StatControl
+from qgain.utilities import config
+
 from sklearn.model_selection import train_test_split
 from torch.optim import Adam
 from tqdm import tqdm
-
-from qgain.io import load_data, process_data
-from qgain.run_metric import MetricControl
-from qgain.run_ml import MLControl
-from qgain.utilities import config
+import h5py
+import numpy as np
+import pandas as pd
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from qgain.control import Control
+
     from torch.nn import Module
     from torch.optim import Optimizer
     from torch.utils.data import Dataset
@@ -33,7 +38,7 @@ class Detector:
 
     These set up the target directories for the required folder structure. The data_path points to the
     directory all experimental data folders will reside in. An experiment can be specified with def_exp_name, which
-    will set the target directory for where Q-GAIN's class data will be saved to.
+    will set the target directory for where Q-GAIN's data will be saved to.
 
     .. code-block::
 
@@ -55,8 +60,8 @@ class Detector:
     types can be added by simply calling the ML controller's add_new_task method. See documentation on the MLControl
     class for more information.
 
-    Similarly, new statistical based analysis tools can be added by calling the metric controller's add_new_metric
-    method. See documentation on the MetricControl class for more information.
+    Similarly, new statistical based analysis tools can be added by calling the stat controller's add_new_tool
+    method. See documentation on the StatControl class for more information.
 
     Parameters
     ----------
@@ -101,15 +106,15 @@ class Detector:
     cl_kwargs : dict
         A dictionary containing any extra function arguments needed to be passed to the classifier model
         (default = None)
-    pi_metrics : list of dicts
-        A list of dictionaries specifying the statistical based analysis methods to use after the completion of the ML
-        models. This dictionary should have a 'name' key whose value is the name of the metric used to call it in
-        'use_models' and 'define_PI' and a 'metric' key whose value is a callable class with fit() and transform()
+    stat_tools : list of dicts
+        A list of dictionaries specifying the statistical based analysis methods to use after the completion of the
+        ML models. This dictionary should have a 'name' key whose value is the name of the method used to call it in
+        'use_models' and 'define_stat' and a 'tool' key whose value is a callable class with fit() and transform()
         methods.
         (default = None)
-    pi_kwargs : list of dicts
-        A list of dictionaries specifying any arguments needed to initialize the corresponding metric class object.
-        This should match the order of that found in the pi_metrics argument.
+    stats_kwargs : list of dicts
+        A list of dictionaries specifying any arguments needed to initialize the corresponding tool.
+        This should match the order of that found in the stat_tools argument.
         (default = None)
 
     """
@@ -119,7 +124,7 @@ class Detector:
                  od_aug: bool | None = None, od_kwargs: dict | None = None,
                  cl_model: Module = None, cl_dataset_fn: Dataset = None, cl_loss_fn: Module = None,
                  cl_aug: bool | None = None, cl_kwargs: dict | None = None,
-                 pi_metrics: list[dict] | None = None, pi_kwargs: list[dict] | None = None) -> None:
+                 stat_tools: list[dict] | None = None, stats_kwargs: list[dict] | None = None) -> None:
         """Initialize the Detector class object.
 
         Parameters
@@ -165,288 +170,56 @@ class Detector:
         cl_kwargs : dict
             A dictionary containing any extra function arguments needed to be passed to the classifier model
             (default = None)
-        pi_metrics : list of dicts
+        stat_tools : list of dicts
             A list of dictionaries specifying the statistical based analysis methods to use after the completion of the
-            ML models. This dictionary should have a 'name' key whose value is the name of the metric used to call it in
-            'use_models' and 'define_PI' and a 'metric' key whose value is a callable class with fit() and transform()
+            ML models. This dictionary should have a 'name' key whose value is the name of the method used to call it in
+            'use_models' and 'define_stat' and a 'tool' key whose value is a callable class with fit() and transform()
             methods.
             (default = None)
-        pi_kwargs : list of dicts
-            A list of dictionaries specifying any arguments needed to initialize the corresponding metric class object.
-            This should match the order of that found in the pi_metrics argument.
+        stats_kwargs : list of dicts
+            A list of dictionaries specifying any arguments needed to initialize the corresponding tool class object.
+            This should match the order of that found in the stat_tools argument.
             (default = None)
 
         """
+        self.exp_path, self.exp_name = config()
+        self.process_fn = process_fn
         self.data = []
-        self.ml_top = MLControl()
-        self.pi_top = MetricControl()
+        self.controllers = {}
+        self.add_controller(name="ML Controller", controller=MLControl())
+        self.add_controller(name="Stat Controller", controller=StatControl())
+        self.add_controller(name="Plot Controller", controller=PlotControl(exp_path=self.exp_path))
 
         if cl_model is not None:
             cl_kwargs = {} if cl_kwargs is None else cl_kwargs
-            self.ml_top.add_new_tool(model=cl_model, name="CL", dataset_fn=cl_dataset_fn, loss_fn=cl_loss_fn,
-                                     augment=cl_aug, kwargs=cl_kwargs)
+            self.controllers["ML Controller"].add_new_tool(model=cl_model, name="CL", dataset_fn=cl_dataset_fn,
+                                                           loss_fn=cl_loss_fn, augment=cl_aug, kwargs=cl_kwargs)
+            self.controllers["Plot Controller"].add_new_tool(plot_tools=[{"name": "CL", "tool": cl_plotter}])
 
         if od_model is not None:
             od_kwargs = {} if od_kwargs is None else od_kwargs
-            self.ml_top.add_new_tool(model=od_model, name="OD", dataset_fn=od_dataset_fn, loss_fn=od_loss_fn,
-                                     augment=od_aug, kwargs=od_kwargs)
+            self.controllers["ML Controller"].add_new_tool(model=od_model, name="OD", dataset_fn=od_dataset_fn,
+                                                           loss_fn=od_loss_fn, augment=od_aug, kwargs=od_kwargs)
+            self.controllers["Plot Controller"].add_new_tool(plot_tools=[{"name": "OD", "tool": od_plotter}])
 
-        if pi_metrics is not None:
-            pi_kwargs = {} if pi_kwargs is None else pi_kwargs
-            self.pi_top.add_new_metric(pi_metrics=pi_metrics, pi_kwargs=pi_kwargs)
+        if stat_tools is not None:
+            stats_kwargs = {} if stats_kwargs is None else stats_kwargs
+            self.controllers["Stat Controller"].add_new_tool(stat_tools=stat_tools, stats_kwargs=stats_kwargs)
 
-        self.exp_path, self.exp_name = config()
-        self.process_fn = process_fn
-
-    def __cl_plotter(self, cl_ground: list, cl_pred: list, style: str, *, save: bool) -> None:
-        """Plot some metrics relevant for the classifier.
-
-        Support function for plot_metrics.
-        """
-        classes = np.unique([cl_ground, cl_pred]).tolist()
-        gmatrix = np.zeros((len(classes), len(classes)), dtype=int)
-        g_id = 0
-        p_id = 0
-        for ground, pred in zip(cl_ground, cl_pred):
-            for index, class_label in enumerate(classes):
-                g_id = index if ground == class_label else g_id
-                p_id = index if pred == class_label else p_id
-            gmatrix[p_id, g_id] += 1
-
-        if style is not None:
-            with plt.style.context(style):
-                fig, ax = plt.subplots()
-                _ = ax.imshow(gmatrix)
-
-                ax.set_xticks(np.arange(len(classes)), classes)
-                ax.set_yticks(np.arange(len(classes)), classes)
-
-                for i in range(len(classes)):
-                    for j in range(len(classes)):
-                        _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
-
-                ax.set_title("Dataset Labels Vs. Classifier Predictions")
-                ax.set_ylabel("Classifier Predictions")
-                ax.set_xlabel("Dataset Labels")
-                plt.tight_layout()
-
-                if save:
-                    fig.savefig(self.exp_path.joinpath("cl_truthTable.png"))
-            plt.show()
-        else:
-            fig, ax = plt.subplots()
-            _ = ax.imshow(gmatrix)
-
-            ax.set_xticks(np.arange(len(classes)), classes)
-            ax.set_yticks(np.arange(len(classes)), classes)
-
-            for i in range(len(classes)):
-                for j in range(len(classes)):
-                    _ = ax.text(j, i, gmatrix[i, j], ha="center", va="center", color="w")
-
-            ax.set_title("Dataset Labels Vs. Classifier Predictions")
-            ax.set_ylabel("Classifier Predictions")
-            ax.set_xlabel("Dataset Labels")
-            plt.tight_layout()
-
-            if save:
-                fig.savefig(self.exp_path.joinpath("cl_truthTable.png"))
-
-    def __od_plotter(self, od_ground: list, od_pred: list, od_skip_count: int, style: str, *, save: bool) -> None:
-        """Plot some metrics relevant for the object detector.
-
-        Support function for plot_metrics.
-        """
-        if od_skip_count > 0:
-            print(f"Warning: {od_skip_count} number of prediction values did not match length of OD ground labels.")
-
-        min_val = np.min([np.min(od_ground), np.min(od_pred)])
-        max_val = np.max([np.max(od_ground), np.max(od_pred)])
-        bins = np.linspace(min_val, max_val, 20)
-        m, b = np.polyfit(od_ground, od_pred, 1)
-        x = np.array(od_ground)
-        y = m * x + b
-        if style is not None:
-            with plt.style.context(style):
-                fig, ax = plt.subplots()
-                _, bins, _ = ax.hist(od_ground, bins=bins, edgecolor="black", label="Dataset Positions")
-                _ = ax.hist(od_pred, bins=bins, edgecolor="black", label="Predicted Positions", alpha=0.5)
-
-                ax.set_title("Position Histogram")
-                ax.set_ylabel("Counts")
-                ax.set_xlabel("Position")
-                ax.tick_params(axis="both", which="major")
-                ax.legend()
-                plt.tight_layout()
-
-                if save:
-                    fig.savefig(self.exp_path.joinpath("od_hist.png"))
-
-                fig, ax = plt.subplots()
-                ax.set_title("Position Scatter Plot")
-                ax.scatter(od_ground, od_pred, label="(Dataset Position, Predicted Position) Values", alpha=0.5)
-                ax.plot(x, y, color="red", label=f"Fitted Line\nm = {m}\nb = {b}")
-                ax.set_ylabel("Predicted Position")
-                ax.set_xlabel("Dataset Position")
-                ax.legend()
-                plt.tight_layout()
-
-                if save:
-                    fig.savefig(self.exp_path.joinpath("od_scatter.png"))
-            plt.show()
-        else:
-            bins = np.linspace(min_val, max_val, 20)
-            fig, ax = plt.subplots()
-            _, bins, _ = ax.hist(od_ground, bins=bins, edgecolor="black", label="Dataset Positions")
-            _ = ax.hist(od_pred, bins=bins, edgecolor="black", label="Predicted Positions", alpha=0.5)
-
-            ax.set_title("Position Histogram")
-            ax.set_ylabel("Counts")
-            ax.set_xlabel("Position")
-            ax.tick_params(axis="both", which="major")
-            ax.legend()
-            plt.tight_layout()
-
-            if save:
-                fig.savefig(self.exp_path.joinpath("od_hist.png"))
-
-            fig, ax = plt.subplots()
-            ax.set_title("Position Scatter Plot")
-            ax.scatter(od_ground, od_pred, label="(Dataset Position, Predicted Position) Values", alpha=0.5)
-            ax.plot(x, y, color="red", label=f"Fitted Line\nm = {m}\nb = {b}")
-            ax.set_ylabel("Predicted Position")
-            ax.set_xlabel("Dataset Position")
-            ax.legend()
-            plt.tight_layout()
-
-            if save:
-                fig.savefig(self.exp_path.joinpath("od_scatter.png"))
-
-    def __filter_ml(self, model_paths: list, model_list: list | tuple | None = None) -> tuple:
-        """Seperate the ML tasks from the non-ML tasks.
-
-        This is a support function for use_models().
-
-        Parameters
-        ----------
-        model_list : list or None
-            The models to run. You can choose from the following:
-
-                - 'classifier': Run the ML classifier model on the object's data.
-                - 'object detector': Run the ML object detector on the object's data. This will determine the location
-                  of any excitations found.
-                - Any other loaded ML model. These should match the name field given to the ML tool during detector
-                  initialization.
-                - Any loaded physically informed metrics. These should match the name field given for the metric during
-                  detector initialization.
-                - None: If set to None Q-GAIN will run all available models.
-
-            (default = None)
-        model_paths : list
-            The names of the saved weights or model parameters. These should end in 'classifier.pt' for the classifier
-            and 'object.pt' for the object detector. For the PI metrics these should match the filenames for any saved
-            fittings.
-            (default = [])
-
-        Returns
-        -------
-        res : tuple
-            Returns a tuple of lists with the first list being the ML tasks and the second list being the checkpoint
-            paths.
-
-        """
-        weights = self.exp_path.joinpath("models")
-        ml_tasks = []
-        ml_files = []
-
-        # Build a list of ML analysis
-        if len(self.ml_top.tools) > 0 and model_list is None:
-            for task in self.ml_top.tools:
-                ml_tasks += [task["name"]]
-
-        elif len(self.ml_top.tools) > 0 and model_list is not None:
-            if "classifier" in model_list:
-                ml_tasks += ["CL"]
-            if "object detector" in model_list:
-                ml_tasks += ["OD"]
-            for task in self.ml_top.tools:
-                if task["name"] in model_list and task["name"] != "CL" and task["name"] != "OD":
-                    ml_tasks += [task["name"]]
-        # Seperate out the ML checkpoint files
-        for task in ml_tasks:
-            for f in model_paths:
-                if task + ".pt" in f:
-                    ml_files += [weights.joinpath(f)]
-
-        return ml_tasks, ml_files
-
-    def __filter_non_ml(self, model_paths: list, model_list: list | tuple | None = None) -> tuple:
-        """Seperate the non ML tasks from the ML tasks.
-
-        This is a support function for use_models().
-
-        Parameters
-        ----------
-        model_list : list or None
-            The models to run. You can choose from the following:
-
-                - 'classifier': Run the ML classifier model on the object's data.
-                - 'object detector': Run the ML object detector on the object's data. This will determine the location
-                  of any excitations found.
-                - Any other loaded ML model. These should match the name field given to the ML tool during detector
-                  initialization.
-                - Any loaded physically informed metrics. These should match the name field given for the metric during
-                  detector initialization.
-                - None: If set to None Q-GAIN will run all available models.
-
-            (default = None)
-        model_paths : list
-            The names of the saved weights or model parameters. These should end in 'classifier.pt' for the classifier
-            and 'object.pt' for the object detector. For the PI metrics these should match the filenames for any saved
-            fittings.
-            (default = [])
-
-        Returns
-        -------
-        res : tuple
-            Returns a tuple of lists with the first list being the non ML tasks and the second list being the pickle
-            object paths.
-
-        """
-        weights = self.exp_path.joinpath("models")
-        pi_tasks = []
-        pi_files = []
-        # Build a list of non ML analysis
-        if len(self.pi_top.tools) > 0 and model_list is None:
-            for metric in self.pi_top.tools:
-                pi_tasks += [metric["name"]]
-        elif len(self.pi_top.tools) > 0 and model_list is not None:
-            for metric in self.pi_top.tools:
-                if metric["name"] in model_list:
-                    pi_tasks += [metric["name"]]
-
-        # Seperate out the PI pickle files
-        for task in pi_tasks:
-            for f in model_paths:
-                if task + ".pkl" in f:
-                    pi_files += [weights.joinpath(f)]
-
-        return pi_tasks, pi_files
-
-    def load_data(self, labels: list, data_frac: float = 0.9, minmax: list | None = None, *, scale: bool = True,
+    def load_data(self, tags: list, data_frac: float = 0.9, minmax: list | None = None, *, scale: bool = False,
                   keep: bool = True) -> None:
         """Load the data corresponding to the given labels in the data roster to the Detector.
 
         Parameters
         ----------
-        labels : list
-            The classes to load. Labels specified here will load all files in the corresponding class folder.
+        tags : list
+            The type of data to load. Labels specified here will load all files in the corresponding folder.
         data_frac : float
             The fraction of the data to use for training.
             (default = 0.9)
         scale : boolean
             If True the data will be scaled so it is bounded between 0 and 1.
-            (default = True)
+            (default = False)
         minmax : list or None
             If scale is set to True the data will be scaled given the minimum and maximum values specified in minmax.
             This expects [MIN, MAX].
@@ -458,9 +231,9 @@ class Detector:
 
         """
         if keep:
-            self.data += load_data(self.exp_path, labels, minmax=minmax, scale=scale)
+            self.data += load_data(self.exp_path, tags, minmax=minmax, scale=scale)
         else:
-            self.data = load_data(self.exp_path, labels, minmax=minmax, scale=scale)
+            self.data = load_data(self.exp_path, tags, minmax=minmax, scale=scale)
 
         self.train = data_frac
         self.test = 1 - data_frac
@@ -476,25 +249,25 @@ class Detector:
         """Import new data into the class folders of the current experiment.
 
         This function will call whatever processing function has been set to preprocess the data and make it suitable
-        for use in Q-GAIN. Processing functions should return a list of dictionaries, or a dictionary of dictionaries,
-        with at minimum the following keys for each data entry:
+        for use in Q-GAIN. Processing functions should return a list like object of dictionaries with at minimum the
+        following keys for each data point:
 
-            - 'label' : The intended class labels
-            - 'filename' : Original filename of the unprocessed data
+            - 'tag' : A descriptor of the data. This is used by Q-GAIN to determine which data to load.
             - 'data' : Target measurement data
-            - 'class_dir' : The directory a sample of a specific class should reside in.
-            - 'positions' : The position of any excitations, if applicable
+            - 'sub_dir' : The directory a sample should reside in.
 
         Additional metadata keys in the dictionary will be saved.
 
-        The keys 'label', 'original_file', and 'path' will be saved to the roster file. These will also be saved as
-        attributes to the data sample's HDF5 file. The 'data' entry will be saved as a separate data set in the
-        sample's HDF5 file. Any other keys, including 'positions', will be saved as attributes to the HDF5
-        file. If these happen to be a dictionary these will be saved as an empty dataset whose attributes are the
-        dictionary items.
+        The keys 'tag' and 'path' (derived from 'sub_dir') will be saved to the roster file. These will also be saved as
+        attributes to the data point's HDF5 file. The 'data' entry will be saved as a separate data set in the
+        sample's HDF5 file. Any other keys will be saved as attributes to the HDF5 file. If these happen to be a
+        dictionary these will be saved as an empty dataset whose attributes are the dictionary items.
 
-        The key 'class_dir' determines what class folders are created in the data path. The Q-GAIN library will attempt
-        to create this structure in whatever the current experiment data path is set to.
+        The key 'sub_dir' determines what sub directories are created in the data path. The Q-GAIN library will attempt
+        to create this structure in whatever the current experiment path is set to.
+
+        If the key 'filename' is found then HDF data point files are saved with that naming scheme. Otherwise the files
+        will be saved prepended with the current experiment name.
 
         Parameters
         ----------
@@ -507,9 +280,9 @@ class Detector:
         -------
         .. code-block:: python
 
-            args = {'target': 'xy', 'atoms_name': 'atoms', 'bg_name': 'background', 'probe_name': 'probe', 'label': 9}
-            qd.import_data(path='../BEC_data_2023_0613/0001', **args)
-            qd.load_data(labels= [9], data_frac = 0.9, minmax = [0, 1])
+            args = {'target': 'MOT', 'atoms_name': 'atoms', 'bg_name': 'bckgrnd', 'probe_name': 'probe', 'tag': 'new'}
+            qd.import_data(path='../MOTSet/', **args)
+            qd.load_data(tags=["new"], data_frac=0.9, minmax=[0, 1])
 
         """
         data = self.process_fn(path, **kwargs)
@@ -528,21 +301,31 @@ class Detector:
             i = 0
 
         for sample in tqdm(data, desc="Writing data files.."):
-            sample_name = self.exp_name + f"_{i}"
+            sample_name = self.exp_name + f"_{i}" if "filename" not in sample else Path(sample["filename"]).stem
             with h5py.File(roster_path, mode) as h5_file:
                 ds = h5_file.create_dataset(sample_name, data=h5py.Empty("f"), dtype="f", shape=None)
-                ds.attrs["label"] = sample["label"]
-                ds.attrs["original_file"] = sample["filename"]
-                ds.attrs["path"] = str(Path(sample["class_dir"]).joinpath(sample_name + ".h5"))
+                ds.attrs["tag"] = sample["tag"]
+                ds.attrs["path"] = str(Path(sample["sub_dir"]).joinpath(sample_name + ".h5"))
 
-            data_path = self.exp_path.joinpath("data/data_files/", sample["class_dir"])
+            data_path = self.exp_path.joinpath("data/data_files/", sample["sub_dir"])
             if not data_path.is_dir():
                 data_path.mkdir(parents=True)
 
             with h5py.File(data_path.joinpath(f"{sample_name}.h5"), "w") as h5_file:
 
-                ds = h5_file.create_dataset("data", data=sample["data"], compression="gzip",
-                                            compression_opts=6)
+                if isinstance(sample["data"], dict):
+                    ds = h5_file.create_dataset("data", data=h5py.Empty("f"), dtype="f", shape=None)
+                    ds.attrs["_dtype"] = "dict"
+                    for subkey in sample["data"]:
+                        ds.attrs[str(subkey)] = sample["data"][subkey]
+                elif isinstance(sample["data"], list):
+                    ds = h5_file.create_dataset("data", data=sample["data"], compression="gzip", compression_opts=6)
+                    ds.attrs["_dtype"] = "list"
+                elif isinstance(sample["data"], (str, int, float, bool)):
+                    ds = h5_file.create_dataset("data", data=sample["data"])
+                else:
+                    ds = h5_file.create_dataset("data", data=sample["data"], compression="gzip", compression_opts=6)
+
                 for key in sample:
                     if str(key) == "data":
                         pass
@@ -562,7 +345,7 @@ class Detector:
 
     def train_nn(self, model_list: list | tuple | None = None, batch_size: int = 32,
                  epochs: int = 30, patience: int = 30, optimizer_fn: Optimizer = Adam, lr: float = 1e-4,
-                 data: list | dict | None = None) -> None:
+                 checkpoints: list | None = None, data: list | dict | None = None) -> None:
         """Train machine learning based models.
 
         This will train the specified models. The resulting weights of the trained models are saved to the models
@@ -588,6 +371,9 @@ class Detector:
         batch_size : int
             The batch size to use during training.
             (default = 32)
+        checkpoints: list
+            If set to a list of saved weight files this will initialize the models with these weights before training.
+            (default = None)
         data : list or dict
             The target data to train off of. By default this will be the data loaded into the detector object. It is
             split into a training and testing subset based on the value of the detector's data_frac attribute.
@@ -596,43 +382,57 @@ class Detector:
         """
         target_data = self.data if data is None else data
         if model_list is None:
-            tasks = ["classifier", "object detector"]
-            for tool in self.ml_top.tools:
+            tasks = []
+            if self.controllers["ML Controller"].get_id(name="CL") is not None:
+                tasks += ["classifier"]
+            if self.controllers["ML Controller"].get_id(name="OD") is not None:
+                tasks += ["object detector"]
+            for tool in self.controllers["ML Controller"].tools:
                 if tool["name"] != "CL" and tool["name"] != "OD":
                     tasks += [tool["name"]]
         else:
             tasks = list(model_list)
 
+        if checkpoints is not None:
+            tool_path = []
+            for path in checkpoints:
+                tool_path += [self.exp_path.joinpath("models", path)]
+        else:
+            tool_path = None
+
         tr_set, te_set = train_test_split(target_data, test_size=self.test, train_size=self.train)
-        if "classifier" in tasks and self.ml_top.get_id(name="CL") is not None:
-            self.ml_top.train(task_list=["CL"], train_data=tr_set, test_data=te_set, optimizer_fn=optimizer_fn,
-                              model_path=self.exp_path, batch_size=batch_size,
-                              patience=patience, epochs=epochs, lr=lr, return_res=False, save_weights=True)
+        if "classifier" in tasks and self.controllers["ML Controller"].get_id(name="CL") is not None:
+            self.controllers["ML Controller"].train(task_list=["CL"], train_data=tr_set, test_data=te_set,
+                                                    optimizer_fn=optimizer_fn, model_path=self.exp_path,
+                                                    batch_size=batch_size, patience=patience, epochs=epochs,
+                                                    lr=lr, checkpoints=tool_path, return_res=False, save_weights=True)
             tasks.remove("classifier")
 
-        if "object detector" in tasks and self.ml_top.get_id(name="OD") is not None:
-            self.ml_top.train(task_list=["OD"], train_data=tr_set, test_data=te_set, optimizer_fn=optimizer_fn,
-                              model_path=self.exp_path, batch_size=batch_size,
-                              patience=patience, epochs=epochs, lr=lr, return_res=False, save_weights=True)
+        if "object detector" in tasks and self.controllers["ML Controller"].get_id(name="OD") is not None:
+            self.controllers["ML Controller"].train(task_list=["OD"], train_data=tr_set, test_data=te_set,
+                                                    optimizer_fn=optimizer_fn, model_path=self.exp_path,
+                                                    batch_size=batch_size, patience=patience, epochs=epochs,
+                                                    lr=lr, checkpoints=tool_path, return_res=False, save_weights=True)
             tasks.remove("object detector")
 
         if len(tasks) > 0:
-            self.ml_top.train(task_list=tasks, train_data=tr_set, test_data=te_set, optimizer_fn=optimizer_fn,
-                              model_path=self.exp_path, batch_size=batch_size,
-                              patience=patience, epochs=epochs, lr=lr, return_res=False, save_weights=True)
+            self.controllers["ML Controller"].train(task_list=tasks, train_data=tr_set, test_data=te_set,
+                                                    optimizer_fn=optimizer_fn, model_path=self.exp_path,
+                                                    batch_size=batch_size, patience=patience, epochs=epochs,
+                                                    lr=lr, checkpoints=tool_path, return_res=False, save_weights=True)
 
-    def define_pi(self, metric_list: list[str] | None = None, data: list[dict] | dict | None = None,
-                  *, save: bool = False) -> None:
+    def define_stat(self, tool_list: list[str] | None = None, data: list[dict] | dict | None = None,
+                  *, save: bool = True) -> None:
         """Fit specified models to data.
 
         Define any statistical based methods by fitting them to the data loaded into the detector.
-        Any saved metrics are placed in the current experiment's models folder.
-        For more control use the metric controller directly.
+        Any saved fits are placed in the current experiment's models folder.
+        For more control use the stat controller directly.
 
         Parameters
         ----------
-        metric_list : list of strings
-            The models to run. Options depend on the specified metrics during initialization. If set to None Q-GAIN
+        tool_list : list of strings
+            The models to run. Options depend on the specified tools during initialization. If set to None Q-GAIN
             will run all available models.
             (default = None)
         data : list of dicts or dict
@@ -640,25 +440,26 @@ class Detector:
             None. If this argument is provided a value the fitting will occur on that data instead.
             (default = None)
         save : bool
-            This determines whether to save the fitted metrics to disk in the experiment's models folder.
+            This determines whether to save the fitted tools to disk in the experiment's models folder.
             (Default = False)
 
         """
-        self.pi_top.build(self.data if data is None else data, metric_list, model_path=self.exp_path,
-                                    save_state=save)
+        self.controllers["Stat Controller"].build(self.data if data is None else data, tool_list,
+                                                model_path=self.exp_path, save_state=save)
 
     def use_models(self, model_paths: list, model_list: list | tuple | None = None,
                    data: list | dict | None = None) -> None:
         """Use any specified models available in Q-GAIN.
 
-        Specifying any of the options 'classifier', or 'object detector' in the argument model_list will make the
-        function use those features. The argument model_paths can be used to dictate the trained model files in the
-        models folder of the experiment path. Results are saved in the dictionary for each sample.
+        Specifying any of the options 'classifier', 'object detector', or any other names of ML tools in the argument
+        *model_list* will make the function use those features. The argument *model_paths* can be used to dictate the
+        trained model files in the models folder of the experiment path. Results are saved in the dictionary for each
+        sample.
 
         For the ML models the results are saved to the dictionary for each sample under a key with the name of the ML
         tool + '_pred'.
         For the statistical methods the results are saved to the dictionary for each sample under a key whose name is
-        the metric's class name + '_pred'.
+        the tool's name + '_pred'.
 
         Parameters
         ----------
@@ -670,15 +471,14 @@ class Detector:
                   of any excitations found.
                 - Any other loaded ML model. These should match the name field given to the ML tool during detector
                   initialization.
-                - Any loaded physically informed metrics. These should match the name field given for the metric during
+                - Any loaded statistical tools. These should match the name field given for the tool during
                   detector initialization.
                 - None: If set to None Q-GAIN will run all available models.
 
             (default = None)
         model_paths : list
-            The names of the saved weights or model parameters. These should end in 'classifier.pt' for the classifier
-            and 'object.pt' for the object detector. For the PI metrics these should match the filenames for any saved
-            fittings.
+            The names of the saved weights or model parameters. These should end with the name of the tool and have the
+            extension 'pt' for ML tools and 'pkl' for statistic tools.
             (default = [])
         data : list or dict
             The external data to use the models on. By default this will be the data loaded into the detector object. It
@@ -688,41 +488,48 @@ class Detector:
         """
         target_data = self.data if data is None else data
 
-        ml_tasks, ml_files = self.__filter_ml(model_list=model_list, model_paths=model_paths)
+        controller_list = ["ML Controller", "Stat Controller"]
+        for controller in self.controllers:
+            if controller not in {"ML Controller", "Stat Controller", "Plot Controller"}:
+                controller_list += [controller]
 
-        pi_tasks, pi_files = self.__filter_non_ml(model_list=model_list, model_paths=model_paths)
+        if model_list is not None:
+            tool_list = []
+            for model in model_list:
+                if model == "classifier":
+                    tool_list += ["CL"]
+                elif model == "object detector":
+                    tool_list += ["OD"]
+                else:
+                    tool_list += [model]
+        else:
+            tool_list = None
 
-        if len(ml_tasks) > 0:
-            print("Starting ML methods.")
-            self.ml_top.predict(data=target_data, model_paths=ml_files, task_list=ml_tasks)
+        if model_paths is not None:
+            tool_path = []
+            for path in model_paths:
+                tool_path += [self.exp_path.joinpath("models", path)]
+        else:
+            tool_path = None
 
-        if len(pi_tasks) > 0:
-            print("Starting PI methods.")
-            self.pi_top.apply(data=target_data, metric_list=pi_tasks,
-                              metric_path=pi_files if len(pi_files) > 0 else None)
+        for controller in controller_list:
+            if len(self.controllers[controller].tools) > 0:
+                self.controllers[controller](data=target_data, tool_list=tool_list, tool_path=tool_path)
+                for idx, item in enumerate(target_data):
+                    for tool in self.controllers[controller].tools:
+                        if "res" in tool and type(tool["res"][idx]) is dict:
+                            for key, val in tool["res"][idx].items():
+                                item[tool["name"] + "_" + str(key)] = val
+                        elif "res" in tool and type(tool["res"][idx]) is not dict:
+                            item[tool["name"] + "_pred"] = tool["res"][idx]
+            for tool in self.controllers[controller].tools:
+                if "res" in tool:
+                    del tool["res"]
 
-        for idx, item in enumerate(target_data):
-            for tool in self.ml_top.tools:
-                if tool["name"] in ml_tasks:
-                    item[tool["name"] + "_pred"] = tool["res"][idx]
+        self.data = target_data if data is None else self.data
 
-            for metric in self.pi_top.tools:
-                if metric["name"] in pi_tasks:
-                    item[metric["tool"].__class__.__name__ + "_pred"] = metric["res"][idx]
-
-        # Remove the controller's copy of the results since we don't need them.
-        for metric in self.pi_top.tools:
-            if "res" in metric:
-                del metric["res"]
-        for tool in self.ml_top.tools:
-            if "res" in tool:
-                del tool["res"]
-
-        if data is None:
-            self.data = target_data
-
-    def plot_metrics(self, types: list | tuple = ("classifier", "object detector"), style: str | None = None,
-                     *, save: bool = False, data: list | dict | None = None) -> None:
+    def plot_metrics(self, types: list | None = None, plot_kwargs: dict[dict] | None = None, *,
+                     style: str | None = None, save: bool = False, data: list | dict | None = None) -> None:
         """Run various plotting routines and display the results.
 
         The types of plots shown depend on the entries in the list argument.
@@ -730,8 +537,12 @@ class Detector:
         Parameters
         ----------
         types : list
-            Choosing a model type here will show appropriate plots for the data you'd typically expect from them.
-            (default = ['classifier', 'object detector'])
+            The plotting methods to run. If None will run all available.
+            (default = None)
+        plot_kwargs : dict of dicts
+            Optional arguments to be passed to the tool's callable function. This dictionary should contain the name of
+            the plotting tool as a key with its value being the keyword dictionary to pass to the function.
+            (default = None)
         style : str
             An optional argument to specify a matplotlib style file and change the overall look of the plots.
             (default = None)
@@ -745,43 +556,40 @@ class Detector:
 
         """
         target = self.data if data is None else data
+        plot_tasks = []
+        kwarg_list = []
 
-        cl_ground = []
-        cl_pred = []
-        od_ground = []
-        od_pred = []
-        od_skip_count = 0
+        # Build a list of plot tasks
+        if len(self.controllers["Plot Controller"].tools) > 0 and types is None:
+            for task in self.controllers["Plot Controller"].tools:
+                plot_tasks += [task["name"]]
 
-        for item in target:
-            if "classifier" in types and "label" in item and self.ml_top is not None:
-                cl_ground.append(item["label"])
-                cl_pred.append(item["CL_pred"])
-
-            if "object detector" in types and "positions" in item and self.ml_top is not None:
-                if len(item["positions"]) == len(item["OD_pred"]):
-                    sorted_ground = np.sort(item["positions"], axis=0, kind="stable")
-                    sorted_pred = np.sort(item["OD_pred"], axis=0, kind="stable")
-                    for i in range(len(sorted_ground)):
-                        if type(item["positions"][i]) in {list, tuple, np.ndarray}:
-                            for j in range(len(item["positions"][i])):
-                                od_ground.append(sorted_ground[i][j])
-                                od_pred.append(sorted_pred[i][j])
-                        else:
-                            od_ground.append(sorted_ground[i])
-                            od_pred.append(sorted_pred[i])
+        elif len(self.controllers["Plot Controller"].tools) > 0 and types is not None:
+            if "classifier" in types:
+                plot_tasks += ["CL"]
+            if "object detector" in types:
+                plot_tasks += ["OD"]
+            for tool in self.controllers["Plot Controller"].tools:
+                if tool["name"] in types and tool["name"] != "CL" and tool["name"] != "OD":
+                    plot_tasks += [tool["name"]]
+        if len(self.controllers["Plot Controller"].tools) > 0:
+            for tool in self.controllers["Plot Controller"].tools:
+                self.controllers["Plot Controller"].set_save(tool_name=tool["name"], val=save)
+                self.controllers["Plot Controller"].set_style(tool_name=tool["name"], val=style)
+                if plot_kwargs is not None and tool["name"] in plot_kwargs:
+                    kwarg_list += [plot_kwargs[tool["name"]]]
                 else:
-                    od_skip_count += 1
+                    kwarg_list += [None]
 
-        if "classifier" in types and self.ml_top is not None:
-            self.__cl_plotter(cl_ground, cl_pred, style, save=save)
-
-        if "object detector" in types and self.ml_top is not None:
-            self.__od_plotter(od_ground, od_pred, od_skip_count, style, save=save)
+        if len(plot_tasks) > 0:
+            print("Starting plotting methods.")
+            self.controllers["Plot Controller"].plot(data=target, tool_list=plot_tasks, kwarg_list=kwarg_list)
 
     def export(self, export_type: str = "csv", keys: list | None = None, data: list | dict | None = None) -> None:
-        """Export the ground (if available) and predicted (if available) labels in the currently loaded dataset.
+        """Export the keys in the currently loaded dataset.
 
-        Additional meta information can be saved by providing the relevant keys.
+        Data is exported by default for keys "tag", "CL_pred", and "OD_pred" if available. Additional keys can be
+        specified with the keys argument.
 
         Parameters
         ----------
@@ -796,8 +604,8 @@ class Detector:
                   entries will become attributes to the dataset. Any keys referencing arrays will be saved as datasets
                   in the group.
                 - 'html': The output will be saved in table form to a html file.
-                - 'pkl': The output will be pickled as a pandas dataframe object.
-                - 'numpy': The output will be converted to a numpy record array and saved as a npy file.
+                - 'pkl': The output will be pickled as a dictionary object.
+                - 'numpy': The output will be saved as a dictionary object to a Numpy .npy file.
 
             (default = csv)
         keys : list
@@ -818,10 +626,8 @@ class Detector:
         for idx, sample in enumerate(target_data):
             export[idx] = {}
             export[idx]["File"] = sample["path"]
-            if "label" in sample:
-                export[idx]["Class Label"] = sample["label"]
-            if "positions" in sample:
-                export[idx]["Position"] = sample["positions"]
+            if "tag" in sample:
+                export[idx]["Data Tag"] = sample["tag"]
             if "CL_pred" in sample:
                 export[idx]["CL_pred"] = sample["CL_pred"]
             if "OD_pred" in sample:
@@ -857,13 +663,117 @@ class Detector:
             df.to_html(file_path, index=False)
         elif export_type == "pkl":
             file_path = directory.joinpath("export_{}.pkl".format(datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
-            df.to_pickle(file_path)
+            with file_path.open("wb") as f:
+                pickle.dump(export, f, pickle.HIGHEST_PROTOCOL)
         elif export_type == "numpy":
             file_path = directory.joinpath("export_{}.npy".format(datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
-            rec = df.to_records(index=False)
-            np.save(file_path, rec)
+            np.save(file_path, export)
         else:
             msg = "Invalid value passed to type."
             raise ValueError(msg)
 
         print("Done!")
+
+    def update_samples(self, data: list | dict) -> None:
+        """Update existing data samples with entries from external data.
+
+        This convenience function will work through the list of data samples and match the path key to that of the
+        external data. When a match is found the internal sample is overwritten with the external data.
+
+        Parameters
+        ----------
+        data: list or dict
+            The external data that is used to replace internal data.
+
+        """
+        target_data = [data] if type(data) is dict else data
+
+        for updated_sample in target_data:
+            for idx in range(len(self.data)):
+                if updated_sample["path"] == self.data[idx]["path"]:
+                    self.data[idx] = updated_sample
+
+    def generate_samples(self, keys: list | tuple | None = None) -> None:
+        """Export internal data samples to a new dataset.
+
+        By default this will save the following keys and its data: 'data' and 'tag'. Additional keys can be saved by
+        using the keys argument. Data is saved in the experimental directory with the current data and time prepended by
+        'DS'.
+
+        Parameters
+        ----------
+        keys : list or tuple or None
+            Additional keys to pull from each sample's dictionary in the dataset.
+            (default = None)
+
+        """
+        target_data = []
+        for sample in self.data:
+            new_sample = {}
+            new_sample["tag"] = sample["tag"]
+            new_sample["sub_dir"] = str(Path(sample["path"]).parent)
+            new_sample["data"] = sample["data"]
+            for key in keys:
+                if key not in new_sample:
+                    new_sample[key] = sample[key]
+            target_data += [new_sample]
+
+        save_folder = "DS_{}".format(datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
+        roster_path = self.exp_path.joinpath(save_folder, "data", "data_info")
+        if not roster_path.is_dir():
+            roster_path.mkdir(parents=True)
+        roster_path = roster_path.joinpath("data_roster.h5")
+        if roster_path.is_file():
+            mode = "a"
+            with h5py.File(roster_path, mode) as h5_file:
+                i = len(h5_file.keys())
+        else:
+            mode = "w"
+            i = 0
+
+        for sample in tqdm(target_data, desc="Writing data files.."):
+            sample_name = self.exp_name + f"_{i}"
+            with h5py.File(roster_path, mode) as h5_file:
+                ds = h5_file.create_dataset(sample_name, data=h5py.Empty("f"), dtype="f", shape=None)
+                ds.attrs["tag"] = sample["tag"]
+                ds.attrs["path"] = str(Path(sample["sub_dir"]).joinpath(sample_name + ".h5"))
+
+            data_path = self.exp_path.joinpath(save_folder, "data", "data_files", sample["sub_dir"])
+            if not data_path.is_dir():
+                data_path.mkdir(parents=True)
+
+            with h5py.File(data_path.joinpath(f"{sample_name}.h5"), "w") as h5_file:
+
+                if type(sample["data"]) in {float, int, str, bool}:
+                    ds = h5_file.create_dataset("data", data=sample["data"])
+                else:
+                    ds = h5_file.create_dataset("data", data=sample["data"], compression="gzip", compression_opts=6)
+                for key in sample:
+                    if str(key) == "data":
+                        pass
+                    elif isinstance(sample[key], dict):
+                        ds = h5_file.create_dataset(str(key), data=h5py.Empty("f"), dtype="f", shape=None)
+                        for subkey in sample[key]:
+                            ds.attrs[str(subkey)] = sample[key][subkey]
+                    elif isinstance(sample[key], np.ndarray):
+                        ds = h5_file.create_dataset(str(key), data=sample[key], compression="gzip", compression_opts=6)
+                    else:
+                        h5_file.attrs[str(key)] = sample[key]
+
+            i += 1
+            if mode == "w":
+                mode = "a"
+        del target_data
+
+    def add_controller(self, name: str, controller: Control) -> None:
+        """Add controller to detector.
+
+        Parameters
+        ----------
+        name : str
+            The name used for the controller.
+        controller : Control
+            The target control class to add to the detector.
+
+        """
+        self.controllers[name] = controller

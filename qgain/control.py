@@ -1,6 +1,12 @@
 """Base controller class for Q-GAIN."""
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+    from pathlib import Path
+
 
 class Control:
     """A base control class for Q-GAIN.
@@ -10,9 +16,33 @@ class Control:
 
     """
 
-    def __init__(self) -> None:
-        """Initialize the class."""
+    def __init__(self, call_fn: Callable) -> None:
+        """Initialize the class.
+
+        Parameters
+        ----------
+        call_fn : Callable
+            The function to run when the controller object is called.
+
+        """
         self.tools = []
+        self.call_fn = call_fn
+
+    def __call__(self, tool_list: list | None = None, tool_path: list[Path] | None = None, **kwargs: dict) -> None:
+        """Call this function when Controller object used as a function."""
+        alerted = False
+        for tool in self.tools:
+            if tool_list is None or tool["name"] in tool_list:
+                if not alerted:
+                    print(f"Starting {self.__class__.__name__}.")
+                    alerted = True
+                task = tool["name"]
+                task_path = None
+                if tool_path is not None:
+                    for path in tool_path:
+                        if tool["name"] in path.stem:
+                            task_path = path
+                self.call_fn(tool=task, tool_path=task_path, **kwargs)
 
     def add_new_tool(self, tool: type, name: str, kwargs: dict | None = None) -> None:
         """Add a new tool to the controller.
@@ -51,3 +81,20 @@ class Control:
             if name == tool["name"]:
                 idx = i
         return idx
+
+    def get_tool(self, name: str) -> int | None:
+        """Return the specified tool.
+
+        Parameters
+        ----------
+        name : string
+            The name of the tool being searched for.
+
+        Returns
+        -------
+        tool : Callable
+            The requested tool object.
+
+        """
+        idx = self.get_id(name=name)
+        return self.tools[idx]["tool"]

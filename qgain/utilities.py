@@ -1,13 +1,13 @@
 """Utility functions for the functioning of Q-GAIN."""
 from __future__ import annotations
 
-import configparser
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
+import configparser
 
+from lmfit import Model, Parameters
 import numpy as np
 import scipy.ndimage as snd
-from lmfit import Model, Parameters
 
 if TYPE_CHECKING:
     from numpy.typing import ArrayLike

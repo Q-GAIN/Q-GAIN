@@ -1,17 +1,17 @@
 """PI functionality for PIE and QE metrics."""
 from __future__ import annotations
 
-import numpy as np
+from qgain.utilities import _pickpeak
+
 from lmfit import Model, Parameters
 from scipy.optimize import curve_fit, fmin
 from tqdm import tqdm
+import numpy as np
 
-from qgain.utilities import _pickpeak
 
-
-def fit_soliton(vec_x: np.ndarray, roixwithoutbackg: np.ndarray, res: dict, inti_pos: list | None = None,
-                func: str = "gaussian1D", n: int = 1, *, return_fit_curve: bool = False,
-                return_list: bool = False) -> (tuple[np.ndarray, list] | list) | (dict | tuple[np.ndarray, dict]):
+def fit_soliton(vec_x: np.ndarray, roixwithoutbackg: np.ndarray, res: dict, inti_pos: list | np.ndarray | None = None,
+                func: str = "gaussian1D", n: int = 1, *, return_fit_curve: bool = False, return_list: bool = False,
+                del_modern: bool = True) -> (tuple[np.ndarray, list] | list) | (dict | tuple[np.ndarray, dict]):
     """Fit solitons to a 1D profile with the given function.
 
     Parameters
@@ -22,7 +22,7 @@ def fit_soliton(vec_x: np.ndarray, roixwithoutbackg: np.ndarray, res: dict, inti
         1D profile. The pixel values with the Thomas Fermi 1D Sum fit subtracted.
     res: dictionary
         The fit parameters from the Thomas Fermi 1D Sum fit.
-    inti_pos : list
+    inti_pos : list or ndarray
         The initial positions of the solitonic excitations. Used to set the 'cen' and 'amp' parameters.
         (default = None)
     func : string
@@ -39,6 +39,9 @@ def fit_soliton(vec_x: np.ndarray, roixwithoutbackg: np.ndarray, res: dict, inti
         If True, fit values will be a list of the best parameter values found from the fit.
         If False, fit values will be a dictionary of the best fit parameters and their values.
         (default = False)
+    del_modern: boolean
+        Only applicable when using 'modern' fitting function. Deletes parameters i0 and r0 from the fit results.
+        (default = True)
 
     Returns
     -------
@@ -113,9 +116,10 @@ def fit_soliton(vec_x: np.ndarray, roixwithoutbackg: np.ndarray, res: dict, inti
         pars_soliton.add("offset", value=0.0, vary=True)
         fit_sp_1d = sol_pos_1d_model.fit(roixwithoutbackg, params=pars_soliton, x=vec_x, nan_policy="raise")
         res_soliton = fit_sp_1d.best_values
-        for peak in range(n):
-            del res_soliton[f"s{peak}_r0"]
-            del res_soliton[f"s{peak}_i0"]
+        if del_modern:
+            for peak in range(n):
+                del res_soliton[f"s{peak}_r0"]
+                del res_soliton[f"s{peak}_i0"]
 
     else:
         msg = "No valid function provided for fitting."
@@ -283,8 +287,8 @@ def m_hat(x: float, amp: float, cen: float, sigma: float, a: float, b: float,
             + b * ((x - cen) / sigma)) * np.exp(-(x - cen)**2 / (2 * sigma**2)))
 
 
-def find_soliton(preprocessed_data: np.ndarray, positions: list | int | None = None, func: str = "gaussian1D",
-                 *, return_list: bool = False) -> dict | list:
+def find_soliton(preprocessed_data: np.ndarray, positions: np.ndarray | list | float | None = None,
+                 func: str = "gaussian1D", *, return_list: bool = False, del_modern: bool = True) -> dict | list:
     """Find solitons in data.
 
     Return the soliton excitation fitting parameters of all excitations in the given image.
@@ -294,7 +298,7 @@ def find_soliton(preprocessed_data: np.ndarray, positions: list | int | None = N
     ----------
     preprocessed_data : ndarray, with shape (132, 164)
         A preprocessed image.
-    positions: list or float or int or None
+    positions: list or float or ndarray or None
         The horizontal location of the solitonic excitation.
         (default = None)
     func: string
@@ -304,6 +308,9 @@ def find_soliton(preprocessed_data: np.ndarray, positions: list | int | None = N
         If True, fit values will be a list of the best parameter values found from the fit.
         If False, fit values will be a dictionary of the best fit parameters and their values.
         (default = False)
+    del_modern: boolean
+        Only applicable when using 'modern' fitting function. Deletes parameters i0 and r0 from the fit results.
+        (default = True)
 
     Returns
     -------
@@ -317,14 +324,14 @@ def find_soliton(preprocessed_data: np.ndarray, positions: list | int | None = N
         if positions is None:
             positions = [np.argmin(roixwithoutbackg)]
             soliton_info = fit_soliton(vec_x, roixwithoutbackg, res, inti_pos=positions, n=len(positions), func=func,
-                                       return_list=return_list)
+                                       return_list=return_list, del_modern=del_modern)
         elif type(positions) in {int, float, np.float64, np.float32}:
             positions = [positions]
             soliton_info = fit_soliton(vec_x, roixwithoutbackg, res, inti_pos=positions, n=len(positions), func=func,
-                                       return_list=return_list)
-        elif type(positions) is list:
+                                       return_list=return_list, del_modern=del_modern)
+        elif type(positions) is list or type(positions) is np.ndarray:
             soliton_info = fit_soliton(vec_x, roixwithoutbackg, res, inti_pos=positions, n=len(positions), func=func,
-                                       return_list=return_list)
+                                       return_list=return_list, del_modern=del_modern)
         return soliton_info
 
     if len(data.shape) == 3 and data.shape[1:] == (132, 164):
@@ -334,7 +341,7 @@ def find_soliton(preprocessed_data: np.ndarray, positions: list | int | None = N
                 vec_x, _, roixwithoutbackg, res = fit_tf_1d_from_image(d)
                 positions = [np.argmin(roixwithoutbackg)]
                 soliton_info.append(fit_soliton(vec_x, roixwithoutbackg, res, inti_pos=positions, n=len(positions),
-                                                func=func, return_list=return_list))
+                                                func=func, return_list=return_list, del_modern=del_modern))
         else:
             for i, d in enumerate(tqdm(data)):
                 pos = positions[i]
@@ -342,10 +349,10 @@ def find_soliton(preprocessed_data: np.ndarray, positions: list | int | None = N
                 if type(pos) in {int, float, np.float64, np.float32}:
                     pos = [pos]
                     soliton_info_per_image = fit_soliton(vec_x, roixwithoutbackg, res, inti_pos=pos, n=len(pos),
-                                                         func=func, return_list=return_list)
-                elif type(pos) is list:
+                                                         func=func, return_list=return_list, del_modern=del_modern)
+                elif type(pos) is list or type(pos) is np.ndarray:
                     soliton_info_per_image = fit_soliton(vec_x, roixwithoutbackg, res, inti_pos=pos, n=len(pos),
-                                                         func=func, return_list=return_list)
+                                                         func=func, return_list=return_list, del_modern=del_modern)
 
                 soliton_info.append(soliton_info_per_image)
         return soliton_info
