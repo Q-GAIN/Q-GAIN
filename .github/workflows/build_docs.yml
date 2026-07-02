@@ -25,6 +25,7 @@ jobs:
           python -m pip install -U sphinx
           python -m pip install sphinx-book-theme
           python -m pip install myst-parser
+          python -m pip install -e .
       - name: Build Sphinx
         run: |
           make -C docs clean
