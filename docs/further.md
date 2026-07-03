@@ -2,7 +2,7 @@
 
 Alternative sources of information on the usage of Q-GAIN can be found:
 
-- [*Q-GAIN: A Python Package for Machine Learning and Physically Informed Analysis Applications*]()
+- [*Q-GAIN: A Python Package for Machine Learning and Physically Informed Analysis Applications*](https://arxiv.org/abs/2607.02413)
 
 The Q-GAIN GitHub organization and repository at [https://github.com/Q-GAIN/Q-GAIN](https://github.com/Q-GAIN/Q-GAIN).
 
