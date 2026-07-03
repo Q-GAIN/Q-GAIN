@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qgain.soldet.mhat_metric &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qgain/soldet/mhat_metric';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/qgain.html">Q-GAIN Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qgain.soldet.mhat_metric</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;PI functionality for PIE and QE metrics.&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">_pickpeak</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">lmfit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Parameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">curve_fit</span><span class="p">,</span> <span class="n">fmin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<div class="viewcode-block" id="fit_soliton">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.fit_soliton">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">inti_pos</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gaussian1D&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">return_fit_curve</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">return_list</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="n">del_modern</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="nb">dict</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit solitons to a 1D profile with the given function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vec_x : 1D numpy array</span>
+<span class="sd">        Pixel index list.</span>
+<span class="sd">    roixwithoutbackg : 1D numpy array</span>
+<span class="sd">        1D profile. The pixel values with the Thomas Fermi 1D Sum fit subtracted.</span>
+<span class="sd">    res: dictionary</span>
+<span class="sd">        The fit parameters from the Thomas Fermi 1D Sum fit.</span>
+<span class="sd">    inti_pos : list or ndarray</span>
+<span class="sd">        The initial positions of the solitonic excitations. Used to set the &#39;cen&#39; and &#39;amp&#39; parameters.</span>
+<span class="sd">        (default = None)</span>
+<span class="sd">    func : string</span>
+<span class="sd">        The fitting function used. Choices are gaussian, original (SOLDET 1.0), or modern (SOLDET 2.0 Module).</span>
+<span class="sd">        (default = &#39;gaussian1D&#39;)</span>
+<span class="sd">    n : integer</span>
+<span class="sd">        The number of excitations in the region of interest.</span>
+<span class="sd">        (default = 1)</span>
+<span class="sd">    return_fit_curve : boolean</span>
+<span class="sd">        If True, return the fitting curve. Return will be (curve fit, fit values).</span>
+<span class="sd">        If False, the fitting curve will not be returned. Return will be fit values.</span>
+<span class="sd">        (default = False)</span>
+<span class="sd">    return_list: boolean</span>
+<span class="sd">        If True, fit values will be a list of the best parameter values found from the fit.</span>
+<span class="sd">        If False, fit values will be a dictionary of the best fit parameters and their values.</span>
+<span class="sd">        (default = False)</span>
+<span class="sd">    del_modern: boolean</span>
+<span class="sd">        Only applicable when using &#39;modern&#39; fitting function. Deletes parameters i0 and r0 from the fit results.</span>
+<span class="sd">        (default = True)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    res_soliton : dict or list or tuple</span>
+<span class="sd">        Output depends on the argument values to the function. By default the function returns a dictionary of the best</span>
+<span class="sd">        parameters found.</span>
+<span class="sd">    fit_sp_1d : ndarray</span>
+<span class="sd">        If return_fit_curve is set to True the output will return a tuple of values, with the first being the curve and</span>
+<span class="sd">        the second dependent on the setting of return_list.</span>
+<span class="sd">    excitation_list : list</span>
+<span class="sd">        If return_list is set to True then the output parameters will be a list of sub list, with each sub list giving</span>
+<span class="sd">        the best parameter values for that excitation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">inti_pos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No soliton positions provided.&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">search_range</span> <span class="o">=</span> <span class="mi">6</span>
+
+    <span class="k">if</span> <span class="n">func</span> <span class="o">==</span> <span class="s2">&quot;gaussian1D&quot;</span><span class="p">:</span>
+        <span class="n">sol_pos_1d_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">gaussian1d</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">peak</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">sol_pos_1d_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">gaussian1d</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sol_pos_1d_model</span> <span class="o">+=</span> <span class="n">Model</span><span class="p">(</span><span class="n">gaussian1d</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">)</span>
+        <span class="n">sol_pos_1d_model</span> <span class="o">+=</span> <span class="n">Model</span><span class="p">(</span><span class="n">offset_func</span><span class="p">)</span>
+        <span class="n">pars_soliton</span> <span class="o">=</span> <span class="n">sol_pos_1d_model</span><span class="o">.</span><span class="n">make_params</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">pars_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_amp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">logamp</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]),</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_cen&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">],</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                     <span class="nb">min</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">-</span> <span class="n">search_range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                                                     <span class="nb">max</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">+</span> <span class="n">search_range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_sigma&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">pars_soliton</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fit_sp_1d</span> <span class="o">=</span> <span class="n">sol_pos_1d_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">pars_soliton</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">nan_policy</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
+        <span class="n">res_soliton</span> <span class="o">=</span> <span class="n">fit_sp_1d</span><span class="o">.</span><span class="n">best_values</span>
+
+    <span class="k">elif</span> <span class="n">func</span> <span class="o">==</span> <span class="s2">&quot;original&quot;</span><span class="p">:</span>
+        <span class="n">sol_pos_1d_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">offset_func</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">sol_pos_1d_model</span> <span class="o">+=</span> <span class="n">Model</span><span class="p">(</span><span class="n">m_hat1d_old</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">)</span>
+        <span class="n">pars_soliton</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_amp&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">logamp</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]),</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_cen&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">],</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="nb">min</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">-</span> <span class="n">search_range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">+</span> <span class="n">search_range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_sigma&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_a&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_b&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fit_sp_1d</span> <span class="o">=</span> <span class="n">sol_pos_1d_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">pars_soliton</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">nan_policy</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
+        <span class="n">res_soliton</span> <span class="o">=</span> <span class="n">fit_sp_1d</span><span class="o">.</span><span class="n">best_values</span>
+
+    <span class="k">elif</span> <span class="n">func</span> <span class="o">==</span> <span class="s2">&quot;modern&quot;</span><span class="p">:</span>
+        <span class="n">sol_pos_1d_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">offset_func</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">sol_pos_1d_model</span> <span class="o">+=</span> <span class="n">Model</span><span class="p">(</span><span class="n">m_hat</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">)</span>
+        <span class="n">pars_soliton</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_amp&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">logamp</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]),</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_cen&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">],</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="nb">min</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">-</span> <span class="n">search_range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">inti_pos</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">+</span> <span class="n">search_range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_sigma&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_a&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_b&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_r0&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;rx&quot;</span><span class="p">],</span> <span class="n">vary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_i0&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;center&quot;</span><span class="p">],</span> <span class="n">vary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">pars_soliton</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fit_sp_1d</span> <span class="o">=</span> <span class="n">sol_pos_1d_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">pars_soliton</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">nan_policy</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">)</span>
+        <span class="n">res_soliton</span> <span class="o">=</span> <span class="n">fit_sp_1d</span><span class="o">.</span><span class="n">best_values</span>
+        <span class="k">if</span> <span class="n">del_modern</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">del</span> <span class="n">res_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_r0&quot;</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">res_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_i0&quot;</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;No valid function provided for fitting.&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">res_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_sigma&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">res_soliton</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">peak</span><span class="si">}</span><span class="s2">_sigma&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">return_list</span><span class="p">:</span>
+        <span class="n">excitation_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">value_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">res_soliton</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="c1"># Get total amount of params. Should be total params = (number of peaks * number of function params) + offset</span>
+        <span class="c1"># Then subtract off the offset, which will get added to each excitation list later</span>
+        <span class="n">param_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">value_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">excitation_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_list</span><span class="p">[</span><span class="n">peak</span> <span class="o">*</span> <span class="n">param_num</span><span class="p">:(</span><span class="n">peak</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">param_num</span><span class="p">])</span>
+            <span class="n">excitation_list</span><span class="p">[</span><span class="n">peak</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">value_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="n">return_fit_curve</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">fit_sp_1d</span><span class="o">.</span><span class="n">eval</span><span class="p">(),</span> <span class="n">excitation_list</span>
+        <span class="k">return</span> <span class="n">excitation_list</span>
+
+    <span class="k">if</span> <span class="n">return_fit_curve</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fit_sp_1d</span><span class="o">.</span><span class="n">eval</span><span class="p">(),</span> <span class="n">res_soliton</span>
+    <span class="k">return</span> <span class="n">res_soliton</span></div>
+
+
+
+<div class="viewcode-block" id="logamp">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.logamp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">logamp</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the log of the excitation amplitude.</span>
+
+<span class="sd">    Applies a logarithm to the negative of the input, y = log(-x).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    roixwithoutbackg : ndarray</span>
+<span class="sd">        A numpy array of image data, representing the region of interest.</span>
+<span class="sd">    pos : float</span>
+<span class="sd">        The position of the excitation. If none is provided then the absolute minimum in the array is used.</span>
+<span class="sd">        (default = None)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    amp : float</span>
+<span class="sd">        The result of the logarithm. If the value is less than -1 the output is clipped to -1.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">)</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">roixwithoutbackg</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span> <span class="k">if</span> <span class="n">roixwithoutbackg</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="offset_func">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.offset_func">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add an offset to a fitting function.</span>
+
+<span class="sd">    Support function for fit_soliton. Serves as an offset for building a fitting model. Such as b in y = mx + b.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Function input. Unused.</span>
+<span class="sd">    offset : float</span>
+<span class="sd">        The offset parameter value during fitting.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    offset : float</span>
+<span class="sd">        The offset parameter value during fitting.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span></div>
+
+
+
+<div class="viewcode-block" id="gaussian1d">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.gaussian1d">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gaussian1d</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cen</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit to a 1D gaussian.</span>
+
+<span class="sd">    Support function for fit_soliton. A basic gaussian fitting function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Function input.</span>
+<span class="sd">    amp : float</span>
+<span class="sd">        The amplitude of the excitation parameter during fitting.</span>
+<span class="sd">    cen : float</span>
+<span class="sd">        The center of the excitation parameter during fitting.</span>
+<span class="sd">    sigma : float</span>
+<span class="sd">        The excitation width parameter during fitting.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    F(x) : float</span>
+<span class="sd">        The output of the function at x.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">amp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="m_hat1d_old">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.m_hat1d_old">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">m_hat1d_old</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cen</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit to a Ricker wavelet.</span>
+
+<span class="sd">    Support function for fit_soliton.</span>
+<span class="sd">    A basic Ricker wavelet fitting function used in the SolDet 1.0 library.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Function input.</span>
+<span class="sd">    amp : float</span>
+<span class="sd">        The amplitude of the excitation parameter during fitting.</span>
+<span class="sd">    cen : float</span>
+<span class="sd">        The center of the excitation parameter during fitting.</span>
+<span class="sd">    sigma : float</span>
+<span class="sd">        The excitation width parameter during fitting.</span>
+<span class="sd">    a : float</span>
+<span class="sd">        The excitation symmetric shoulder height.</span>
+<span class="sd">    b : float</span>
+<span class="sd">        The excitation asymmetric shoulder height.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    F(x) : float</span>
+<span class="sd">        The output of the function at x.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">amp</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">cen</span> <span class="o">-</span> <span class="mi">82</span><span class="p">)</span> <span class="o">/</span> <span class="mi">82</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="m_hat">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.m_hat">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">m_hat</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cen</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+          <span class="n">r0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i0</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit to a Ricker wavelet (modern).</span>
+
+<span class="sd">    Support function for fit_soliton.</span>
+<span class="sd">    A modified Ricker wavelet fitting function used in the modern SolDet module.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Function input.</span>
+<span class="sd">    amp : float</span>
+<span class="sd">        The amplitude of the excitation parameter during fitting.</span>
+<span class="sd">    cen : float</span>
+<span class="sd">        The center of the excitation parameter during fitting.</span>
+<span class="sd">    sigma : float</span>
+<span class="sd">        The excitation width parameter during fitting.</span>
+<span class="sd">    a : float</span>
+<span class="sd">        The excitation symmetric shoulder height.</span>
+<span class="sd">    b : float</span>
+<span class="sd">        The excitation asymmetric shoulder height.</span>
+<span class="sd">    r0 : float</span>
+<span class="sd">        Thomas Fermi envelope width.</span>
+<span class="sd">    i0 : float</span>
+<span class="sd">        Thomas Fermi envelope center.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    F(x) : float</span>
+<span class="sd">        The output of the function at x.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">amp</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">cen</span> <span class="o">-</span> <span class="n">i0</span><span class="p">)</span> <span class="o">/</span> <span class="n">r0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+            <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="find_soliton">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.find_soliton">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_soliton</span><span class="p">(</span><span class="n">preprocessed_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gaussian1D&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">return_list</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">del_modern</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find solitons in data.</span>
+
+<span class="sd">    Return the soliton excitation fitting parameters of all excitations in the given image.</span>
+<span class="sd">    If position is None, return the deepest depletion fitting params.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    preprocessed_data : ndarray, with shape (132, 164)</span>
+<span class="sd">        A preprocessed image.</span>
+<span class="sd">    positions: list or float or ndarray or None</span>
+<span class="sd">        The horizontal location of the solitonic excitation.</span>
+<span class="sd">        (default = None)</span>
+<span class="sd">    func: string</span>
+<span class="sd">        The fitting function to be used. Can be &#39;gaussian1D&#39;, &#39;original&#39; (SOLDET 1.0), or &#39;modern&#39; (SOLDET 2.0 module).</span>
+<span class="sd">        (default = &#39;gaussian1D&#39;)</span>
+<span class="sd">    return_list: boolean</span>
+<span class="sd">        If True, fit values will be a list of the best parameter values found from the fit.</span>
+<span class="sd">        If False, fit values will be a dictionary of the best fit parameters and their values.</span>
+<span class="sd">        (default = False)</span>
+<span class="sd">    del_modern: boolean</span>
+<span class="sd">        Only applicable when using &#39;modern&#39; fitting function. Deletes parameters i0 and r0 from the fit results.</span>
+<span class="sd">        (default = True)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    soliton_info : dict or list</span>
+<span class="sd">        Soliton fitting parameters. See &quot;fit_soliton&quot; function for more information.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">preprocessed_data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">):</span>
+        <span class="n">vec_x</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">fit_tf_1d_from_image</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">positions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">)]</span>
+            <span class="n">soliton_info</span> <span class="o">=</span> <span class="n">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">inti_pos</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">),</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+                                       <span class="n">return_list</span><span class="o">=</span><span class="n">return_list</span><span class="p">,</span> <span class="n">del_modern</span><span class="o">=</span><span class="n">del_modern</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">}:</span>
+            <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">positions</span><span class="p">]</span>
+            <span class="n">soliton_info</span> <span class="o">=</span> <span class="n">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">inti_pos</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">),</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+                                       <span class="n">return_list</span><span class="o">=</span><span class="n">return_list</span><span class="p">,</span> <span class="n">del_modern</span><span class="o">=</span><span class="n">del_modern</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">soliton_info</span> <span class="o">=</span> <span class="n">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">inti_pos</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">),</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+                                       <span class="n">return_list</span><span class="o">=</span><span class="n">return_list</span><span class="p">,</span> <span class="n">del_modern</span><span class="o">=</span><span class="n">del_modern</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">soliton_info</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">):</span>
+        <span class="n">soliton_info</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">positions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+                <span class="n">vec_x</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">fit_tf_1d_from_image</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">roixwithoutbackg</span><span class="p">)]</span>
+                <span class="n">soliton_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">inti_pos</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">),</span>
+                                                <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="n">return_list</span><span class="p">,</span> <span class="n">del_modern</span><span class="o">=</span><span class="n">del_modern</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">vec_x</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">fit_tf_1d_from_image</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">}:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+                    <span class="n">soliton_info_per_image</span> <span class="o">=</span> <span class="n">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">inti_pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span>
+                                                         <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="n">return_list</span><span class="p">,</span> <span class="n">del_modern</span><span class="o">=</span><span class="n">del_modern</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+                    <span class="n">soliton_info_per_image</span> <span class="o">=</span> <span class="n">fit_soliton</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">inti_pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span>
+                                                         <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="n">return_list</span><span class="p">,</span> <span class="n">del_modern</span><span class="o">=</span><span class="n">del_modern</span><span class="p">)</span>
+
+                <span class="n">soliton_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">soliton_info_per_image</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">soliton_info</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unspported shape </span><span class="si">{</span><span class="n">preprocessed_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fit_tf_1d_from_image">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.fit_tf_1d_from_image">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_tf_1d_from_image</span><span class="p">(</span><span class="n">roi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit an image to a 1D Thomas Fermi model.</span>
+
+<span class="sd">    Thomas fermi 1D fitting for background removal.</span>
+<span class="sd">    This fits a 1D envelope to the image and removes it from the image to subtract the background.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    roi : ndarray</span>
+<span class="sd">        The image data to fit to.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    vec_x : ndarray of int</span>
+<span class="sd">        An array of the pixel positions</span>
+<span class="sd">    vec_y : ndarray of float</span>
+<span class="sd">        The summed array values along the height axis of the original image</span>
+<span class="sd">    roixwithoutbackg : ndarray</span>
+<span class="sd">        Data with the fitted background removed</span>
+<span class="sd">    res : dict</span>
+<span class="sd">        The fit results</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vec_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">164</span><span class="p">)</span>
+    <span class="n">vec_y</span> <span class="o">=</span> <span class="n">roi</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">peaksx</span><span class="p">,</span> <span class="n">peaksposx</span> <span class="o">=</span> <span class="n">_pickpeak</span><span class="p">(</span><span class="n">vec_y</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">guess_amp</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">peaksx</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vec_y</span><span class="p">))</span>
+    <span class="n">guess_cen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">peaksposx</span><span class="p">)</span>
+    <span class="n">guess_sigma</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">vec_y</span> <span class="o">*</span> <span class="p">(</span><span class="n">vec_x</span> <span class="o">-</span> <span class="n">guess_cen</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">vec_y</span><span class="p">)</span>
+    <span class="n">guess_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">guess_sigma</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">guess_offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vec_y</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">_fit_tf_1d</span><span class="p">(</span><span class="n">vec_x</span><span class="p">,</span> <span class="n">vec_y</span><span class="p">,</span> <span class="n">guess_amp</span><span class="p">,</span> <span class="n">guess_cen</span><span class="p">,</span> <span class="n">guess_sigma</span><span class="p">,</span> <span class="n">guess_offset</span><span class="p">)</span>
+    <span class="n">roixwithoutbackg</span> <span class="o">=</span> <span class="p">(</span><span class="n">vec_y</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;fitfunc&quot;</span><span class="p">](</span><span class="n">vec_x</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">vec_x</span><span class="p">,</span> <span class="n">vec_y</span><span class="p">,</span> <span class="n">roixwithoutbackg</span><span class="p">,</span> <span class="n">res</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_fit_tf_1d</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">guess_amp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">guess_cen</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">guess_rx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+               <span class="n">guess_offset</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit to a Thomas Fermi model.</span>
+
+<span class="sd">    Thomas fermi 1D fitting for background removal.</span>
+<span class="sd">    This function supports fit_tf_1d_from_image and does the actual fitting of the 1D Thomas Fermi envelope.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : ndarray</span>
+<span class="sd">        The input pixel position.</span>
+<span class="sd">    y : ndarray</span>
+<span class="sd">        The value of the array (function) at x.</span>
+<span class="sd">    guess_amp : float</span>
+<span class="sd">        An initial value for the amplitude of the envelope waveform.</span>
+<span class="sd">    guess_cen : float</span>
+<span class="sd">        An initial guess for the center of the envelope.</span>
+<span class="sd">    guess_rx : float</span>
+<span class="sd">        An initial guess for the width of the envelope.</span>
+<span class="sd">    guess_offset : float</span>
+<span class="sd">        An initial guess for the offset value of the envelope function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : dict</span>
+<span class="sd">        A dictionary containing the fitting results. This includes the initial value and the fitted curve.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess_amp</span><span class="p">,</span> <span class="n">guess_cen</span><span class="p">,</span> <span class="n">guess_rx</span><span class="p">,</span> <span class="n">guess_offset</span><span class="p">])</span>
+    <span class="n">first_guess</span> <span class="o">=</span> <span class="n">thomas_fermi_1dsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">guess</span><span class="p">)</span>
+    <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">thomas_fermi_1dsum</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guess</span><span class="p">)</span>
+    <span class="n">data_fitted_tf1d</span> <span class="o">=</span> <span class="n">thomas_fermi_1dsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+    <span class="n">amp</span><span class="p">,</span> <span class="n">cen</span><span class="p">,</span> <span class="n">rx</span><span class="p">,</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">popt</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;amp&quot;</span><span class="p">:</span> <span class="n">amp</span><span class="p">,</span> <span class="s2">&quot;center&quot;</span><span class="p">:</span> <span class="n">cen</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">:</span> <span class="n">rx</span><span class="p">,</span> <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">offset</span><span class="p">,</span>
+            <span class="s2">&quot;data_fitted_tf1D&quot;</span><span class="p">:</span> <span class="n">data_fitted_tf1d</span><span class="p">,</span>
+            <span class="s2">&quot;fitfunc&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">thomas_fermi_1dsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">),</span> <span class="s2">&quot;first_guess&quot;</span><span class="p">:</span> <span class="n">first_guess</span><span class="p">,</span>
+            <span class="s2">&quot;maxcov&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pcov</span><span class="p">),</span> <span class="s2">&quot;rawres&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span><span class="p">)}</span>
+
+
+<div class="viewcode-block" id="thomas_fermi_1dsum">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.thomas_fermi_1dsum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">thomas_fermi_1dsum</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">amp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cen</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thomas fermi 1D Model for background removal.</span>
+
+<span class="sd">    This function supports _fit_tf_1d and serves as the model for fitting the data to.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : ndarray</span>
+<span class="sd">        The input pixel position.</span>
+<span class="sd">    amp : float</span>
+<span class="sd">        The amplitude of the envelope parameter during fitting.</span>
+<span class="sd">    cen : float</span>
+<span class="sd">        The center of the envelope parameter during fitting.</span>
+<span class="sd">    rx : float</span>
+<span class="sd">        The width of the envelope parameter during fitting.</span>
+<span class="sd">    offset : float</span>
+<span class="sd">        The offset of the envelope parameter during fitting.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    F(x) : float</span>
+<span class="sd">        The output of the function at x</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span> <span class="o">/</span> <span class="n">rx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">amp</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span></div>
+
+
+
+<div class="viewcode-block" id="outlier_treatment">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.outlier_treatment">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">outlier_treatment</span><span class="p">(</span><span class="n">datacolumn</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find IQR of a given data distribution.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datacolumn : 1D list or numpy array of float numbers</span>
+<span class="sd">        The given data distribution.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lower_range : float</span>
+<span class="sd">        Lower bound of IQR</span>
+<span class="sd">    upper_range : float</span>
+<span class="sd">        Upper bound of IQR</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">sorted</span><span class="p">(</span><span class="n">datacolumn</span><span class="p">)</span>
+    <span class="n">q1</span><span class="p">,</span> <span class="n">q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">datacolumn</span><span class="p">,</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
+    <span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+    <span class="n">lower_range</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span><span class="p">)</span>
+    <span class="n">upper_range</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">lower_range</span><span class="p">,</span> <span class="n">upper_range</span></div>
+
+
+
+<div class="viewcode-block" id="preprocess_mhat_params">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.mhat_metric.preprocess_mhat_params">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocess_mhat_params</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">remove_outliers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                           <span class="n">use_minimum_as_center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Preprocesses the fit parameters.</span>
+
+<span class="sd">    Removes the offset and optionally removes outliers or sets the minimum value as the center.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    params : list or ndarray</span>
+<span class="sd">        The fitting parameters for an excitation.</span>
+<span class="sd">    remove_outliers: boolean</span>
+<span class="sd">        If True, apply IQR outliers removal.</span>
+<span class="sd">        (default = False)</span>
+<span class="sd">    use_minimum_as_center: boolean</span>
+<span class="sd">        If True, set the center as the minimum value.</span>
+<span class="sd">        (default = False)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    p : 1D or 2D ndarray</span>
+<span class="sd">        The preprocessed parameters.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">use_minimum_as_center</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
+                <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">m_hat</span><span class="p">,</span> <span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">pi</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Remove Offset</span>
+
+        <span class="k">if</span> <span class="n">remove_outliers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>  <span class="c1"># Remove outliers</span>
+                <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">outlier_treatment</span><span class="p">(</span><span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">[(</span><span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">upper</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lower</span><span class="p">),</span> <span class="p">:]</span>
+
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">use_minimum_as_center</span><span class="p">:</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">m_hat</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p1</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Remove Offset</span>
+
+    <span class="k">return</span> <span class="n">p</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

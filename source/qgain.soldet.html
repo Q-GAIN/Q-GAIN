@@ -1,0 +1,1752 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SolDet Subpackage &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/qgain.soldet';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="VortexDetector Subpackage" href="qgain.vdet.html" />
+    <link rel="prev" title="Q-GAIN" href="modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="qgain.html">Q-GAIN Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Q-GAIN</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/source/qgain.soldet.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SolDet Subpackage</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.classifier_nn">qgain.soldet.classifier_nn module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.classifier_nn.SolDetClassifier"><code class="docutils literal notranslate"><span class="pre">SolDetClassifier</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.classifier_nn.SolDetClassifier.forward"><code class="docutils literal notranslate"><span class="pre">SolDetClassifier.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.mhat_metric">qgain.soldet.mhat_metric module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.find_soliton"><code class="docutils literal notranslate"><span class="pre">find_soliton()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.fit_soliton"><code class="docutils literal notranslate"><span class="pre">fit_soliton()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.fit_tf_1d_from_image"><code class="docutils literal notranslate"><span class="pre">fit_tf_1d_from_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.gaussian1d"><code class="docutils literal notranslate"><span class="pre">gaussian1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.logamp"><code class="docutils literal notranslate"><span class="pre">logamp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.m_hat"><code class="docutils literal notranslate"><span class="pre">m_hat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.m_hat1d_old"><code class="docutils literal notranslate"><span class="pre">m_hat1d_old()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.offset_func"><code class="docutils literal notranslate"><span class="pre">offset_func()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.outlier_treatment"><code class="docutils literal notranslate"><span class="pre">outlier_treatment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.preprocess_mhat_params"><code class="docutils literal notranslate"><span class="pre">preprocess_mhat_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.thomas_fermi_1dsum"><code class="docutils literal notranslate"><span class="pre">thomas_fermi_1dsum()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.object_nn">qgain.soldet.object_nn module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.MetzLoss"><code class="docutils literal notranslate"><span class="pre">MetzLoss</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.MetzLoss.forward"><code class="docutils literal notranslate"><span class="pre">MetzLoss.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.ObjectDetector"><code class="docutils literal notranslate"><span class="pre">ObjectDetector</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.ObjectDetector.forward"><code class="docutils literal notranslate"><span class="pre">ObjectDetector.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.pi_models">qgain.soldet.pi_models module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.PIEClassifier"><code class="docutils literal notranslate"><span class="pre">PIEClassifier</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.PIEClassifier.fit"><code class="docutils literal notranslate"><span class="pre">PIEClassifier.fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.PIEClassifier.transform"><code class="docutils literal notranslate"><span class="pre">PIEClassifier.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.QE"><code class="docutils literal notranslate"><span class="pre">QE</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.QE.fit"><code class="docutils literal notranslate"><span class="pre">QE.fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.QE.transform"><code class="docutils literal notranslate"><span class="pre">QE.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.apply_metric"><code class="docutils literal notranslate"><span class="pre">apply_metric()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.soliton_datasets">qgain.soldet.soliton_datasets module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonClassDataset"><code class="docutils literal notranslate"><span class="pre">SolitonClassDataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonODDataset"><code class="docutils literal notranslate"><span class="pre">SolitonODDataset</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonODDataset.labels_to_data"><code class="docutils literal notranslate"><span class="pre">SolitonODDataset.labels_to_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonPIEClassDataset"><code class="docutils literal notranslate"><span class="pre">SolitonPIEClassDataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonQEClassDataset"><code class="docutils literal notranslate"><span class="pre">SolitonQEClassDataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.augment_expand_as_mlst2021"><code class="docutils literal notranslate"><span class="pre">augment_expand_as_mlst2021()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.augment_w_pos"><code class="docutils literal notranslate"><span class="pre">augment_w_pos()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.cl_accu_metric"><code class="docutils literal notranslate"><span class="pre">cl_accu_metric()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.download_ds"><code class="docutils literal notranslate"><span class="pre">download_ds()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.expand_data_by_augment"><code class="docutils literal notranslate"><span class="pre">expand_data_by_augment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.labels_to_pos_conversion"><code class="docutils literal notranslate"><span class="pre">labels_to_pos_conversion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.od_accu_metric"><code class="docutils literal notranslate"><span class="pre">od_accu_metric()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.pos_41labels_conversion"><code class="docutils literal notranslate"><span class="pre">pos_41labels_conversion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.pos_to_41labels_conversion"><code class="docutils literal notranslate"><span class="pre">pos_to_41labels_conversion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.soldet_to_h5"><code class="docutils literal notranslate"><span class="pre">soldet_to_h5()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.soliton_detector">qgain.soldet.soliton_detector module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector"><code class="docutils literal notranslate"><span class="pre">SolitonDetector</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.define_pie_classifier"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.define_pie_classifier()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.define_quality_estimate"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.define_quality_estimate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.export"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.export()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.import_data"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.import_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.load_data"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.load_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.plot_metrics"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.plot_metrics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.use_models"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.use_models()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="soldet-subpackage">
+<h1>SolDet Subpackage<a class="headerlink" href="#soldet-subpackage" title="Link to this heading">#</a></h1>
+<section id="module-qgain.soldet.classifier_nn">
+<span id="qgain-soldet-classifier-nn-module"></span><h2>qgain.soldet.classifier_nn module<a class="headerlink" href="#module-qgain.soldet.classifier_nn" title="Link to this heading">#</a></h2>
+<p>Classifier model for SolDet.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.classifier_nn.SolDetClassifier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.classifier_nn.</span></span><span class="sig-name descname"><span class="pre">SolDetClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/classifier_nn.html#SolDetClassifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.classifier_nn.SolDetClassifier" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qgain.html#qgain.models.MLST2021CNNmodern" title="qgain.models.MLST2021CNNmodern"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLST2021CNNmodern</span></code></a></p>
+<p>Modern SolDet classifier.</p>
+<p>This pytorch classifier model identifies the class a solitonic image belongs to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>num_classes</strong> (<em>int</em>) – The number of classes to identify. By default this value is three classes, which represents the presence of
+no excitations (0), a single excitation (1), or multiple excitations (2).
+(default = 3)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.classifier_nn.SolDetClassifier.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/classifier_nn.html#SolDetClassifier.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.classifier_nn.SolDetClassifier.forward" title="Link to this definition">#</a></dt>
+<dd><p>Take a tensor and make a class prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensor</em><em> of </em><em>shape</em><em> (</em><em>B</em><em>, </em><em>1</em><em>, </em><em>H</em><em>, </em><em>W</em><em>)</em>) – The input tensor to make a prediction on. The expected shape is of shape (B, 1, H, W), where B is the batch
+size, H is the image height, and W is the image width.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> – The output tensor containing the probabilities for each class. The output is of shape (B, 3) where B is the
+batch size and the last dimension contains the probabilities for the number of classes
+specified in the model initialization.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor of shape (B, 3)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qgain.soldet.mhat_metric">
+<span id="qgain-soldet-mhat-metric-module"></span><h2>qgain.soldet.mhat_metric module<a class="headerlink" href="#module-qgain.soldet.mhat_metric" title="Link to this heading">#</a></h2>
+<p>PI functionality for PIE and QE metrics.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.find_soliton">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">find_soliton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocessed_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gaussian1D'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_modern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#find_soliton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.find_soliton" title="Link to this definition">#</a></dt>
+<dd><p>Find solitons in data.</p>
+<p>Return the soliton excitation fitting parameters of all excitations in the given image.
+If position is None, return the deepest depletion fitting params.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preprocessed_data</strong> (<em>ndarray</em><em>, </em><em>with shape</em><em> (</em><em>132</em><em>, </em><em>164</em><em>)</em>) – A preprocessed image.</p></li>
+<li><p><strong>positions</strong> (<em>list</em><em> or </em><em>float</em><em> or </em><em>ndarray</em><em> or </em><em>None</em>) – The horizontal location of the solitonic excitation.
+(default = None)</p></li>
+<li><p><strong>func</strong> (<em>string</em>) – The fitting function to be used. Can be ‘gaussian1D’, ‘original’ (SOLDET 1.0), or ‘modern’ (SOLDET 2.0 module).
+(default = ‘gaussian1D’)</p></li>
+<li><p><strong>return_list</strong> (<em>boolean</em>) – If True, fit values will be a list of the best parameter values found from the fit.
+If False, fit values will be a dictionary of the best fit parameters and their values.
+(default = False)</p></li>
+<li><p><strong>del_modern</strong> (<em>boolean</em>) – Only applicable when using ‘modern’ fitting function. Deletes parameters i0 and r0 from the fit results.
+(default = True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>soliton_info</strong> – Soliton fitting parameters. See “fit_soliton” function for more information.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.fit_soliton">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">fit_soliton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roixwithoutbackg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inti_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gaussian1D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_fit_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_modern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#fit_soliton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.fit_soliton" title="Link to this definition">#</a></dt>
+<dd><p>Fit solitons to a 1D profile with the given function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_x</strong> (<em>1D numpy array</em>) – Pixel index list.</p></li>
+<li><p><strong>roixwithoutbackg</strong> (<em>1D numpy array</em>) – 1D profile. The pixel values with the Thomas Fermi 1D Sum fit subtracted.</p></li>
+<li><p><strong>res</strong> (<em>dictionary</em>) – The fit parameters from the Thomas Fermi 1D Sum fit.</p></li>
+<li><p><strong>inti_pos</strong> (<em>list</em><em> or </em><em>ndarray</em>) – The initial positions of the solitonic excitations. Used to set the ‘cen’ and ‘amp’ parameters.
+(default = None)</p></li>
+<li><p><strong>func</strong> (<em>string</em>) – The fitting function used. Choices are gaussian, original (SOLDET 1.0), or modern (SOLDET 2.0 Module).
+(default = ‘gaussian1D’)</p></li>
+<li><p><strong>n</strong> (<em>integer</em>) – The number of excitations in the region of interest.
+(default = 1)</p></li>
+<li><p><strong>return_fit_curve</strong> (<em>boolean</em>) – If True, return the fitting curve. Return will be (curve fit, fit values).
+If False, the fitting curve will not be returned. Return will be fit values.
+(default = False)</p></li>
+<li><p><strong>return_list</strong> (<em>boolean</em>) – If True, fit values will be a list of the best parameter values found from the fit.
+If False, fit values will be a dictionary of the best fit parameters and their values.
+(default = False)</p></li>
+<li><p><strong>del_modern</strong> (<em>boolean</em>) – Only applicable when using ‘modern’ fitting function. Deletes parameters i0 and r0 from the fit results.
+(default = True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>res_soliton</strong> (<em>dict or list or tuple</em>) – Output depends on the argument values to the function. By default the function returns a dictionary of the best
+parameters found.</p></li>
+<li><p><strong>fit_sp_1d</strong> (<em>ndarray</em>) – If return_fit_curve is set to True the output will return a tuple of values, with the first being the curve and
+the second dependent on the setting of return_list.</p></li>
+<li><p><strong>excitation_list</strong> (<em>list</em>) – If return_list is set to True then the output parameters will be a list of sub list, with each sub list giving
+the best parameter values for that excitation.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.fit_tf_1d_from_image">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">fit_tf_1d_from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#fit_tf_1d_from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.fit_tf_1d_from_image" title="Link to this definition">#</a></dt>
+<dd><p>Fit an image to a 1D Thomas Fermi model.</p>
+<p>Thomas fermi 1D fitting for background removal.
+This fits a 1D envelope to the image and removes it from the image to subtract the background.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>roi</strong> (<em>ndarray</em>) – The image data to fit to.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>vec_x</strong> (<em>ndarray of int</em>) – An array of the pixel positions</p></li>
+<li><p><strong>vec_y</strong> (<em>ndarray of float</em>) – The summed array values along the height axis of the original image</p></li>
+<li><p><strong>roixwithoutbackg</strong> (<em>ndarray</em>) – Data with the fitted background removed</p></li>
+<li><p><strong>res</strong> (<em>dict</em>) – The fit results</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.gaussian1d">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">gaussian1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#gaussian1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.gaussian1d" title="Link to this definition">#</a></dt>
+<dd><p>Fit to a 1D gaussian.</p>
+<p>Support function for fit_soliton. A basic gaussian fitting function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Function input.</p></li>
+<li><p><strong>amp</strong> (<em>float</em>) – The amplitude of the excitation parameter during fitting.</p></li>
+<li><p><strong>cen</strong> (<em>float</em>) – The center of the excitation parameter during fitting.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – The excitation width parameter during fitting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F(x)</strong> – The output of the function at x.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.logamp">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">logamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roixwithoutbackg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#logamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.logamp" title="Link to this definition">#</a></dt>
+<dd><p>Get the log of the excitation amplitude.</p>
+<p>Applies a logarithm to the negative of the input, y = log(-x).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roixwithoutbackg</strong> (<em>ndarray</em>) – A numpy array of image data, representing the region of interest.</p></li>
+<li><p><strong>pos</strong> (<em>float</em>) – The position of the excitation. If none is provided then the absolute minimum in the array is used.
+(default = None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>amp</strong> – The result of the logarithm. If the value is less than -1 the output is clipped to -1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.m_hat">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">m_hat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#m_hat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.m_hat" title="Link to this definition">#</a></dt>
+<dd><p>Fit to a Ricker wavelet (modern).</p>
+<p>Support function for fit_soliton.
+A modified Ricker wavelet fitting function used in the modern SolDet module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Function input.</p></li>
+<li><p><strong>amp</strong> (<em>float</em>) – The amplitude of the excitation parameter during fitting.</p></li>
+<li><p><strong>cen</strong> (<em>float</em>) – The center of the excitation parameter during fitting.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – The excitation width parameter during fitting.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – The excitation symmetric shoulder height.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – The excitation asymmetric shoulder height.</p></li>
+<li><p><strong>r0</strong> (<em>float</em>) – Thomas Fermi envelope width.</p></li>
+<li><p><strong>i0</strong> (<em>float</em>) – Thomas Fermi envelope center.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F(x)</strong> – The output of the function at x.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.m_hat1d_old">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">m_hat1d_old</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#m_hat1d_old"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.m_hat1d_old" title="Link to this definition">#</a></dt>
+<dd><p>Fit to a Ricker wavelet.</p>
+<p>Support function for fit_soliton.
+A basic Ricker wavelet fitting function used in the SolDet 1.0 library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Function input.</p></li>
+<li><p><strong>amp</strong> (<em>float</em>) – The amplitude of the excitation parameter during fitting.</p></li>
+<li><p><strong>cen</strong> (<em>float</em>) – The center of the excitation parameter during fitting.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – The excitation width parameter during fitting.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – The excitation symmetric shoulder height.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – The excitation asymmetric shoulder height.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F(x)</strong> – The output of the function at x.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.offset_func">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">offset_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#offset_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.offset_func" title="Link to this definition">#</a></dt>
+<dd><p>Add an offset to a fitting function.</p>
+<p>Support function for fit_soliton. Serves as an offset for building a fitting model. Such as b in y = mx + b.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Function input. Unused.</p></li>
+<li><p><strong>offset</strong> (<em>float</em>) – The offset parameter value during fitting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>offset</strong> – The offset parameter value during fitting.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.outlier_treatment">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">outlier_treatment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datacolumn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#outlier_treatment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.outlier_treatment" title="Link to this definition">#</a></dt>
+<dd><p>Find IQR of a given data distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datacolumn</strong> (<em>1D list</em><em> or </em><em>numpy array</em><em> of </em><em>float numbers</em>) – The given data distribution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>lower_range</strong> (<em>float</em>) – Lower bound of IQR</p></li>
+<li><p><strong>upper_range</strong> (<em>float</em>) – Upper bound of IQR</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.preprocess_mhat_params">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">preprocess_mhat_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_outliers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_minimum_as_center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#preprocess_mhat_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.preprocess_mhat_params" title="Link to this definition">#</a></dt>
+<dd><p>Preprocesses the fit parameters.</p>
+<p>Removes the offset and optionally removes outliers or sets the minimum value as the center.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>list</em><em> or </em><em>ndarray</em>) – The fitting parameters for an excitation.</p></li>
+<li><p><strong>remove_outliers</strong> (<em>boolean</em>) – If True, apply IQR outliers removal.
+(default = False)</p></li>
+<li><p><strong>use_minimum_as_center</strong> (<em>boolean</em>) – If True, set the center as the minimum value.
+(default = False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>p</strong> – The preprocessed parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D or 2D ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.mhat_metric.thomas_fermi_1dsum">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.mhat_metric.</span></span><span class="sig-name descname"><span class="pre">thomas_fermi_1dsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/mhat_metric.html#thomas_fermi_1dsum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.mhat_metric.thomas_fermi_1dsum" title="Link to this definition">#</a></dt>
+<dd><p>Thomas fermi 1D Model for background removal.</p>
+<p>This function supports _fit_tf_1d and serves as the model for fitting the data to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>) – The input pixel position.</p></li>
+<li><p><strong>amp</strong> (<em>float</em>) – The amplitude of the envelope parameter during fitting.</p></li>
+<li><p><strong>cen</strong> (<em>float</em>) – The center of the envelope parameter during fitting.</p></li>
+<li><p><strong>rx</strong> (<em>float</em>) – The width of the envelope parameter during fitting.</p></li>
+<li><p><strong>offset</strong> (<em>float</em>) – The offset of the envelope parameter during fitting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F(x)</strong> – The output of the function at x</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qgain.soldet.object_nn">
+<span id="qgain-soldet-object-nn-module"></span><h2>qgain.soldet.object_nn module<a class="headerlink" href="#module-qgain.soldet.object_nn" title="Link to this heading">#</a></h2>
+<p>Object model for SolDet.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.object_nn.MetzLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.object_nn.</span></span><span class="sig-name descname"><span class="pre">MetzLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/object_nn.html#MetzLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.object_nn.MetzLoss" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>1D loss function for soliton detection.</p>
+<p>Implementation of the loss function defined in: <a class="reference external" href="https://arxiv.org/abs/2111.04881">https://arxiv.org/abs/2111.04881</a>
+The first term is essentially the weighted cross entropy probability for the cell belonging to the
+‘soliton present’ class.
+The second term is a mean-squared error for the fractional position within the cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param</strong> (<em>float</em>) – The weight value used when calculating the loss.
+(default = 5.7)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.object_nn.MetzLoss.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/object_nn.html#MetzLoss.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.object_nn.MetzLoss.forward" title="Link to this definition">#</a></dt>
+<dd><p>Do one forward pass and calculate a loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – The output tensor of the neural network.</p></li>
+<li><p><strong>tars</strong> (<em>Tensor</em>) – The target label tensor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>loss</strong> – The resulting loss value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.object_nn.ObjectDetector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.object_nn.</span></span><span class="sig-name descname"><span class="pre">ObjectDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">41)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/object_nn.html#ObjectDetector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.object_nn.ObjectDetector" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qgain.html#qgain.models.ObjectDetector" title="qgain.models.ObjectDetector"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDetector</span></code></a></p>
+<p>Modern SolDet module Object Detector.</p>
+<p>This pytorch object detector model identifies the position of a solitonic excitation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label_shape</strong> (<em>tuple</em>) – The shape of the position labels. For 1D this shape is typically (1, width // 4), where 4 is the number of
+pixels for each cell in the array.
+(default = 1, 41)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.object_nn.ObjectDetector.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/object_nn.html#ObjectDetector.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.object_nn.ObjectDetector.forward" title="Link to this definition">#</a></dt>
+<dd><p>Take a tensor and identify any solitons and their positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensor</em><em> of </em><em>shape</em><em> (</em><em>B</em><em>, </em><em>1</em><em>, </em><em>H</em><em>, </em><em>W</em><em>)</em>) – The input tensor to make a prediction on. The expected shape is of shape (B, 1, H, W), where B is the batch
+size, H is the image height, and W is the image width.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> – The output tensor containing the probabilities for a soliton to be present in one of the cells and its
+fractional position within a cell. Here B is the batch size and dimension 1 contains the probability (0)
+and the position within the cell (1), where values 0 to 1 indicate left to right. Dimension 2 indicates the
+number of cells in the vertical direction and dimension 3 indicates the number of cells in the horizontal
+direction.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor of shape (B, 2, 1, W // 4)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-qgain.soldet.pi_models">
+<span id="qgain-soldet-pi-models-module"></span><h2>qgain.soldet.pi_models module<a class="headerlink" href="#module-qgain.soldet.pi_models" title="Link to this heading">#</a></h2>
+<p>The models for the PIE classifier and Quality Estimator.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.PIEClassifier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.pi_models.</span></span><span class="sig-name descname"><span class="pre">PIEClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">par0_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">np.float64(0.45107561936021673)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invpar0_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">np.float64(-0.45107561936021673)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par4_hard_l_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">-0.53</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par4_hard_g_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par4_soft_l_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">-0.41</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par4_soft_g_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.61</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par1_l_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">-3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">par1_r_cutoff:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'modern'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer:</span> <span class="pre">Callable[...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Any]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'sklearn.preprocessing._data.PowerTransformer'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#PIEClassifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.PIEClassifier" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a new metric on provided data for the physics informed classifier and apply it.</p>
+<p>This metric and the specified cut values will be used to categorize solitons into different types, based on how
+far they are from an ‘ideal’ soliton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>par0_cutoff</strong> (<em>float</em>) – The “top partial” cutoff value for the ratio of the amplitude fitting parameter from the top and bottom
+image cuts.
+(default = np.log(1.57))</p></li>
+<li><p><strong>invpar0_cutoff</strong> (<em>float</em>) – The “bottom partial” cutoff value for the inverse ratio of the amplitude fitting parameter of the top and
+bottom image cuts.
+(default = -np.log(1.57))</p></li>
+<li><p><strong>par4_hard_l_cutoff</strong> (<em>float</em>) – The “clockwise solitonic vortex” cutoff value for the asymmetric shoulder height fitting parameter
+differences from the top and bottom image cuts.
+(default = -0.53)</p></li>
+<li><p><strong>par4_hard_g_cutoff</strong> (<em>float</em>) – The “counter clockwise solitonic vortex” cutoff value for the asymmetric shoulder height fitting parameter
+differences from the top and bottom image cuts.
+(default = 0.75)</p></li>
+<li><p><strong>par4_soft_l_cutoff</strong> (<em>float</em>) – Involved with the ‘weaker’ categorization cut for the asymmetric shoulder height fitting parameter. This
+combined with par1_r_cutoff serves as the cut off values for “clockwise solitonic vortex” categorization if
+an earlier cut did not.
+(default = -0.41)</p></li>
+<li><p><strong>par4_soft_g_cutoff</strong> (<em>float</em>) – Involved with the ‘weaker’ categorization cut for the asymmetric shoulder height fitting parameter. This
+combined with par1_l_cutoff serves as the cut off values for “counter clockwise solitonic vortex”
+categorization if an earlier cut did not.
+(default = 0.61)</p></li>
+<li><p><strong>par1_l_cutoff</strong> (<em>float</em>) – Involved with the ‘weaker’ categorization cut for the center of the excitation fitting parameter. This
+combined with par4_soft_l_cutoff serves as the cut off values for “counter clockwise solitonic vortex”
+categorization if an earlier cut did not.
+(default = -3.0)</p></li>
+<li><p><strong>par1_r_cutoff</strong> (<em>float</em>) – Involved with the ‘weaker’ categorization cut for the center of the excitation fitting parameter. This
+combined with par4_soft_l_cutoff serves as the cut off values for “clockwise solitonic vortex” categorization
+if an earlier cut did not.
+(default = 1.14)</p></li>
+<li><p><strong>https</strong> (<em>Further information can be found in the SolDet paper</em>)</p></li>
+<li><p><strong>func</strong> (<em>string</em>) – The fitting function to be used. Can be ‘gaussian1D’, ‘original’ (SOLDET 1.0),
+or ‘modern’ (modern SOLDET module).
+(default = ‘modern’)</p></li>
+<li><p><strong>transformer</strong> (<em>Callable function</em>) – The type of transform to use on the parameters.
+(default = PowerTransformer)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.PIEClassifier.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#PIEClassifier.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.PIEClassifier.fit" title="Link to this definition">#</a></dt>
+<dd><p>Fitting algorith.</p>
+<p>Locates solitons in a set of images and fits them to the specified function set during class initialization.
+The resulting parameters are transformed into a new distribution and used to retrieve a covariance and mean
+value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em> of </em><em>dicts</em><em> or </em><em>dict</em>) – The data to be used in the fitting.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.PIEClassifier.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#PIEClassifier.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.PIEClassifier.transform" title="Link to this definition">#</a></dt>
+<dd><p>Transform the data.</p>
+<p>Applies the previously fitted metric and defined cuts to determine the sub class of a solitonic excitation
+identified by the classifier and object detector ML models.</p>
+<p>Images are split into a top half and bottom half. Excitations are located and the metric is applied. From these
+parameters various cuts are done to classify the soliton into the following sub classes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0: Longitudinal soliton</p></li>
+<li><p>1: Top partial soliton</p></li>
+<li><p>2: Bottom partial soliton</p></li>
+<li><p>3: Clockwise solitonic vortex</p></li>
+<li><p>4: Counterclockwise solitonic vortex</p></li>
+<li><p>5: Canted</p></li>
+</ul>
+</div></blockquote>
+<p>These are determined by defining A, the amplitude fitting parameter ratio; db, the shoulder height difference;
+and dic, the center position difference and comparing them to various cuts. These cuts are defined as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>par0_cutoff: The “top partial” cutoff value for the ratio of the amplitude fitting parameter from the top
+and bottom image cuts.</p></li>
+<li><p>invpar0_cutoff: The “bottom partial” cutoff value for the inverse ratio of the amplitude fitting
+parameter of the top and bottom image cuts.</p></li>
+<li><p>par4_hard_l_cutoff: The “clockwise solitonic vortex” cutoff value for the asymmetric shoulder height
+fitting parameter differences from the top and bottom image cuts.</p></li>
+<li><p>par4_hard_g_cutoff: The “counter clockwise solitonic vortex” cutoff value for the asymmetric shoulder
+height fitting parameter differences from the top and bottom image cuts.</p></li>
+<li><p>par4_soft_l_cutoff: Involved with the ‘weaker’ categorization cut for the asymmetric shoulder height
+fitting parameter. This combined with par1_r_cutoff serves as the cut off values for “clockwise solitonic
+vortex” categorization if an earlier cut did not.</p></li>
+<li><p>par4_soft_g_cutoff: Involved with the ‘weaker’ categorization cut for the asymmetric shoulder height
+fitting parameter. This combined with par1_l_cutoff serves as the cut off values for “counter clockwise
+solitonic vortex” categorization if an earlier cut did not.</p></li>
+<li><p>par1_l_cutoff: Involved with the ‘weaker’ categorization cut for the center of the excitation fitting
+parameter. This combined with par4_soft_g_cutoff serves as the cut off values for “counter clockwise
+solitonic vortex” categorization if an earlier cut did not.</p></li>
+<li><p>par1_r_cutoff: Involved with the ‘weaker’ categorization cut for the center of the excitation fitting
+parameter. This combined with par4_soft_l_cutoff serves as the cut off values for “clockwise solitonic
+vortex” categorization if an earlier cut did not.</p></li>
+</ul>
+</div></blockquote>
+<p>Further information can be found in the SolDet paper <a class="reference external" href="https://arxiv.org/abs/2111.04881">https://arxiv.org/abs/2111.04881</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em> of </em><em>dicts</em><em> or </em><em>dict</em>) – The data to be used for classifying into PIE types.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>class_return</strong> – A list of the identified sub classes for all found excitations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.QE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.pi_models.</span></span><span class="sig-name descname"><span class="pre">QE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'modern'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer:</span> <span class="pre">Callable[...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Any]</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'sklearn.preprocessing._data.PowerTransformer'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#QE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.QE" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a new metric on the data for the physics informed quality estimator.</p>
+<p>This metric will be used to determine how likely a soliton is a longitudinal soliton when applying the
+quality estimator. The metric is based on all existing single longitudinal solitons in the current dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>string</em>) – The fitting function to be used. Can be ‘gaussian1D’, ‘original’ (SOLDET 1.0),
+or ‘modern’ (modern SOLDET module).
+(default = ‘modern’)</p></li>
+<li><p><strong>transformer</strong> (<em>Callable function</em>) – The type of transform to use on the parameters.
+(default = PowerTransformer)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.QE.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#QE.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.QE.fit" title="Link to this definition">#</a></dt>
+<dd><p>Locate solitons in a set of images and fit them to the specified function set during class initialization.</p>
+<p>The resulting parameters are transformed into a new distribution and used to retrieve a covariance and mean
+value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em> of </em><em>dicts</em><em> or </em><em>dict</em>) – The data to be used in the fitting.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.QE.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#QE.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.QE.transform" title="Link to this definition">#</a></dt>
+<dd><p>Transform the data.</p>
+<p>Applies the previously built metric to determine the probability that a soliton identified by the classifier and
+object detector ML models is longitudinal.</p>
+<p>The score is calculated by taking the metric, transforming the input data, and calculating the mahalanobis
+distance between the metric and the transformed data. The chi squared is applied to this to calculate a score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em> of </em><em>dicts</em><em> or </em><em>dict</em>) – The data to be used for classifying into PIE types.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>pred</strong> – A list of the quality scores for all found excitations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.pi_models.apply_metric">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.pi_models.</span></span><span class="sig-name descname"><span class="pre">apply_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_dist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">np.ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/pi_models.html#apply_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.pi_models.apply_metric" title="Link to this definition">#</a></dt>
+<dd><p>Given a transformed set, determine the mahalanobis distance or quality score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>numpy array</em>) – The processed fit parameters for the excitation(s).</p></li>
+<li><p><strong>sigma</strong> (<em>numpy array</em>) – The covariance matrix of the built metric.</p></li>
+<li><p><strong>mu</strong> (<em>numpy array</em>) – The mean values of the built metric.</p></li>
+<li><p><strong>transformer</strong> (<em>boolean</em><em> or </em><em>sklearn Transformer object</em>) – If False, parameters are not transformed.
+If a Transformer object then the input data is transformed using the metric.
+(default = False)</p></li>
+<li><p><strong>return_dist</strong> (<em>boolean</em>) – If True, returns a list of the calculated Mahalanobis Distance(s).
+If False, returns a list of the calculated quality score(s).
+(default = False)</p></li>
+<li><p><strong>gamma</strong> (<em>boolean</em>) – An optional argument that will apply the gamma function instead of the chi squared in the QE score.
+(default = False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>res</strong> – An array of distances or quality scores.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qgain.soldet.soliton_datasets">
+<span id="qgain-soldet-soliton-datasets-module"></span><h2>qgain.soldet.soliton_datasets module<a class="headerlink" href="#module-qgain.soldet.soliton_datasets" title="Link to this heading">#</a></h2>
+<p>Dataset class definitions for preparing data to be used by their respective models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.SolitonClassDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">SolitonClassDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#SolitonClassDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.SolitonClassDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>A dataset class for the ML based classifier.</p>
+<p>This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is
+expected to be at key ‘data’.
+It will also grab the class label at key ‘label’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The data to build a dataset from.</p></li>
+<li><p><strong>augment</strong> (<em>bool</em>) – If set to True the data is augmented with rotations.
+(default = True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.SolitonODDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">SolitonODDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#SolitonODDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.SolitonODDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>A dataset class for the ML based object detector.</p>
+<p>This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is
+expected to be at key ‘data’.
+It will also grab the positions at key ‘positions’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The data to build a dataset from.</p></li>
+<li><p><strong>augment</strong> (<em>bool</em>) – If set to True the data is augmented with rotations.
+(default = True)</p></li>
+<li><p><strong>threshold</strong> (<em>list</em>) – <p>A list of values that influence the conversion between real positions and cell positions.</p>
+<blockquote>
+<div><ul>
+<li><p>Threshold[0] is the minimum value to consider a soliton is present.</p></li>
+<li><dl class="simple">
+<dt>Threshold[1] is the minimum distance two solitons can be considered separate. Any distances under this</dt><dd><p>value is considered the same excitation.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>(default = [0.5, 4])</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.SolitonODDataset.labels_to_data">
+<span class="sig-name descname"><span class="pre">labels_to_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#SolitonODDataset.labels_to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.SolitonODDataset.labels_to_data" title="Link to this definition">#</a></dt>
+<dd><p>Convert the labels in cell space to positions in pixel space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sample</strong> (<em>ndarray</em>) – An array of probability and fractional position values in cell space.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>labels</strong> – The positions in pixel space</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.SolitonPIEClassDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">SolitonPIEClassDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#SolitonPIEClassDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.SolitonPIEClassDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>A dataset class for the physics informed classifier.</p>
+<p>This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is
+expected to be at key ‘data’.
+It will also grab the positions at key ‘positions’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The data to build a dataset from.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.SolitonQEClassDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">SolitonQEClassDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#SolitonQEClassDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.SolitonQEClassDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>A dataset class for the physics informed quality estimate.</p>
+<p>This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is
+expected to be at key ‘data’.
+It will also grab the positions at key ‘positions’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The data to build a dataset from.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.augment_expand_as_mlst2021">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">augment_expand_as_mlst2021</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_Buffer</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">SeedSequence</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">BitGenerator</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Generator</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#augment_expand_as_mlst2021"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.augment_expand_as_mlst2021" title="Link to this definition">#</a></dt>
+<dd><p>Augment data suitable for classifiers in the SolDet module.</p>
+<p>This does a simple horizontal, vertical, and 180 degree rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_x</strong> (<em>ndarray</em>) – The array of image data to be augmented. Typically (N, H, W) where N is the number of images, W is the width
+of the image and H is the height.</p></li>
+<li><p><strong>raw_y</strong> (<em>ndarray</em>) – An array of class labels for each image in the images array.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>array_like</em><em>[</em><em>ints</em><em>] or </em><em>SeedSequence</em><em> or </em><em>BitGenerator</em><em> or </em><em>Generator</em>) – The seed to use to initialize the randomization generator
+(default = None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>augment_x</strong> (<em>ndarray</em>) – The augmented image data</p></li>
+<li><p><strong>augment_y</strong> (<em>ndarray</em>) – The augmented class label data</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.augment_w_pos">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">augment_w_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#augment_w_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.augment_w_pos" title="Link to this definition">#</a></dt>
+<dd><p>Augment the data by rotating the images three ways: horizontal flip, vertical flip, and a 180 degree rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> (<em>ndarray</em>) – The array of image data to be augmented. Typically (N, H, W) where N is the number of images, W is the width
+of the image and H is the height.</p></li>
+<li><p><strong>positions</strong> (<em>list</em>) – A list of positions for each image in the images array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>aug_x</strong> (<em>ndarray</em>) – The augmented image data</p></li>
+<li><p><strong>aug_y</strong> (<em>list</em>) – The augmented position data</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.cl_accu_metric">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">cl_accu_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targ</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#cl_accu_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.cl_accu_metric" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the number of correct predictions and give an accuracy score.</p>
+<p>This is used during training of the SolDet CL to determine its accuracy during validation.</p>
+<section id="paramters">
+<h3>Paramters<a class="headerlink" href="#paramters" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>pred<span class="classifier">torch.Tensor</span></dt><dd><p>The output tensor of the object detector.</p>
+</dd>
+<dt>targ<span class="classifier">torch.Tensor</span></dt><dd><p>The target label in cell space.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>correct</strong></p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.download_ds">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">download_ds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#download_ds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.download_ds" title="Link to this definition">#</a></dt>
+<dd><p>Download the public SolDet data set.</p>
+<p>This will expand the compressed files into the currently set experimental folder.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.expand_data_by_augment">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">expand_data_by_augment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#expand_data_by_augment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.expand_data_by_augment" title="Link to this definition">#</a></dt>
+<dd><p>Support function for augment_expand_as_mlst2021.</p>
+<p>This does a simple horizontal, vertical, and 180 degree rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> (<em>ndarray</em>) – The array of image data to be augmented. Typically (N, H, W) where N is the number of images, W is the width
+of the image and H is the height.</p></li>
+<li><p><strong>labels</strong> (<em>ndarray</em>) – An array of class lebels for each image in the images array.</p></li>
+<li><p><strong>augments</strong> (<em>list</em>) – A list of augments to apply to the data. Choices are ‘hflip’ for horizontal flipping, ‘vflip’ for vertical
+flipping, and ‘180rot’ for a 180 degree rotation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>aug_x</strong> (<em>ndarray</em>) – The augmented image data</p></li>
+<li><p><strong>aug_y</strong> (<em>ndarray</em>) – The augmented class label data</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.labels_to_pos_conversion">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">labels_to_pos_conversion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">4)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#labels_to_pos_conversion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.labels_to_pos_conversion" title="Link to this definition">#</a></dt>
+<dd><p>Convert soliton positions in cell space to pixel space.</p>
+<p>This new space is a compressed representation of
+the positions in pixel space and the probability of them being present in a cell. The new space is a (2, 1, 41)
+array of values with the first 41 entries representing the probability of an excitation being located in a cell,
+and the second 41 entries representing the fractional position of the excitation in that cell.
+Each cell represents 4 pixels in length.</p>
+<p>The behavior of this function depends on the data type of label_in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_in</strong> (<em>list</em><em> or </em><em>ndarray</em>) – An array of values in cell space. For each cell whose probability is above the threshold it will have a position
+calculated. This position will be based on the fractional position in the cell. If multiple excitations exists
+next to each other the average positions will be calculated between the two.</p></li>
+<li><p><strong>threshold</strong> (<em>list</em>) – A list of values that influence the conversion between real positions and cell positions.
+Threshold[0] is the minimum value to consider that an excitation is present.
+Threshold[1] is the minimum distance two excitations can be considered separate. Any distances under this
+value is considered the same excitation.
+(default = [0.5, 4)])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>label_out</strong> – A list of positions in pixel space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.od_accu_metric">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">od_accu_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targ</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#od_accu_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.od_accu_metric" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the number of correct predictions and give an accuracy score.</p>
+<p>This is used during training of the SolDet OD to determine its accuracy during validation.</p>
+<section id="id1">
+<h3>Paramters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>pred<span class="classifier">torch.Tensor</span></dt><dd><p>The output tensor of the object detector.</p>
+</dd>
+<dt>targ<span class="classifier">torch.Tensor</span></dt><dd><p>The target label in cell space.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>correct</strong></p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.pos_41labels_conversion">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">pos_41labels_conversion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">4)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#pos_41labels_conversion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.pos_41labels_conversion" title="Link to this definition">#</a></dt>
+<dd><p>Convert between soliton positions in pixel space and cell space.</p>
+<p>This new space is a compressed representation of the positions in pixel space and the probability of them being
+present in a cell. The new space is a (2, 1, 41) array of values with the first 41 entries representing the
+probability of an excitation being located in a cell, and the second 41 entries representing the fractional position
+of the excitation in that cell. Each cell represents 4 pixels in length.</p>
+<p>The behavior of this function depends on the data type of label_in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_in</strong> (<em>list</em><em> or </em><em>ndarray</em>) – <p>If the data type is a list then it is assumed that this is a list of positions in pixel space. Valid input can
+be a list of a single value for single image input, or a list of sub lists of positions for multiple images.
+The output will be an array of (2, 1, 41).</p>
+<p>If the data type is an array then it is assumed this input is an array of values in cell space. For each cell
+whose probability is above the threshold it will have a position calculated. This position will be based on the
+fractional position in the cell. If multiple excitations exists next to each other the average positions will be
+calculated between the two.</p>
+</p></li>
+<li><p><strong>threshold</strong> (<em>list</em>) – A list of values that influence the conversion between real positions and cell positions.
+Threshold[0] is the minimum value to consider that an excitation is present.
+Threshold[1] is the minimum distance two excitations can be considered separate. Any distances under this
+value is considered the same excitation.
+(default = [0.5, 4)])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>label_out</strong> – If label_in was a list then the output is an array of (2, 1, 41) values in cell space.
+If label_in was an array then the output is a list of positions in pixel space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list or ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.pos_to_41labels_conversion">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">pos_to_41labels_conversion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#pos_to_41labels_conversion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.pos_to_41labels_conversion" title="Link to this definition">#</a></dt>
+<dd><p>Convert soliton positions in pixel space to cell space.</p>
+<p>This new space is a compressed representation of the positions in pixel space and the probability of them being
+present in a cell. The new space is a (2, 1, 41) array of values with the first 41 entries representing the
+probability of an excitation being located in a cell, and the second 41 entries representing the fractional position
+of the excitation in that cell. Each cell represents 4 pixels in length..</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label_in</strong> (<em>list</em>) – A list of positions in pixel space. Valid input can be a list of a single value for single image input, or a
+list of sub lists of positions for multiple images. The output will be an array of (2, 1, 41).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>label_out</strong> – An array of (2, 1, 41) values in cell space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_datasets.soldet_to_h5">
+<span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_datasets.</span></span><span class="sig-name descname"><span class="pre">soldet_to_h5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_old</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_datasets.html#soldet_to_h5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_datasets.soldet_to_h5" title="Link to this definition">#</a></dt>
+<dd><p>Convert the original SolDet dataset into the HDF version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – The path to the destination folder. This should contain the data and data_info folders of the SolDet module.</p></li>
+<li><p><strong>delete_old</strong> (<em>bool</em>) – If true this will delete the old files when creating the new ones.
+(default = True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-qgain.soldet.soliton_detector">
+<span id="qgain-soldet-soliton-detector-module"></span><h2>qgain.soldet.soliton_detector module<a class="headerlink" href="#module-qgain.soldet.soliton_detector" title="Link to this heading">#</a></h2>
+<p>The Soliton Detector Class.</p>
+<p>This uses the Q-GAIN detector module to set up a detector suitable for detecting and analyzing solitons.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.soldet.soliton_detector.</span></span><span class="sig-name descname"><span class="pre">SolitonDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">od_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cl_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qgain.html#qgain.detector.Detector" title="qgain.detector.Detector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Detector</span></code></a></p>
+<p>A Soliton Detector class to interface with the Q-GAIN library for analysis and detection of solitons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>od_kwargs</strong> (<em>dict</em>) – A dictionary containing any extra function arguments needed to be passed to the object detector model
+(default = {})</p></li>
+<li><p><strong>cl_kwargs</strong> (<em>dict</em>) – A dictionary containing any extra function arguments needed to be passed to the classifier model
+(default = {“num_classes”: 3})</p></li>
+<li><p><strong>augment</strong> (<em>bool</em><em> or </em><em>None</em>) – A flag to indicate whether or not to augment the data in the dataset function when training ML models.
+If this value is set to True or False it is expected the specified dataset class or function call has an
+augment argument.
+(default = True)</p></li>
+<li><p><strong>Example</strong></p></li>
+<li><p><strong>-------</strong></p></li>
+<li><p><strong>code-block:</strong> (<em>..</em>) – python: qgain.change_exp(‘soldet_ds’)
+qgain.soldet.soliton_datasets.download_ds()
+qgain.soldet.soliton_datasets.soldet_to_h5(soldet.config()[0])
+sd = soldet.soliton_detector.SolitonDetector()
+sd.load_data(tags = [0, 1])
+sd.train_nn([‘classifier’])
+sd.use_models(model_list = [‘classifier’], model_paths = [‘CL.pt’])</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.define_pie_classifier">
+<span class="sig-name descname"><span class="pre">define_pie_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.define_pie_classifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.define_pie_classifier" title="Link to this definition">#</a></dt>
+<dd><p>Create a new metric on the object’s data for the physics informed classifier.</p>
+<dl class="simple">
+<dt>save<span class="classifier">bool</span></dt><dd><p>If true this saves the metric and cuts.
+(default = False)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.define_quality_estimate">
+<span class="sig-name descname"><span class="pre">define_quality_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.define_quality_estimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.define_quality_estimate" title="Link to this definition">#</a></dt>
+<dd><p>Create a new metric on the object’s data for the physics informed quality scorer.</p>
+<dl class="simple">
+<dt>save<span class="classifier">bool</span></dt><dd><p>If true this saves the metric and cuts.
+(default = False)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.export" title="Link to this definition">#</a></dt>
+<dd><p>Export the ground (if available) and predicted (if available) labels in the currently loaded dataset.</p>
+<p>Will export the ground and predicted labels for the object detector, classifier, quality estimator and PIE
+classifier.
+Additional meta information can be saved by providing the relevant keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>export_type</strong> (<em>str</em>) – Choosing a type here will save the data to the corresponding file format.
+(default = csv)</p></li>
+<li><p><strong>keys</strong> (<em>list</em>) – Additional keys to pull from each sample’s dictionary in the dataset. This could potentially cause errors
+when attempting to export datatypes that are incompatible with the chosen output format.
+(default = None)</p></li>
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The external target data to export keys from which will be used instead of the data loaded into the soliton
+detector.
+(default = None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.import_data">
+<span class="sig-name descname"><span class="pre">import_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'atoms'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'background'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probe_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'probe'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">164</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">132</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.import_data" title="Link to this definition">#</a></dt>
+<dd><p>Import new data into the class folders of the current experiment.</p>
+<p>This function will call the Q-GAIN processing function with the original SolDet parameters to import new data
+from HDF files and preprocess the data to make it suitable for use in SolDet.
+When importing data from labscript files with different experimental configurations the parameters can be
+changed to properly search the labscript shot files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>string</em>) – The path to the folder containing the new data.</p></li>
+<li><p><strong>target</strong> (<em>string</em>) – The directory name in the h5 file containing the cloud images.
+(default = “xy”)</p></li>
+<li><p><strong>atoms_name</strong> (<em>string</em>) – The full or partial name for images containing the atoms, probe, and background.
+(default = “atoms”)</p></li>
+<li><p><strong>bg_name</strong> (<em>string</em>) – The full or partial name for images of only the background, no atoms or probe light.
+(default = “background”)</p></li>
+<li><p><strong>probe_name</strong> (<em>string</em>) – The full or partial name for images of only the probe light.
+(default = “probe”)</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – The target width of the cloud images after processing.
+(default = 164)</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – The target height of the cloud images after processing.
+(default = 132)</p></li>
+<li><p><strong>label</strong> (<em>int</em>) – The SolDet module class label for the image.
+(default = 9)</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em> or </em><em>none</em>) – Optional arguments to pass to the processing function of the detector.
+(default = None)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;atoms_name&#39;</span><span class="p">:</span> <span class="s1">&#39;atoms&#39;</span><span class="p">,</span> <span class="s1">&#39;bg_name&#39;</span><span class="p">:</span> <span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="s1">&#39;probe_name&#39;</span><span class="p">:</span> <span class="s1">&#39;probe&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;../BEC_data_2023_0613/0001&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">data_frac</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">minmax</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.load_data">
+<span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">8,</span> <span class="pre">9)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_frac</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(-1,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.load_data" title="Link to this definition">#</a></dt>
+<dd><p>Load the data corresponding to the given tags in the data roster to the SolitonDetector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tags</strong> (<em>list</em>) – The classes to load. Tags specified here will load all files in the corresponding class folder.
+These labels should match the ones listed in the data.
+(default = [0, 1, 2, 8, 9])</p></li>
+<li><p><strong>data_frac</strong> (<em>float</em>) – The fraction of the data to use for training.
+(default = 0.9)</p></li>
+<li><p><strong>scale</strong> (<em>boolean</em>) – If True the data will be scaled so it is bounded between 0 and 1.
+(default = True)</p></li>
+<li><p><strong>minmax</strong> (<em>list</em>) – If scale is set to True the data will be scaled given the minimum and maximum values specified in minmax.
+This expects [MIN, MAX].
+(default = [-1, 3])</p></li>
+<li><p><strong>keep</strong> (<em>bool</em>) – If True this will keep existing data loaded into the SolitonDetector object, otherwise it will be
+overwritten.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.plot_metrics">
+<span class="sig-name descname"><span class="pre">plot_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('classifier',</span> <span class="pre">'object</span> <span class="pre">detector',</span> <span class="pre">'pie</span> <span class="pre">classifier',</span> <span class="pre">'quality</span> <span class="pre">estimator')</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.plot_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.plot_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Run various plotting routines and display the results.</p>
+<p>The types of plots shown depend on the entries in the list argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> (<em>list</em>) – The plotting tools to use.
+(default = (‘classifier’, ‘object detector’, ‘pie classifier’, ‘quality estimator’))</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – An optional argument to specify a matplotlib style file and change the overall look of the plots.
+(default = None)</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – An optional argument that will save the output rather than display it.
+(default = False)</p></li>
+<li><p><strong>plot_kwargs</strong> (<em>dict</em><em> of </em><em>dicts</em>) – Optional arguments to be passed to the tool’s callable function. This dictionary should contain the name of
+the plotting tool as a key with its value being the keyword dictionary to pass to the function.
+(default = None)</p></li>
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The data to generate plots from. By default this is the data loaded into the detector object. If using a
+different target the function expects a similar structure to that of the SolDet module.
+(default = None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.soldet.soliton_detector.SolitonDetector.use_models">
+<span class="sig-name descname"><span class="pre">use_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('classifier',</span> <span class="pre">'object</span> <span class="pre">detector',</span> <span class="pre">'pie</span> <span class="pre">classifier',</span> <span class="pre">'quality</span> <span class="pre">estimator')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/soldet/soliton_detector.html#SolitonDetector.use_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.soldet.soliton_detector.SolitonDetector.use_models" title="Link to this definition">#</a></dt>
+<dd><p>Use all models available in the SolDet module.</p>
+<p>Specifying any of the options ‘classifier’, ‘object detector’, ‘pie classifier’, or ‘quality estimator’ in the
+argument model_list will make the function use those features. The argument model_paths can be used to dictate
+the trained model files in the models folder of the experiment path. If none are found then the function will
+attempt to use provided files. Results are saved in the dictionary for each sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_list</strong> (<em>list</em>) – <p>The models to run. You can choose from the following:</p>
+<blockquote>
+<div><ul>
+<li><p>’classifier’: Run the ML classifier model on the object’s data.
+This will determine which class the image belongs to. For the SolDet module this is 0 (No solitons),
+1 (Single Soliton), 2 (Multiple Solitons).</p></li>
+<li><p>’object detector’: Run the ML object detector on the object’s data. This will determine the location
+of any excitations found.</p></li>
+<li><p>’pie classifier’: Run the physics informed classifier on the object’s data. This will further
+classify the Solitons found by the ML models into Longitudinal, Canted, Counterclockwise Vortex,
+Clockwise Vortex, Top Partial, and Bottom Partial.</p></li>
+<li><p>’quality estimator’: Run the physics informed quality estimator. For a given soliton this will
+estimate how much it resembles a longitudinal soliton.</p></li>
+</ul>
+</div></blockquote>
+<p>(default = [‘classifier’, ‘object detector’, ‘pie classifier’, ‘quality estimator’])</p>
+</p></li>
+<li><p><strong>model_paths</strong> (<em>list</em>) – The names of the saved weights or model parameters. These should end in ‘_CL.pt’ for the classifier
+and ‘_OD.pt’ for the object detector. For conventional analysis methods these should be pickle files that
+end with the name of the method. Passing an empty list, or a list lacking any saved metric files, to this
+argument will attempt to run any defined metrics without loading files.</p></li>
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The external data to use the models on. By default the target is the data loaded into a detector object. It
+is possible to use external data by providing a list of dicts or dicts of dicts to this argument.
+(default = None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Q-GAIN</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="qgain.vdet.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">VortexDetector Subpackage</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.classifier_nn">qgain.soldet.classifier_nn module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.classifier_nn.SolDetClassifier"><code class="docutils literal notranslate"><span class="pre">SolDetClassifier</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.classifier_nn.SolDetClassifier.forward"><code class="docutils literal notranslate"><span class="pre">SolDetClassifier.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.mhat_metric">qgain.soldet.mhat_metric module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.find_soliton"><code class="docutils literal notranslate"><span class="pre">find_soliton()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.fit_soliton"><code class="docutils literal notranslate"><span class="pre">fit_soliton()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.fit_tf_1d_from_image"><code class="docutils literal notranslate"><span class="pre">fit_tf_1d_from_image()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.gaussian1d"><code class="docutils literal notranslate"><span class="pre">gaussian1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.logamp"><code class="docutils literal notranslate"><span class="pre">logamp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.m_hat"><code class="docutils literal notranslate"><span class="pre">m_hat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.m_hat1d_old"><code class="docutils literal notranslate"><span class="pre">m_hat1d_old()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.offset_func"><code class="docutils literal notranslate"><span class="pre">offset_func()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.outlier_treatment"><code class="docutils literal notranslate"><span class="pre">outlier_treatment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.preprocess_mhat_params"><code class="docutils literal notranslate"><span class="pre">preprocess_mhat_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.mhat_metric.thomas_fermi_1dsum"><code class="docutils literal notranslate"><span class="pre">thomas_fermi_1dsum()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.object_nn">qgain.soldet.object_nn module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.MetzLoss"><code class="docutils literal notranslate"><span class="pre">MetzLoss</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.MetzLoss.forward"><code class="docutils literal notranslate"><span class="pre">MetzLoss.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.ObjectDetector"><code class="docutils literal notranslate"><span class="pre">ObjectDetector</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.object_nn.ObjectDetector.forward"><code class="docutils literal notranslate"><span class="pre">ObjectDetector.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.pi_models">qgain.soldet.pi_models module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.PIEClassifier"><code class="docutils literal notranslate"><span class="pre">PIEClassifier</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.PIEClassifier.fit"><code class="docutils literal notranslate"><span class="pre">PIEClassifier.fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.PIEClassifier.transform"><code class="docutils literal notranslate"><span class="pre">PIEClassifier.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.QE"><code class="docutils literal notranslate"><span class="pre">QE</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.QE.fit"><code class="docutils literal notranslate"><span class="pre">QE.fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.QE.transform"><code class="docutils literal notranslate"><span class="pre">QE.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.pi_models.apply_metric"><code class="docutils literal notranslate"><span class="pre">apply_metric()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.soliton_datasets">qgain.soldet.soliton_datasets module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonClassDataset"><code class="docutils literal notranslate"><span class="pre">SolitonClassDataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonODDataset"><code class="docutils literal notranslate"><span class="pre">SolitonODDataset</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonODDataset.labels_to_data"><code class="docutils literal notranslate"><span class="pre">SolitonODDataset.labels_to_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonPIEClassDataset"><code class="docutils literal notranslate"><span class="pre">SolitonPIEClassDataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.SolitonQEClassDataset"><code class="docutils literal notranslate"><span class="pre">SolitonQEClassDataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.augment_expand_as_mlst2021"><code class="docutils literal notranslate"><span class="pre">augment_expand_as_mlst2021()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.augment_w_pos"><code class="docutils literal notranslate"><span class="pre">augment_w_pos()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.cl_accu_metric"><code class="docutils literal notranslate"><span class="pre">cl_accu_metric()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.download_ds"><code class="docutils literal notranslate"><span class="pre">download_ds()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.expand_data_by_augment"><code class="docutils literal notranslate"><span class="pre">expand_data_by_augment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.labels_to_pos_conversion"><code class="docutils literal notranslate"><span class="pre">labels_to_pos_conversion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.od_accu_metric"><code class="docutils literal notranslate"><span class="pre">od_accu_metric()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.pos_41labels_conversion"><code class="docutils literal notranslate"><span class="pre">pos_41labels_conversion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.pos_to_41labels_conversion"><code class="docutils literal notranslate"><span class="pre">pos_to_41labels_conversion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_datasets.soldet_to_h5"><code class="docutils literal notranslate"><span class="pre">soldet_to_h5()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.soldet.soliton_detector">qgain.soldet.soliton_detector module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector"><code class="docutils literal notranslate"><span class="pre">SolitonDetector</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.define_pie_classifier"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.define_pie_classifier()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.define_quality_estimate"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.define_quality_estimate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.export"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.export()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.import_data"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.import_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.load_data"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.load_data()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.plot_metrics"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.plot_metrics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.soldet.soliton_detector.SolitonDetector.use_models"><code class="docutils literal notranslate"><span class="pre">SolitonDetector.use_models()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qgain.run_ml &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qgain/run_ml';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/qgain.html">Q-GAIN Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qgain.run_ml</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Machine Learning Controller.&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">Control</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># specify cpu or gpu device for training</span>
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+
+
+<div class="viewcode-block" id="MLControl">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLControl">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MLControl</span><span class="p">(</span><span class="n">Control</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The machine learning (ML) control class for the Q-GAIN package.</span>
+
+<span class="sd">    When creating a new tool the controller will pass any initialization arguments to the MLTool which sets up</span>
+<span class="sd">    the model. A tool to the ML controller is a seperate ML model it must run data through. This will be added as an</span>
+<span class="sd">    entry in the member attribute list called tools.</span>
+<span class="sd">    Adding additional ML tools can be accomplished with the listed parameters in the add_new_tool method.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the class.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">call_fn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MLControl.add_new_tool">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLControl.add_new_tool">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_new_tool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span>
+                 <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span> <span class="n">augment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a new tool to the controller.</span>
+
+<span class="sd">        Functionality can be modified with external modules by replacing them in the corresponding argument.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        model : pytorch Module</span>
+<span class="sd">            The type of model to be used. If using a custom module the output of the model should be in the same shape</span>
+<span class="sd">            as the target tensors used during training and validation.</span>
+<span class="sd">        name : string</span>
+<span class="sd">            The name of the model. Used for checkpoint file names and GUI communication.</span>
+<span class="sd">        dataset_fn : pytorch Dataset</span>
+<span class="sd">            The dataset function used to provide data to the models. If using a custom function this should accept the</span>
+<span class="sd">            shape and type of data you are providing to the framework. It should have an argument named augment</span>
+<span class="sd">            to indicate whether or not to augment the data if augment is not set to None.</span>
+<span class="sd">        augment : bool or None</span>
+<span class="sd">            A flag to indicate whether or not to augment the provided data in the dataset function.</span>
+<span class="sd">            (default = True)</span>
+<span class="sd">        device : int</span>
+<span class="sd">            Which device to use. An integer provided here will specify which GPU to run the model on. If none is</span>
+<span class="sd">            provided then either GPU 0 will be selected, or the CPU will be used if no CUDA compatible device is</span>
+<span class="sd">            detected. This also influences the output of the GUI. Worker progress will be printed to the terminal on</span>
+<span class="sd">            lines that correspond to the device. For GPU 0 updates will be printed to position 0, for GPU 1 updates will</span>
+<span class="sd">            be printed to position 1, and so on.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        loss_fn : pytorch loss Module</span>
+<span class="sd">            The loss function to use during training.</span>
+<span class="sd">        metrics : list of dicts</span>
+<span class="sd">            An optional list of loss metrics to use during validation. This argument expects a list of dictionaries with</span>
+<span class="sd">            a key &#39;name&#39; whose value gives the name of the metric and a key &#39;metric&#39; whose value is a callable function</span>
+<span class="sd">            that can be invoked by the controller to calculate a loss value. These will be listed during training and</span>
+<span class="sd">            reported along with the built in metrics.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            A dictionary of arguments to pass to the specified model.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">metrics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;metrics must be a list of dictionaries.&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">add_new_tool</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">tool</span><span class="o">=</span><span class="n">MLTool</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;dataset_fn&quot;</span><span class="p">:</span> <span class="n">dataset_fn</span><span class="p">,</span>
+                                                             <span class="s2">&quot;loss_fn&quot;</span><span class="p">:</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="n">device</span><span class="p">,</span> <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">metrics</span><span class="p">,</span>
+                                                             <span class="s2">&quot;augment&quot;</span><span class="p">:</span> <span class="n">augment</span><span class="p">,</span> <span class="s2">&quot;kwargs&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="MLControl.train">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLControl.train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">test_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">optimizer_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+              <span class="n">task_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+              <span class="n">patience</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">lr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="n">checkpoints</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+              <span class="o">*</span><span class="p">,</span> <span class="n">return_res</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">save_weights</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Train a tool&#39;s model.</span>
+
+<span class="sd">        Specifying None in task_list trains all available models. Otherwise the controller will only train the model</span>
+<span class="sd">        specified.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        train_data : list</span>
+<span class="sd">            The data to train the model off of. By default this expects a list of dictionaries containing the N samples.</span>
+<span class="sd">            If a custom dataset has been specified, this data should be of the expected type and shape for that pytorch</span>
+<span class="sd">            dataset function.</span>
+<span class="sd">        test_data : list</span>
+<span class="sd">            The data to test the model with. By default this expects a list of dictionaries containing the N samples.</span>
+<span class="sd">            If a custom dataset has been specified, this data should be of the expected type and shape for that pytorch</span>
+<span class="sd">            dataset function.</span>
+<span class="sd">        task_list : list of strings</span>
+<span class="sd">            The list of models to train. If None will train all available models.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        optimizer_fn : pytorch Optimizer</span>
+<span class="sd">            The optimizing function to use during training.</span>
+<span class="sd">        model_path : str</span>
+<span class="sd">            The path to where weights should be saved to if save_weights = True.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        save_weights : bool</span>
+<span class="sd">            Whether to save the best weights or not.</span>
+<span class="sd">            (default = False)</span>
+<span class="sd">        checkpoints: list</span>
+<span class="sd">            If set to a list of saved weight files this will initialize the model with these weights before training.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        batch_size : int</span>
+<span class="sd">            The batch size to use during training.</span>
+<span class="sd">            (default = 32)</span>
+<span class="sd">        patience : int</span>
+<span class="sd">            How many epochs to wait with no improvement before terminating.</span>
+<span class="sd">            (default = 30)</span>
+<span class="sd">        epochs : int</span>
+<span class="sd">            The number of iterations to train and test over all batches in their respective sets.</span>
+<span class="sd">            (default = 30)</span>
+<span class="sd">        lr : float</span>
+<span class="sd">            The learning rate to use in the optimizer.</span>
+<span class="sd">            (default = 1e-4)</span>
+<span class="sd">        return_res : bool</span>
+<span class="sd">            Whether to return the best loss and accuracy metrics.</span>
+<span class="sd">            (default = False)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        results : list</span>
+<span class="sd">            If return_res = True then function will return a list holding the results for each model. Each entry will be</span>
+<span class="sd">            a tuple containing the minimum test loss found during training and a dictionary containing additional</span>
+<span class="sd">            loss metrics, if provided.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if all items in task list are in the controller.</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools</span><span class="p">:</span>
+            <span class="n">names</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tool</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">task_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Invalid task name given to controller.&quot;</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">task_list</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">tool</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">task_list</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initiating training of: </span><span class="si">{}</span><span class="s2"> model.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tool</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]))</span>
+                <span class="n">checkpoint</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">if</span> <span class="n">checkpoints</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">checkpoints</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">tool</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]:</span>
+                            <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">file</span>
+
+                <span class="k">if</span> <span class="n">return_res</span><span class="p">:</span>
+                    <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tool</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span>
+                                                   <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">optimizer_fn</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span>
+                                                   <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="n">patience</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span>
+                                                   <span class="n">checkpoint</span><span class="o">=</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">return_res</span><span class="o">=</span><span class="n">return_res</span><span class="p">,</span>
+                                                   <span class="n">save_weights</span><span class="o">=</span><span class="n">save_weights</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tool</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span>
+                                                   <span class="n">optimizer_fn</span><span class="o">=</span><span class="n">optimizer_fn</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span>
+                                                   <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="n">patience</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span>
+                                                   <span class="n">checkpoint</span><span class="o">=</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">return_res</span><span class="o">=</span><span class="n">return_res</span><span class="p">,</span>
+                                                   <span class="n">save_weights</span><span class="o">=</span><span class="n">save_weights</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">return_res</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">results</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="MLControl.predict">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLControl.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tool_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">tool</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make predictions using the tool&#39;s model.</span>
+
+<span class="sd">        Runs all available models if task_list is set to None.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict or ndarray</span>
+<span class="sd">            The data to make predictions on.</span>
+<span class="sd">        tool : str</span>
+<span class="sd">            The ML tool to run.</span>
+<span class="sd">        tool_path : Path object</span>
+<span class="sd">            A Path object that points to the saved weights for the model.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">ml_tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ml_tool</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">tool</span><span class="p">:</span>
+                <span class="n">ml_tool</span><span class="p">[</span><span class="s2">&quot;res&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ml_tool</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">tool_path</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MLTool">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MLTool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A tool class intended to handle training and inference tasks for Pytorch models.</span>
+
+<span class="sd">    Functionality can be modified with external modules by replacing them in the corresponding argument during class</span>
+<span class="sd">    initialization.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model : pytorch Module</span>
+<span class="sd">        The type of model to be used. If using a custom module the output of the model should be in the same shape as</span>
+<span class="sd">        the target tensors used during training and validation.</span>
+<span class="sd">    dataset_fn : pytorch Dataset</span>
+<span class="sd">        The dataset function used to provide data to the models. If using a custom function this should accept the</span>
+<span class="sd">        shape and type of data you are providing to the framework. It should have an argument named augment</span>
+<span class="sd">        to indicate whether or not to augment the data if augment is not set to None.</span>
+<span class="sd">    augment : bool or None</span>
+<span class="sd">        A flag to indicate whether or not to augment the provided data in the dataset function.</span>
+<span class="sd">        (default = True)</span>
+<span class="sd">    device : int</span>
+<span class="sd">        Which device to use. An integer provided here will specify which GPU to run the model on. If none is provided</span>
+<span class="sd">        then either GPU 0 will be selected, or the CPU will be used if no CUDA compatible device is detected.</span>
+<span class="sd">        This also influences the output of the GUI. Worker progress will be printed to the terminal on lines that</span>
+<span class="sd">        correspond to the device. For GPU 0 updates will be printed to position 0, for GPU 1 updates will be printed to</span>
+<span class="sd">        position 1, and so on.</span>
+<span class="sd">        (default = None)</span>
+<span class="sd">    loss_fn : pytorch loss Module</span>
+<span class="sd">            The loss function to use during training.</span>
+<span class="sd">    metrics : list of dicts</span>
+<span class="sd">        An optional list of loss metrics to use during validation. This argument expects a list of dictionaries with a</span>
+<span class="sd">        key &#39;name&#39; whose value gives the name of the metric and a key &#39;metric&#39; whose value is a callable function that</span>
+<span class="sd">        can be invoked by the controller to calculate a loss value. These will be listed during training and reported</span>
+<span class="sd">        along with the built in metrics.</span>
+<span class="sd">        (default = None)</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        A dictionary of arguments to pass to the specified model.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span>
+                 <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="o">*</span><span class="p">,</span> <span class="n">augment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the tool.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        model : pytorch Module</span>
+<span class="sd">            The type of model to be used. If using a custom module the output of the model should be in the same shape</span>
+<span class="sd">            as the target tensors used during training and validation.</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the model. Used for checkpoint file names and GUI communication.</span>
+<span class="sd">        dataset_fn : pytorch Dataset</span>
+<span class="sd">            The dataset function used to provide data to the models. If using a custom function this should accept the</span>
+<span class="sd">            shape and type of data you are providing to the framework. It should have an argument named augment</span>
+<span class="sd">            to indicate whether or not to augment the data if augment is not set to None.</span>
+<span class="sd">        augment : bool or None</span>
+<span class="sd">            A flag to indicate whether or not to augment the provided data in the dataset function.</span>
+<span class="sd">            (default = True)</span>
+<span class="sd">        device : int</span>
+<span class="sd">            Which device to use. An integer provided here will specify which GPU to run the model on. If none is</span>
+<span class="sd">            provided then either GPU 0 will be selected, or the CPU will be used if no CUDA compatible device is</span>
+<span class="sd">            detected. This also influences the output of the GUI. Worker progress will be printed to the terminal on</span>
+<span class="sd">            lines that correspond to the device. For GPU 0 updates will be printed to position 0, for GPU 1 updates will</span>
+<span class="sd">            be printed to position 1, and so on.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        loss_fn : pytorch loss Module</span>
+<span class="sd">            The loss function to use during training.</span>
+<span class="sd">        metrics : list of dicts</span>
+<span class="sd">            An optional list of loss metrics to use during validation. This argument expects a list of dictionaries with</span>
+<span class="sd">            a key &#39;name&#39; whose value gives the name of the metric and a key &#39;metric&#39; whose value is a callable function</span>
+<span class="sd">            that can be invoked by the controller to calculate a loss value. These will be listed during training and</span>
+<span class="sd">            reported along with the built in metrics.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            A dictionary of arguments to pass to the specified model.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span> <span class="o">=</span> <span class="n">dataset_fn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">loss_fn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">augment</span> <span class="o">=</span> <span class="n">augment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">device</span> <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;cuda:</span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">DEVICE</span>
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="n">metrics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics</span>
+
+<div class="viewcode-block" id="MLTool.train">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLTool.train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">test_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">optimizer_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+              <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">patience</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+              <span class="n">lr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="n">checkpoint</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">return_res</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+              <span class="n">save_weights</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Train the object&#39;s model on the given data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        train_data : list</span>
+<span class="sd">            The data to train the model off of. By default this expects a list of dictionaries containing the N samples.</span>
+<span class="sd">            If a custom dataset has been specified, this data should be of the expected type and shape for that pytorch</span>
+<span class="sd">            dataset function.</span>
+<span class="sd">        test_data : list</span>
+<span class="sd">            The data to test the model with. By default this expects a list of dictionaries containing the N samples.</span>
+<span class="sd">            If a custom dataset has been specified, this data should be of the expected type and shape for that pytorch</span>
+<span class="sd">            dataset function.</span>
+<span class="sd">        optimizer_fn : pytorch Optimizer</span>
+<span class="sd">            The optimizing function to use during training.</span>
+<span class="sd">        model_path : str</span>
+<span class="sd">            The path to where weights should be saved to if save_weights = True.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        save_weights : bool</span>
+<span class="sd">            Whether to save the best weights or not.</span>
+<span class="sd">            (default = False)</span>
+<span class="sd">        checkpoint: Path</span>
+<span class="sd">            If set to a saved weights file this will initialize the model with these weights before training.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        batch_size : int</span>
+<span class="sd">            The batch size to use during training.</span>
+<span class="sd">            (default = 32)</span>
+<span class="sd">        patience : int</span>
+<span class="sd">            How many epochs to wait with no improvement before terminating.</span>
+<span class="sd">            (default = 30)</span>
+<span class="sd">        epochs : int</span>
+<span class="sd">            The number of iterations to train and test over all batches in their respective sets.</span>
+<span class="sd">            (default = 30)</span>
+<span class="sd">        lr : float</span>
+<span class="sd">            The learning rate to use in the optimizer.</span>
+<span class="sd">            (default = 1e-4)</span>
+<span class="sd">        return_res : bool</span>
+<span class="sd">            Whether to return the best loss and accuracy metrics.</span>
+<span class="sd">            (default = False)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        min_loss : float</span>
+<span class="sd">            The minimum test loss found during training if return_res = True.</span>
+<span class="sd">        min_dict : dict</span>
+<span class="sd">            A dictionary containing additional loss metrics, if provided. This is returned if return_res = True.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">train_ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span>
+                                   <span class="n">augment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">augment</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">augment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+        <span class="n">test_ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span>
+                                  <span class="n">augment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">augment</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">augment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_ds</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples and validating with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_ds</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples.&quot;</span><span class="p">)</span>
+        <span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_ds</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_ds</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">save_weights</span><span class="p">:</span>
+            <span class="n">save_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">,</span>
+                                                  <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+                                                  <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.pt&quot;</span><span class="p">)</span>
+
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer_fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+        <span class="n">get_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">checkpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
+                                                  <span class="n">weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s2">&quot;model_state_dict&quot;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded previous checkpoint.&quot;</span><span class="p">)</span>
+
+        <span class="n">patience_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">),</span>
+                    <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Device: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2"> | Epoch: 0/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2"> | Loss: #.###### | Test Loss: #.#######&quot;</span><span class="p">,</span>
+                    <span class="n">position</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
+        <span class="n">min_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">(</span><span class="n">record</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+                <span class="c1"># TRAINING</span>
+                <span class="n">running_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+                <span class="k">for</span> <span class="p">(</span><span class="n">tr_dat</span><span class="p">,</span> <span class="n">tr_tar</span><span class="p">)</span> <span class="ow">in</span> <span class="n">train_dataloader</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">tr_dat</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">tr_tar</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+                    <span class="c1"># compute error</span>
+                    <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">loss</span> <span class="o">=</span> <span class="n">get_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+                    <span class="c1"># backpropagation</span>
+                    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+                    <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+
+                <span class="n">train_metrics</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)}</span>
+
+                <span class="c1"># VALIDATION</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+                <span class="n">test_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
+                    <span class="n">item</span><span class="p">[</span><span class="s2">&quot;res&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">te_dat</span><span class="p">,</span> <span class="n">te_tar</span><span class="p">)</span> <span class="ow">in</span> <span class="n">test_dataloader</span><span class="p">:</span>
+                        <span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">te_dat</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">te_tar</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                        <span class="n">test_loss</span> <span class="o">+=</span> <span class="n">get_loss</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+                        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
+                            <span class="n">item</span><span class="p">[</span><span class="s2">&quot;res&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;metric&quot;</span><span class="p">](</span><span class="n">output</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+                <span class="n">test_loss</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
+                    <span class="n">item</span><span class="p">[</span><span class="s2">&quot;res&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">)</span>
+
+                <span class="n">test_metrics</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Test Loss&quot;</span><span class="p">:</span> <span class="n">test_loss</span><span class="p">}</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
+                    <span class="n">test_metrics</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;res&quot;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Warning: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">min_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_metrics</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">save_weights</span><span class="p">:</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">({</span><span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span> <span class="s2">&quot;train_metrics&quot;</span><span class="p">:</span> <span class="n">train_metrics</span><span class="p">,</span> <span class="s2">&quot;test_metrics&quot;</span><span class="p">:</span> <span class="n">test_metrics</span><span class="p">,</span>
+                                <span class="s2">&quot;model_state_dict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">},</span> <span class="n">save_path</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">test_metrics</span><span class="p">[</span><span class="s2">&quot;Test Loss&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_dict</span><span class="p">[</span><span class="s2">&quot;Test Loss&quot;</span><span class="p">]:</span>
+                <span class="n">patience_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">min_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_metrics</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">save_weights</span><span class="p">:</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">({</span><span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span> <span class="s2">&quot;train_metrics&quot;</span><span class="p">:</span> <span class="n">train_metrics</span><span class="p">,</span> <span class="s2">&quot;test_metrics&quot;</span><span class="p">:</span> <span class="n">test_metrics</span><span class="p">,</span>
+                                <span class="s2">&quot;model_state_dict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">},</span> <span class="n">save_path</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">patience_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">pbar_str</span> <span class="o">=</span> <span class="s2">&quot;Device: </span><span class="si">{}</span><span class="s2"> | Epoch: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2"> | Loss: </span><span class="si">{:&gt;7f}</span><span class="s2"> |&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                                                           <span class="n">train_metrics</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">test_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">pbar_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">&gt;5f</span><span class="si">}</span><span class="s2"> |&quot;</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="n">pbar_str</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">patience_count</span> <span class="o">&gt;</span> <span class="n">patience</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="n">pbar_str</span> <span class="o">=</span> <span class="s2">&quot;Done! Minimum&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">min_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pbar_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">&gt;5f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">pbar_str</span> <span class="o">+=</span> <span class="s2">&quot;.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pbar_str</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">return_res</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">min_dict</span><span class="p">[</span><span class="s2">&quot;Test Loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">min_dict</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="MLTool.predict">
+<a class="viewcode-back" href="../../source/qgain.html#qgain.run_ml.MLTool.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make predictions using the object&#39;s model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict or ndarray</span>
+<span class="sd">            The data to make predictions on. This should be in the format your Dataset function supports.</span>
+<span class="sd">        model_path : str</span>
+<span class="sd">            The path to the saved weights for the model.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pos : list</span>
+<span class="sd">            A list of all positions found for each provided image.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">augment</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">augment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_fn</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">(</span><span class="n">record</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">)):</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                <span class="n">target</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="n">checkpoint_dict</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint_dict</span><span class="p">[</span><span class="s2">&quot;model_state_dict&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; model loaded.&quot;</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running model, please wait..&quot;</span><span class="p">)</span>
+                <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Running..&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
+                    <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="s2">&quot;cpu&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">):</span>
+                        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+                    <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">))</span>
+                        <span class="k">del</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

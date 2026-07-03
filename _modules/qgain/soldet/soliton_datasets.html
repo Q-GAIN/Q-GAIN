@@ -1,0 +1,1237 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qgain.soldet.soliton_datasets &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qgain/soldet/soliton_datasets';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/qgain.html">Q-GAIN Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qgain.soldet.soliton_datasets</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Dataset class definitions for preparing data to be used by their respective models.&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision.transforms.functional</span><span class="w"> </span><span class="kn">import</span> <span class="n">hflip</span><span class="p">,</span> <span class="n">vflip</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+
+<div class="viewcode-block" id="SolitonPIEClassDataset">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.SolitonPIEClassDataset">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SolitonPIEClassDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dataset class for the physics informed classifier.</span>
+
+<span class="sd">    This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is</span>
+<span class="sd">    expected to be at key &#39;data&#39;.</span>
+<span class="sd">    It will also grab the positions at key &#39;positions&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list or dict</span>
+<span class="sd">        The data to build a dataset from.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the dataset class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The data to build a dataset from.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Loaded image data is square. SolDet module enforces rectangular data.&quot;</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_data</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the length of the dataset.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        length : int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_data</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a sample at the specified index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx : int</span>
+<span class="sd">            The sample index</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        image : ndarray</span>
+<span class="sd">            The image data at the specified index</span>
+<span class="sd">        pos : list of floats</span>
+<span class="sd">            A list of positions at the specified index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_data</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="SolitonQEClassDataset">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.SolitonQEClassDataset">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SolitonQEClassDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dataset class for the physics informed quality estimate.</span>
+
+<span class="sd">    This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is</span>
+<span class="sd">    expected to be at key &#39;data&#39;.</span>
+<span class="sd">    It will also grab the positions at key &#39;positions&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list or dict</span>
+<span class="sd">        The data to build a dataset from.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the dataset class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The data to build a dataset from.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;excitation_PIE&quot;</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Loaded image data is square. SolDet module enforces rectangular data.&quot;</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;excitation_PIE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+                    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_data</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the length of the dataset.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        length : int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_data</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a sample at the specified index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx : int</span>
+<span class="sd">            The sample index</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        image : ndarray</span>
+<span class="sd">            The image data at the specified index</span>
+<span class="sd">        pos : list of floats</span>
+<span class="sd">            A list of positions at the specified index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_data</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="SolitonClassDataset">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.SolitonClassDataset">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SolitonClassDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dataset class for the ML based classifier.</span>
+
+<span class="sd">    This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is</span>
+<span class="sd">    expected to be at key &#39;data&#39;.</span>
+<span class="sd">    It will also grab the class label at key &#39;label&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list or dict</span>
+<span class="sd">        The data to build a dataset from.</span>
+<span class="sd">    augment : bool</span>
+<span class="sd">        If set to True the data is augmented with rotations.</span>
+<span class="sd">        (default = True)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">augment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the dataset.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The data to build a dataset from.</span>
+<span class="sd">        augment : bool</span>
+<span class="sd">            If set to True the data is augmented with rotations.</span>
+<span class="sd">            (default = True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Loaded image data is square. SolDet module enforces rectangular data.&quot;</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s2">&quot;label&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">augment</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">augment_expand_as_mlst2021</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the length of the dataset.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        length : int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a sample at the specified index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx : int</span>
+<span class="sd">            The sample index</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        image : ndarray</span>
+<span class="sd">            The image data at the specified index</span>
+<span class="sd">        label : int</span>
+<span class="sd">            The class label at the specified index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="o">.</span><span class="n">long</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="SolitonODDataset">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.SolitonODDataset">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SolitonODDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dataset class for the ML based object detector.</span>
+
+<span class="sd">    This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is</span>
+<span class="sd">    expected to be at key &#39;data&#39;.</span>
+<span class="sd">    It will also grab the positions at key &#39;positions&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list or dict</span>
+<span class="sd">        The data to build a dataset from.</span>
+<span class="sd">    augment : bool</span>
+<span class="sd">        If set to True the data is augmented with rotations.</span>
+<span class="sd">        (default = True)</span>
+<span class="sd">    threshold : list</span>
+<span class="sd">        A list of values that influence the conversion between real positions and cell positions.</span>
+
+<span class="sd">            - Threshold[0] is the minimum value to consider a soliton is present.</span>
+<span class="sd">            - Threshold[1] is the minimum distance two solitons can be considered separate. Any distances under this</span>
+<span class="sd">                value is considered the same excitation.</span>
+
+<span class="sd">        (default = [0.5, 4])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="o">*</span><span class="p">,</span> <span class="n">augment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the dataset.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The data to build a dataset from.</span>
+<span class="sd">        augment : bool</span>
+<span class="sd">            If set to True the data is augmented with rotations.</span>
+<span class="sd">            (default = True)</span>
+<span class="sd">        threshold : list</span>
+<span class="sd">            A list of values that influence the conversion between real positions and cell positions.</span>
+
+<span class="sd">                - Threshold[0] is the minimum value to consider a soliton is present.</span>
+<span class="sd">                - Threshold[1] is the minimum distance two solitons can be considered separate. Any distances under this</span>
+<span class="sd">                    value is considered the same excitation.</span>
+
+<span class="sd">            (default = [0.5, 4])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Loaded image data is square. SolDet enforces rectangular data.&quot;</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">])</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+        <span class="k">if</span> <span class="n">augment</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">augment_w_pos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">pos_41labels_conversion</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the length of the dataset.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        length : int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a sample at the specified index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx : int</span>
+<span class="sd">            The sample index</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        image : ndarray</span>
+<span class="sd">            The image data at the specified index</span>
+<span class="sd">        pos : list of floats</span>
+<span class="sd">            A list of positions at the specified index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">pos</span>
+
+<div class="viewcode-block" id="SolitonODDataset.labels_to_data">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.SolitonODDataset.labels_to_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">labels_to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert the labels in cell space to positions in pixel space.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sample : ndarray</span>
+<span class="sd">            An array of probability and fractional position values in cell space.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        labels : list</span>
+<span class="sd">            The positions in pixel space</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pos_41labels_conversion</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="od_accu_metric">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.od_accu_metric">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">od_accu_metric</span><span class="p">(</span><span class="n">pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">targ</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the number of correct predictions and give an accuracy score.</span>
+
+<span class="sd">    This is used during training of the SolDet OD to determine its accuracy during validation.</span>
+
+<span class="sd">    Paramters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    pred : torch.Tensor</span>
+<span class="sd">        The output tensor of the object detector.</span>
+<span class="sd">    targ : torch.Tensor</span>
+<span class="sd">        The target label in cell space.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    correct : float</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">batch_correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">num_exc</span> <span class="o">=</span> <span class="p">(</span><span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">t_loc</span> <span class="o">=</span> <span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+            <span class="n">p_loc</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+            <span class="n">batch_correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">t_loc</span><span class="p">,</span> <span class="n">p_loc</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">num_exc</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">batch_correct</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">batch_correct</span> <span class="o">/</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="cl_accu_metric">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.cl_accu_metric">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cl_accu_metric</span><span class="p">(</span><span class="n">pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">targ</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the number of correct predictions and give an accuracy score.</span>
+
+<span class="sd">    This is used during training of the SolDet CL to determine its accuracy during validation.</span>
+
+<span class="sd">    Paramters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    pred : torch.Tensor</span>
+<span class="sd">        The output tensor of the object detector.</span>
+<span class="sd">    targ : torch.Tensor</span>
+<span class="sd">        The target label in cell space.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    correct : float</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">targ</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="augment_w_pos">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.augment_w_pos">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">augment_w_pos</span><span class="p">(</span><span class="n">images</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Augment the data by rotating the images three ways: horizontal flip, vertical flip, and a 180 degree rotation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    images : ndarray</span>
+<span class="sd">        The array of image data to be augmented. Typically (N, H, W) where N is the number of images, W is the width</span>
+<span class="sd">        of the image and H is the height.</span>
+<span class="sd">    positions : list</span>
+<span class="sd">        A list of positions for each image in the images array.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    aug_x : ndarray</span>
+<span class="sd">        The augmented image data</span>
+<span class="sd">    aug_y : list</span>
+<span class="sd">        The augmented position data</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">images</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="n">aug_x</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">aug_y</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">xdim</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="c1"># hflip</span>
+    <span class="n">aug_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">aug_x</span><span class="p">,</span> <span class="n">hflip</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="p">[</span><span class="n">xdim</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+    <span class="c1"># vflip</span>
+    <span class="n">aug_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">aug_x</span><span class="p">,</span> <span class="n">vflip</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+        <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+    <span class="c1"># 180</span>
+    <span class="n">aug_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">aug_x</span><span class="p">,</span> <span class="n">vflip</span><span class="p">(</span><span class="n">hflip</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="p">[</span><span class="n">xdim</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">aug_x</span><span class="p">,</span> <span class="n">aug_y</span></div>
+
+
+
+<div class="viewcode-block" id="expand_data_by_augment">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.expand_data_by_augment">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">expand_data_by_augment</span><span class="p">(</span><span class="n">images</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">augments</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Support function for augment_expand_as_mlst2021.</span>
+
+<span class="sd">    This does a simple horizontal, vertical, and 180 degree rotation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    images : ndarray</span>
+<span class="sd">        The array of image data to be augmented. Typically (N, H, W) where N is the number of images, W is the width</span>
+<span class="sd">        of the image and H is the height.</span>
+<span class="sd">    labels : ndarray</span>
+<span class="sd">        An array of class lebels for each image in the images array.</span>
+<span class="sd">    augments : list</span>
+<span class="sd">        A list of augments to apply to the data. Choices are &#39;hflip&#39; for horizontal flipping, &#39;vflip&#39; for vertical</span>
+<span class="sd">        flipping, and &#39;180rot&#39; for a 180 degree rotation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    aug_x : ndarray</span>
+<span class="sd">        The augmented image data</span>
+<span class="sd">    aug_y : ndarray</span>
+<span class="sd">        The augmented class label data</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">aug_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">images</span><span class="p">]</span>
+    <span class="n">aug_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;hflip&quot;</span> <span class="ow">in</span> <span class="n">augments</span><span class="p">:</span>
+        <span class="n">aug_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">images</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;vflip&quot;</span> <span class="ow">in</span> <span class="n">augments</span><span class="p">:</span>
+        <span class="n">aug_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">images</span><span class="p">[:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;180rot&quot;</span> <span class="ow">in</span> <span class="n">augments</span><span class="p">:</span>
+        <span class="n">aug_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="n">aug_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">aug_x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">aug_y</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="augment_expand_as_mlst2021">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.augment_expand_as_mlst2021">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">augment_expand_as_mlst2021</span><span class="p">(</span><span class="n">raw_x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">raw_y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                               <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">SeedSequence</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">BitGenerator</span> <span class="o">|</span>
+                               <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Augment data suitable for classifiers in the SolDet module.</span>
+
+<span class="sd">    This does a simple horizontal, vertical, and 180 degree rotation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    raw_x : ndarray</span>
+<span class="sd">        The array of image data to be augmented. Typically (N, H, W) where N is the number of images, W is the width</span>
+<span class="sd">        of the image and H is the height.</span>
+<span class="sd">    raw_y : ndarray</span>
+<span class="sd">        An array of class labels for each image in the images array.</span>
+<span class="sd">    seed : int or array_like[ints] or SeedSequence or BitGenerator or Generator</span>
+<span class="sd">        The seed to use to initialize the randomization generator</span>
+<span class="sd">        (default = None)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    augment_x : ndarray</span>
+<span class="sd">        The augmented image data</span>
+<span class="sd">    augment_y : ndarray</span>
+<span class="sd">        The augmented class label data</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">zero_aug_x</span><span class="p">,</span> <span class="n">zero_aug_y</span> <span class="o">=</span> <span class="n">expand_data_by_augment</span><span class="p">(</span><span class="n">raw_x</span><span class="p">[(</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)],</span>
+                                                    <span class="n">raw_y</span><span class="p">[(</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)],</span>
+                                                    <span class="n">augments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;hflip&quot;</span><span class="p">,</span> <span class="s2">&quot;vflip&quot;</span><span class="p">,</span> <span class="s2">&quot;180rot&quot;</span><span class="p">])</span>
+
+    <span class="c1"># select 1/3 each of one class to apply each transformation to.</span>
+    <span class="c1"># if the raw_x/y were shuffled then these will also be shuffled</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">raw_y</span><span class="p">[</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="n">one_raw_x</span> <span class="o">=</span> <span class="n">raw_x</span><span class="p">[</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">one_raw_y</span> <span class="o">=</span> <span class="n">raw_y</span><span class="p">[</span><span class="n">raw_y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">one_hflip_x</span><span class="p">,</span> <span class="n">one_hflip_y</span> <span class="o">=</span> <span class="n">expand_data_by_augment</span><span class="p">(</span>
+        <span class="n">one_raw_x</span><span class="p">[::</span><span class="mi">3</span><span class="p">],</span> <span class="n">one_raw_y</span><span class="p">[::</span><span class="mi">3</span><span class="p">],</span> <span class="n">augments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;hflip&quot;</span><span class="p">])</span>
+    <span class="n">one_vflip_x</span><span class="p">,</span> <span class="n">one_vflip_y</span> <span class="o">=</span> <span class="n">expand_data_by_augment</span><span class="p">(</span>
+        <span class="n">one_raw_x</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">3</span><span class="p">],</span> <span class="n">one_raw_y</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">3</span><span class="p">],</span> <span class="n">augments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vflip&quot;</span><span class="p">])</span>
+    <span class="n">one_180_x</span><span class="p">,</span> <span class="n">one_180_y</span> <span class="o">=</span> <span class="n">expand_data_by_augment</span><span class="p">(</span>
+        <span class="n">one_raw_x</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">3</span><span class="p">],</span> <span class="n">one_raw_y</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">3</span><span class="p">],</span> <span class="n">augments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;180rot&quot;</span><span class="p">])</span>
+
+    <span class="n">augment_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">zero_aug_x</span><span class="p">,</span> <span class="n">one_hflip_x</span><span class="p">,</span> <span class="n">one_vflip_x</span><span class="p">,</span> <span class="n">one_180_x</span><span class="p">])</span>
+    <span class="n">augment_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">zero_aug_y</span><span class="p">,</span> <span class="n">one_hflip_y</span><span class="p">,</span> <span class="n">one_vflip_y</span><span class="p">,</span> <span class="n">one_180_y</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">augment_x</span><span class="p">,</span> <span class="n">augment_y</span></div>
+
+
+
+<div class="viewcode-block" id="pos_to_41labels_conversion">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.pos_to_41labels_conversion">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pos_to_41labels_conversion</span><span class="p">(</span><span class="n">label_in</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert soliton positions in pixel space to cell space.</span>
+
+<span class="sd">    This new space is a compressed representation of the positions in pixel space and the probability of them being</span>
+<span class="sd">    present in a cell. The new space is a (2, 1, 41) array of values with the first 41 entries representing the</span>
+<span class="sd">    probability of an excitation being located in a cell, and the second 41 entries representing the fractional position</span>
+<span class="sd">    of the excitation in that cell. Each cell represents 4 pixels in length..</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    label_in : list</span>
+<span class="sd">        A list of positions in pixel space. Valid input can be a list of a single value for single image input, or a</span>
+<span class="sd">        list of sub lists of positions for multiple images. The output will be an array of (2, 1, 41).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    label_out : ndarray</span>
+<span class="sd">        An array of (2, 1, 41) values in cell space.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">label_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">41</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Postions on Single image</span>
+        <span class="n">label_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">41</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">sub_l_in</span> <span class="ow">in</span> <span class="n">label_in</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sub_l_in</span> <span class="o">&lt;</span> <span class="mi">164</span> <span class="ow">and</span> <span class="n">sub_l_in</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">label_out</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub_l_in</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="n">label_out</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub_l_in</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sub_l_in</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;soliton position beyond [0, 164].&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># A list of postions on many images</span>
+        <span class="n">label_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">41</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">label_in</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">sub_l_in</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">sub_l_in</span> <span class="o">&lt;</span> <span class="mi">164</span> <span class="ow">and</span> <span class="n">sub_l_in</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub_l_in</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub_l_in</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sub_l_in</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;soliton position beyond [0, 164].&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">label_out</span></div>
+
+
+
+<div class="viewcode-block" id="labels_to_pos_conversion">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.labels_to_pos_conversion">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">labels_to_pos_conversion</span><span class="p">(</span><span class="n">label_in</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert soliton positions in cell space to pixel space.</span>
+
+<span class="sd">    This new space is a compressed representation of</span>
+<span class="sd">    the positions in pixel space and the probability of them being present in a cell. The new space is a (2, 1, 41)</span>
+<span class="sd">    array of values with the first 41 entries representing the probability of an excitation being located in a cell,</span>
+<span class="sd">    and the second 41 entries representing the fractional position of the excitation in that cell.</span>
+<span class="sd">    Each cell represents 4 pixels in length.</span>
+
+<span class="sd">    The behavior of this function depends on the data type of label_in.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    label_in : list or ndarray</span>
+<span class="sd">        An array of values in cell space. For each cell whose probability is above the threshold it will have a position</span>
+<span class="sd">        calculated. This position will be based on the fractional position in the cell. If multiple excitations exists</span>
+<span class="sd">        next to each other the average positions will be calculated between the two.</span>
+<span class="sd">    threshold : list</span>
+<span class="sd">        A list of values that influence the conversion between real positions and cell positions.</span>
+<span class="sd">        Threshold[0] is the minimum value to consider that an excitation is present.</span>
+<span class="sd">        Threshold[1] is the minimum distance two excitations can be considered separate. Any distances under this</span>
+<span class="sd">        value is considered the same excitation.</span>
+<span class="sd">        (default = [0.5, 4)])</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    label_out : list</span>
+<span class="sd">        A list of positions in pixel space.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">label_out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">label_in</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">41</span><span class="p">):</span>  <span class="c1"># Single 41 label</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">label_in</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">label_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">label_in</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_out</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_out</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">label_out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                    <span class="k">del</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">elif</span> <span class="n">label_in</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">41</span><span class="p">):</span>  <span class="c1"># Array of 41 labels</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_in</span><span class="p">:</span>
+            <span class="n">l_out</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">l_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">label</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l_out</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l_out</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">l_out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">l_out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                        <span class="k">del</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">label_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_out</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Invalid input shape.&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">label_out</span></div>
+
+
+
+<div class="viewcode-block" id="pos_41labels_conversion">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.pos_41labels_conversion">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pos_41labels_conversion</span><span class="p">(</span><span class="n">label_in</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert between soliton positions in pixel space and cell space.</span>
+
+<span class="sd">    This new space is a compressed representation of the positions in pixel space and the probability of them being</span>
+<span class="sd">    present in a cell. The new space is a (2, 1, 41) array of values with the first 41 entries representing the</span>
+<span class="sd">    probability of an excitation being located in a cell, and the second 41 entries representing the fractional position</span>
+<span class="sd">    of the excitation in that cell. Each cell represents 4 pixels in length.</span>
+
+<span class="sd">    The behavior of this function depends on the data type of label_in.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    label_in : list or ndarray</span>
+<span class="sd">        If the data type is a list then it is assumed that this is a list of positions in pixel space. Valid input can</span>
+<span class="sd">        be a list of a single value for single image input, or a list of sub lists of positions for multiple images.</span>
+<span class="sd">        The output will be an array of (2, 1, 41).</span>
+
+<span class="sd">        If the data type is an array then it is assumed this input is an array of values in cell space. For each cell</span>
+<span class="sd">        whose probability is above the threshold it will have a position calculated. This position will be based on the</span>
+<span class="sd">        fractional position in the cell. If multiple excitations exists next to each other the average positions will be</span>
+<span class="sd">        calculated between the two.</span>
+<span class="sd">    threshold : list</span>
+<span class="sd">        A list of values that influence the conversion between real positions and cell positions.</span>
+<span class="sd">        Threshold[0] is the minimum value to consider that an excitation is present.</span>
+<span class="sd">        Threshold[1] is the minimum distance two excitations can be considered separate. Any distances under this</span>
+<span class="sd">        value is considered the same excitation.</span>
+<span class="sd">        (default = [0.5, 4)])</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    label_out : list or ndarray</span>
+<span class="sd">        If label_in was a list then the output is an array of (2, 1, 41) values in cell space.</span>
+<span class="sd">        If label_in was an array then the output is a list of positions in pixel space.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>  <span class="c1"># if input is soliton positions</span>
+        <span class="n">label_out</span> <span class="o">=</span> <span class="n">pos_to_41labels_conversion</span><span class="p">(</span><span class="n">label_in</span><span class="o">=</span><span class="n">label_in</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>  <span class="c1"># if input is 41 labels</span>
+        <span class="n">label_out</span> <span class="o">=</span> <span class="n">labels_to_pos_conversion</span><span class="p">(</span><span class="n">label_in</span><span class="o">=</span><span class="n">label_in</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">label_out</span></div>
+
+
+
+<div class="viewcode-block" id="download_ds">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.download_ds">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_ds</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download the public SolDet data set.</span>
+
+<span class="sd">    This will expand the compressed files into the currently set experimental folder.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">config</span><span class="p">()</span>
+
+    <span class="n">roster_npy_exists</span> <span class="o">=</span> <span class="n">data_path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data_info&quot;</span><span class="p">,</span> <span class="s2">&quot;data_roster.npy&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+    <span class="n">roster_h5_exists</span> <span class="o">=</span> <span class="n">data_path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data_info&quot;</span><span class="p">,</span> <span class="s2">&quot;data_roster.h5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">roster_npy_exists</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">roster_h5_exists</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading SolDet data. This may take a while. Please wait..&quot;</span><span class="p">)</span>
+
+        <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://data.nist.gov/od/ds/mds2-2363/data_info.zip&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;https://data.nist.gov/od/ds/ark:/88434/mds2-2363/data_files.zip&quot;</span><span class="p">]</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;data_info.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;data_files.zip&quot;</span><span class="p">]</span>
+        <span class="n">subdir</span> <span class="o">=</span> <span class="n">data_path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> returned status code </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">file_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="k">with</span> <span class="n">subdir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">,</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">wrapattr</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">file_size</span><span class="p">,</span>
+                                                                      <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">raw</span><span class="p">:</span>
+                <span class="n">chunk</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                <span class="k">while</span> <span class="n">chunk</span><span class="p">:</span>
+                    <span class="n">chunk</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
+                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Extracting data. Please wait..&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">subdir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
+                <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">subdir</span><span class="p">)</span>
+            <span class="n">subdir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data already exists. Skipping...&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="soldet_to_h5">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_datasets.soldet_to_h5">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">soldet_to_h5</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">delete_old</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert the original SolDet dataset into the HDF version.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: str</span>
+<span class="sd">        The path to the destination folder. This should contain the data and data_info folders of the SolDet module.</span>
+<span class="sd">    delete_old : bool</span>
+<span class="sd">        If true this will delete the old files when creating the new ones.</span>
+<span class="sd">        (default = True)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">data_roster_dir</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data_info&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data_roster_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_roster_dir</span><span class="si">}</span><span class="s2"> is an invalid data_roster path.&quot;</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">data_roster</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">roster_orig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_roster_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data_roster.npy&quot;</span><span class="p">),</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">data_roster_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data_roster.h5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Roster file data_roster.npy not found, &quot;</span>
+                  <span class="s2">&quot;but data_roster.h5 was found. Did you already convert?&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Roster file data_roster.npy not found.&quot;</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+    <span class="n">data_roster</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">data_roster</span><span class="p">,</span> <span class="o">**</span><span class="n">roster_orig</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">delete_old</span><span class="p">:</span>
+        <span class="n">data_roster_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data_roster.npy&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+
+    <span class="n">roster_path</span> <span class="o">=</span> <span class="n">data_roster_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data_roster.h5&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">roster_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">roster_path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">h5_file</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data_roster</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Converting data..&quot;</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">sample_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+        <span class="n">data_dir</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data_files&quot;</span><span class="p">)</span>
+        <span class="n">numpy_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;label_v3&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">label</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;label_v2&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">label</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;label_v1&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">label</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Invalid label data.&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">class_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;class-</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">soldet_h5</span> <span class="o">=</span> <span class="n">data_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">class_dir</span><span class="p">,</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s2">&quot;.h5&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;excitation_position&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pos</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;excitation_positions&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pos</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;position&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pos</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pos</span>
+
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">roster_path</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">meta_block_size</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">h5py</span><span class="o">.</span><span class="n">Empty</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+            <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">class_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">sample_name</span> <span class="o">+</span> <span class="s2">&quot;.h5&quot;</span><span class="p">))</span>
+
+        <span class="n">data_loaded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">class_dir</span><span class="p">,</span> <span class="n">numpy_file</span><span class="p">),</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">delete_old</span><span class="p">:</span>
+            <span class="n">data_dir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">class_dir</span><span class="p">,</span> <span class="n">numpy_file</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">soldet_h5</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5_file</span><span class="p">:</span>
+            <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+            <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+            <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;original_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s2">&quot;file_name&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">data_roster</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="n">item</span><span class="p">])</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;cloud_data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data_loaded</span><span class="p">[</span><span class="s2">&quot;cloud_data&quot;</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span>
+                                        <span class="n">compression_opts</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data_loaded</span><span class="p">[</span><span class="s2">&quot;masked_data&quot;</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span>
+                                        <span class="n">compression_opts</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data_loaded</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;masked_data&quot;</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;cloud_data&quot;</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_loaded</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">ds</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">h5py</span><span class="o">.</span><span class="n">Empty</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="n">data_loaded</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">subkey</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data_loaded</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">subkey</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_loaded</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                    <span class="n">ds</span> <span class="o">=</span> <span class="n">h5_file</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">data_loaded</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span>
+                                                <span class="n">compression_opts</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">h5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data_loaded</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

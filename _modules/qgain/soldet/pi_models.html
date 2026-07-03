@@ -1,0 +1,939 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qgain.soldet.pi_models &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qgain/soldet/pi_models';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/qgain.html">Q-GAIN Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qgain.soldet.pi_models</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The models for the PIE classifier and Quality Estimator.&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.mhat_metric</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_soliton</span><span class="p">,</span> <span class="n">preprocess_mhat_params</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.soliton_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolitonPIEClassDataset</span><span class="p">,</span> <span class="n">SolitonQEClassDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.soliton_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_41labels_conversion</span> <span class="k">as</span> <span class="n">labels_conv</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PowerTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+
+
+<div class="viewcode-block" id="PIEClassifier">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.PIEClassifier">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PIEClassifier</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new metric on provided data for the physics informed classifier and apply it.</span>
+
+<span class="sd">    This metric and the specified cut values will be used to categorize solitons into different types, based on how</span>
+<span class="sd">    far they are from an &#39;ideal&#39; soliton.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    par0_cutoff : float</span>
+<span class="sd">        The &quot;top partial&quot; cutoff value for the ratio of the amplitude fitting parameter from the top and bottom</span>
+<span class="sd">        image cuts.</span>
+<span class="sd">        (default = np.log(1.57))</span>
+<span class="sd">    invpar0_cutoff : float</span>
+<span class="sd">        The &quot;bottom partial&quot; cutoff value for the inverse ratio of the amplitude fitting parameter of the top and</span>
+<span class="sd">        bottom image cuts.</span>
+<span class="sd">        (default = -np.log(1.57))</span>
+<span class="sd">    par4_hard_l_cutoff : float</span>
+<span class="sd">        The &quot;clockwise solitonic vortex&quot; cutoff value for the asymmetric shoulder height fitting parameter</span>
+<span class="sd">        differences from the top and bottom image cuts.</span>
+<span class="sd">        (default = -0.53)</span>
+<span class="sd">    par4_hard_g_cutoff : float</span>
+<span class="sd">        The &quot;counter clockwise solitonic vortex&quot; cutoff value for the asymmetric shoulder height fitting parameter</span>
+<span class="sd">        differences from the top and bottom image cuts.</span>
+<span class="sd">        (default = 0.75)</span>
+<span class="sd">    par4_soft_l_cutoff : float</span>
+<span class="sd">        Involved with the &#39;weaker&#39; categorization cut for the asymmetric shoulder height fitting parameter. This</span>
+<span class="sd">        combined with par1_r_cutoff serves as the cut off values for &quot;clockwise solitonic vortex&quot; categorization if</span>
+<span class="sd">        an earlier cut did not.</span>
+<span class="sd">        (default = -0.41)</span>
+<span class="sd">    par4_soft_g_cutoff : float</span>
+<span class="sd">        Involved with the &#39;weaker&#39; categorization cut for the asymmetric shoulder height fitting parameter. This</span>
+<span class="sd">        combined with par1_l_cutoff serves as the cut off values for &quot;counter clockwise solitonic vortex&quot;</span>
+<span class="sd">        categorization if an earlier cut did not.</span>
+<span class="sd">        (default = 0.61)</span>
+<span class="sd">    par1_l_cutoff : float</span>
+<span class="sd">        Involved with the &#39;weaker&#39; categorization cut for the center of the excitation fitting parameter. This</span>
+<span class="sd">        combined with par4_soft_l_cutoff serves as the cut off values for &quot;counter clockwise solitonic vortex&quot;</span>
+<span class="sd">        categorization if an earlier cut did not.</span>
+<span class="sd">        (default = -3.0)</span>
+<span class="sd">    par1_r_cutoff : float</span>
+<span class="sd">        Involved with the &#39;weaker&#39; categorization cut for the center of the excitation fitting parameter. This</span>
+<span class="sd">        combined with par4_soft_l_cutoff serves as the cut off values for &quot;clockwise solitonic vortex&quot; categorization</span>
+<span class="sd">        if an earlier cut did not.</span>
+<span class="sd">        (default = 1.14)</span>
+
+<span class="sd">    Further information can be found in the SolDet paper https://arxiv.org/abs/2111.04881</span>
+<span class="sd">    func : string</span>
+<span class="sd">        The fitting function to be used. Can be &#39;gaussian1D&#39;, &#39;original&#39; (SOLDET 1.0),</span>
+<span class="sd">        or &#39;modern&#39; (modern SOLDET module).</span>
+<span class="sd">        (default = &#39;modern&#39;)</span>
+<span class="sd">    transformer : Callable function</span>
+<span class="sd">        The type of transform to use on the parameters.</span>
+<span class="sd">        (default = PowerTransformer)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">par0_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.57</span><span class="p">),</span> <span class="n">invpar0_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.57</span><span class="p">),</span>
+                <span class="n">par4_hard_l_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.53</span><span class="p">,</span> <span class="n">par4_hard_g_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+                <span class="n">par4_soft_l_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.41</span><span class="p">,</span> <span class="n">par4_soft_g_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.61</span><span class="p">,</span>
+                <span class="n">par1_l_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">par1_r_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.14</span><span class="p">,</span>
+                <span class="n">func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;modern&quot;</span><span class="p">,</span> <span class="n">transformer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">PowerTransformer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the PIE classifier.</span>
+
+<span class="sd">        Further information can be found in the SolDet paper https://arxiv.org/abs/2111.04881</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        par0_cutoff : float</span>
+<span class="sd">            The &quot;top partial&quot; cutoff value for the ratio of the amplitude fitting parameter from the top and bottom</span>
+<span class="sd">            image cuts.</span>
+<span class="sd">            (default = np.log(1.57))</span>
+<span class="sd">        invpar0_cutoff : float</span>
+<span class="sd">            The &quot;bottom partial&quot; cutoff value for the inverse ratio of the amplitude fitting parameter of the top and</span>
+<span class="sd">            bottom image cuts.</span>
+<span class="sd">            (default = -np.log(1.57))</span>
+<span class="sd">        par4_hard_l_cutoff : float</span>
+<span class="sd">            The &quot;clockwise solitonic vortex&quot; cutoff value for the asymmetric shoulder height fitting parameter</span>
+<span class="sd">            differences from the top and bottom image cuts.</span>
+<span class="sd">            (default = -0.53)</span>
+<span class="sd">        par4_hard_g_cutoff : float</span>
+<span class="sd">            The &quot;counter clockwise solitonic vortex&quot; cutoff value for the asymmetric shoulder height fitting parameter</span>
+<span class="sd">            differences from the top and bottom image cuts.</span>
+<span class="sd">            (default = 0.75)</span>
+<span class="sd">        par4_soft_l_cutoff : float</span>
+<span class="sd">            Involved with the &#39;weaker&#39; categorization cut for the asymmetric shoulder height fitting parameter. This</span>
+<span class="sd">            combined with par1_r_cutoff serves as the cut off values for &quot;clockwise solitonic vortex&quot; categorization if</span>
+<span class="sd">            an earlier cut did not.</span>
+<span class="sd">            (default = -0.41)</span>
+<span class="sd">        par4_soft_g_cutoff : float</span>
+<span class="sd">            Involved with the &#39;weaker&#39; categorization cut for the asymmetric shoulder height fitting parameter. This</span>
+<span class="sd">            combined with par1_l_cutoff serves as the cut off values for &quot;counter clockwise solitonic vortex&quot;</span>
+<span class="sd">            categorization if an earlier cut did not.</span>
+<span class="sd">            (default = 0.61)</span>
+<span class="sd">        par1_l_cutoff : float</span>
+<span class="sd">            Involved with the &#39;weaker&#39; categorization cut for the center of the excitation fitting parameter. This</span>
+<span class="sd">            combined with par4_soft_l_cutoff serves as the cut off values for &quot;counter clockwise solitonic vortex&quot;</span>
+<span class="sd">            categorization if an earlier cut did not.</span>
+<span class="sd">            (default = -3.0)</span>
+<span class="sd">        par1_r_cutoff : float</span>
+<span class="sd">            Involved with the &#39;weaker&#39; categorization cut for the center of the excitation fitting parameter. This</span>
+<span class="sd">            combined with par4_soft_l_cutoff serves as the cut off values for &quot;clockwise solitonic vortex&quot;</span>
+<span class="sd">            categorization if an earlier cut did not.</span>
+<span class="sd">            (default = 1.14)</span>
+<span class="sd">        func : string</span>
+<span class="sd">            The fitting function to be used. Can be &#39;gaussian1D&#39;, &#39;original&#39; (SOLDET 1.0),</span>
+<span class="sd">            or &#39;modern&#39; (modern SOLDET module).</span>
+<span class="sd">            (default = &#39;modern&#39;)</span>
+<span class="sd">        transformer : Callable function</span>
+<span class="sd">            The type of transform to use on the parameters.</span>
+<span class="sd">            (default = PowerTransformer)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par0_cutoff</span> <span class="o">=</span> <span class="n">par0_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invpar0_cutoff</span> <span class="o">=</span> <span class="n">invpar0_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par4_hard_l_cutoff</span> <span class="o">=</span> <span class="n">par4_hard_l_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par4_hard_g_cutoff</span> <span class="o">=</span> <span class="n">par4_hard_g_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par4_soft_l_cutoff</span> <span class="o">=</span> <span class="n">par4_soft_l_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par4_soft_g_cutoff</span> <span class="o">=</span> <span class="n">par4_soft_g_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par1_l_cutoff</span> <span class="o">=</span> <span class="n">par1_l_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">par1_r_cutoff</span> <span class="o">=</span> <span class="n">par1_r_cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">transformer</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__cutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top_metrics</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">bottom_metrics</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform classification cuts for PIE classifier.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        class_return : int</span>
+<span class="sd">            The soliton class.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">diff0</span> <span class="o">=</span> <span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">diff1</span> <span class="o">=</span> <span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">diff4</span> <span class="o">=</span> <span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span> <span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">diff0</span> <span class="o">=</span> <span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">diff1</span> <span class="o">=</span> <span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">diff4</span> <span class="o">=</span> <span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span> <span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+                     <span class="o">-</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">/</span> <span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">class_return</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">path_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">diff0</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par0_cutoff</span><span class="p">:</span>
+            <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;A&quot;</span>
+            <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;1&quot;</span>
+            <span class="n">class_return</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">diff0</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">invpar0_cutoff</span><span class="p">:</span>
+            <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;A&quot;</span>
+            <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;2&quot;</span>
+            <span class="n">class_return</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="c1"># passed amplitude check</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span>
+            <span class="c1"># strong assym check</span>
+            <span class="k">if</span> <span class="n">diff4</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par4_hard_l_cutoff</span><span class="p">:</span>
+                <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+                <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;3&quot;</span>
+                <span class="n">class_return</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="n">diff4</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par4_hard_g_cutoff</span><span class="p">:</span>
+                <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+                <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;4&quot;</span>
+                <span class="n">class_return</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span>
+                <span class="c1"># pos check</span>
+                <span class="k">if</span> <span class="n">diff1</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par1_l_cutoff</span><span class="p">:</span>
+                    <span class="c1"># weak assym check</span>
+                    <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;icL&quot;</span>
+                    <span class="k">if</span> <span class="n">diff4</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par4_soft_g_cutoff</span><span class="p">:</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;wb&quot;</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;4&quot;</span>
+                        <span class="n">class_return</span> <span class="o">=</span> <span class="mi">4</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;wbF&quot;</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;5&quot;</span>
+                        <span class="n">class_return</span> <span class="o">=</span> <span class="mi">5</span>
+                <span class="k">elif</span> <span class="n">diff1</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par1_r_cutoff</span><span class="p">:</span>
+                    <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;icR&quot;</span>
+                    <span class="c1"># weak assym check</span>
+                    <span class="k">if</span> <span class="n">diff4</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">par4_soft_l_cutoff</span><span class="p">:</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;wb&quot;</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;3&quot;</span>
+                        <span class="n">class_return</span> <span class="o">=</span> <span class="mi">3</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;wbF&quot;</span>
+                        <span class="n">path_string</span> <span class="o">+=</span> <span class="s2">&quot;5&quot;</span>
+                        <span class="n">class_return</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="k">return</span> <span class="n">class_return</span>
+
+<div class="viewcode-block" id="PIEClassifier.fit">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.PIEClassifier.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fitting algorith.</span>
+
+<span class="sd">        Locates solitons in a set of images and fits them to the specified function set during class initialization.</span>
+<span class="sd">        The resulting parameters are transformed into a new distribution and used to retrieve a covariance and mean</span>
+<span class="sd">        value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts or dict</span>
+<span class="sd">            The data to be used in the fitting.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">SolitonPIEClassDataset</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">one_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">one_pos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">)):</span>
+            <span class="n">one_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">one_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building PIE metric.&quot;</span><span class="p">)</span>
+        <span class="n">one_soliton_params</span> <span class="o">=</span> <span class="n">find_soliton</span><span class="p">(</span><span class="n">one_data</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">one_pos</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">one_soliton_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">one_soliton_params</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+        <span class="n">pie_fit_params</span> <span class="o">=</span> <span class="n">preprocess_mhat_params</span><span class="p">(</span><span class="n">one_soliton_params</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">PIE_pt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PIE_pt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pie_fit_params</span><span class="p">)</span>
+        <span class="n">train_params_trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PIE_pt</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">pie_fit_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PIE_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">train_params_trans</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PIE_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_params_trans</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PIE_dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_means</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PIEClassifier.transform">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.PIEClassifier.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transform the data.</span>
+
+<span class="sd">        Applies the previously fitted metric and defined cuts to determine the sub class of a solitonic excitation</span>
+<span class="sd">        identified by the classifier and object detector ML models.</span>
+
+<span class="sd">        Images are split into a top half and bottom half. Excitations are located and the metric is applied. From these</span>
+<span class="sd">        parameters various cuts are done to classify the soliton into the following sub classes:</span>
+
+<span class="sd">            - 0: Longitudinal soliton</span>
+<span class="sd">            - 1: Top partial soliton</span>
+<span class="sd">            - 2: Bottom partial soliton</span>
+<span class="sd">            - 3: Clockwise solitonic vortex</span>
+<span class="sd">            - 4: Counterclockwise solitonic vortex</span>
+<span class="sd">            - 5: Canted</span>
+
+<span class="sd">        These are determined by defining A, the amplitude fitting parameter ratio; db, the shoulder height difference;</span>
+<span class="sd">        and dic, the center position difference and comparing them to various cuts. These cuts are defined as:</span>
+
+<span class="sd">            - par0_cutoff: The &quot;top partial&quot; cutoff value for the ratio of the amplitude fitting parameter from the top</span>
+<span class="sd">              and bottom image cuts.</span>
+<span class="sd">            - invpar0_cutoff: The &quot;bottom partial&quot; cutoff value for the inverse ratio of the amplitude fitting</span>
+<span class="sd">              parameter of the top and bottom image cuts.</span>
+<span class="sd">            - par4_hard_l_cutoff: The &quot;clockwise solitonic vortex&quot; cutoff value for the asymmetric shoulder height</span>
+<span class="sd">              fitting parameter differences from the top and bottom image cuts.</span>
+<span class="sd">            - par4_hard_g_cutoff: The &quot;counter clockwise solitonic vortex&quot; cutoff value for the asymmetric shoulder</span>
+<span class="sd">              height fitting parameter differences from the top and bottom image cuts.</span>
+<span class="sd">            - par4_soft_l_cutoff: Involved with the &#39;weaker&#39; categorization cut for the asymmetric shoulder height</span>
+<span class="sd">              fitting parameter. This combined with par1_r_cutoff serves as the cut off values for &quot;clockwise solitonic</span>
+<span class="sd">              vortex&quot; categorization if an earlier cut did not.</span>
+<span class="sd">            - par4_soft_g_cutoff: Involved with the &#39;weaker&#39; categorization cut for the asymmetric shoulder height</span>
+<span class="sd">              fitting parameter. This combined with par1_l_cutoff serves as the cut off values for &quot;counter clockwise</span>
+<span class="sd">              solitonic vortex&quot; categorization if an earlier cut did not.</span>
+<span class="sd">            - par1_l_cutoff: Involved with the &#39;weaker&#39; categorization cut for the center of the excitation fitting</span>
+<span class="sd">              parameter. This combined with par4_soft_g_cutoff serves as the cut off values for &quot;counter clockwise</span>
+<span class="sd">              solitonic vortex&quot; categorization if an earlier cut did not.</span>
+<span class="sd">            - par1_r_cutoff: Involved with the &#39;weaker&#39; categorization cut for the center of the excitation fitting</span>
+<span class="sd">              parameter. This combined with par4_soft_l_cutoff serves as the cut off values for &quot;clockwise solitonic</span>
+<span class="sd">              vortex&quot; categorization if an earlier cut did not.</span>
+
+<span class="sd">        Further information can be found in the SolDet paper https://arxiv.org/abs/2111.04881</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts or dict</span>
+<span class="sd">            The data to be used for classifying into PIE types.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        class_return : list</span>
+<span class="sd">            A list of the identified sub classes for all found excitations.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_metrics</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottom_metrics</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;PIE Classifier running..&quot;</span><span class="p">)</span>
+        <span class="n">warned</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s2">&quot;CL_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="s2">&quot;OD_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">cl_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">]</span>
+                <span class="n">od_pred</span> <span class="o">=</span> <span class="n">labels_conv</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="k">else</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">cl_pred</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">od_pred</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="n">od_pred</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">warned</span><span class="p">:</span>
+                <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Warning: ML or position labels not found in an entry.&quot;</span><span class="p">)</span>
+                <span class="n">warned</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">img_data</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">pos</span>
+                <span class="n">bottom_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img_data</span><span class="p">)</span>
+                <span class="n">bottom_mask</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">bottom_mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">top_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img_data</span><span class="p">)</span>
+                <span class="n">top_mask</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">top_mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+
+                <span class="n">top_prod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">img_data</span><span class="p">,</span> <span class="n">top_mask</span><span class="p">)</span>
+                <span class="n">bottom_prod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">img_data</span><span class="p">,</span> <span class="n">bottom_mask</span><span class="p">)</span>
+                <span class="n">top_metrics</span> <span class="o">=</span> <span class="n">find_soliton</span><span class="p">(</span><span class="n">top_prod</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">bottom_metrics</span> <span class="o">=</span> <span class="n">find_soliton</span><span class="p">(</span><span class="n">bottom_prod</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="n">work_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_metrics</span><span class="p">,</span> <span class="n">bottom_metrics</span><span class="p">]</span>
+                <span class="n">dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">img_data</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">soliton_params</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">work_list</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">soliton_params</span> <span class="o">==</span> <span class="p">[]:</span>
+                            <span class="n">pred</span> <span class="o">=</span> <span class="p">[]</span>
+                            <span class="n">process_params</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">process_params</span> <span class="o">=</span> <span class="n">preprocess_mhat_params</span><span class="p">(</span><span class="n">soliton_params</span><span class="p">,</span> <span class="n">use_minimum_as_center</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="n">pred</span> <span class="o">=</span> <span class="n">apply_metric</span><span class="p">(</span><span class="n">process_params</span><span class="p">,</span> <span class="n">transformer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_pt</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_cov</span><span class="p">,</span>
+                                                        <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_means</span><span class="p">,</span> <span class="n">return_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">dim</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">):</span>
+                        <span class="n">pred</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="n">process_params</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">params_per_image</span> <span class="ow">in</span> <span class="n">soliton_params</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">params_per_image</span> <span class="o">==</span> <span class="p">[]:</span>
+                                <span class="n">pred</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                                <span class="n">process_params</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">process_params_per_image</span> <span class="o">=</span> <span class="n">preprocess_mhat_params</span><span class="p">(</span><span class="n">params_per_image</span><span class="p">,</span>
+                                                                                  <span class="n">use_minimum_as_center</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                                <span class="n">pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">apply_metric</span><span class="p">(</span><span class="n">process_params_per_image</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_pt</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_cov</span><span class="p">,</span>
+                                                        <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PIE_means</span><span class="p">,</span> <span class="n">return_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+                                <span class="n">process_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process_params_per_image</span><span class="p">)</span>
+
+                    <span class="n">work_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span><span class="p">,</span> <span class="n">process_params</span><span class="p">]</span>
+
+                <span class="n">top_metrics</span> <span class="o">=</span> <span class="n">work_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">bottom_metrics</span> <span class="o">=</span> <span class="n">work_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">bottom_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">class_return</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">top_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                        <span class="n">class_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cutter</span><span class="p">(</span><span class="n">top_metrics</span><span class="o">=</span><span class="n">top_metrics</span><span class="p">,</span>
+                                                          <span class="n">bottom_metrics</span><span class="o">=</span><span class="n">bottom_metrics</span><span class="p">,</span>
+                                                          <span class="n">idx</span><span class="o">=</span><span class="n">idx</span><span class="p">))</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">class_return</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cutter</span><span class="p">(</span><span class="n">top_metrics</span><span class="o">=</span><span class="n">top_metrics</span><span class="p">,</span>
+                                                          <span class="n">bottom_metrics</span><span class="o">=</span><span class="n">bottom_metrics</span><span class="p">,</span>
+                                                          <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">top_metrics</span> <span class="o">+=</span> <span class="p">[</span><span class="n">top_metrics</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bottom_metrics</span> <span class="o">+=</span> <span class="p">[</span><span class="n">bottom_metrics</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">class_return</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="p">[</span><span class="n">class_return</span><span class="p">]</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="QE">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.QE">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QE</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new metric on the data for the physics informed quality estimator.</span>
+
+<span class="sd">    This metric will be used to determine how likely a soliton is a longitudinal soliton when applying the</span>
+<span class="sd">    quality estimator. The metric is based on all existing single longitudinal solitons in the current dataset.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : string</span>
+<span class="sd">        The fitting function to be used. Can be &#39;gaussian1D&#39;, &#39;original&#39; (SOLDET 1.0),</span>
+<span class="sd">        or &#39;modern&#39; (modern SOLDET module).</span>
+<span class="sd">        (default = &#39;modern&#39;)</span>
+<span class="sd">    transformer : Callable function</span>
+<span class="sd">        The type of transform to use on the parameters.</span>
+<span class="sd">        (default = PowerTransformer)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;modern&quot;</span><span class="p">,</span> <span class="n">transformer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">PowerTransformer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the estimator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        func : string</span>
+<span class="sd">            The fitting function to be used. Can be &#39;gaussian1D&#39;, &#39;original&#39; (SOLDET 1.0),</span>
+<span class="sd">            or &#39;modern&#39; (modern SOLDET module).</span>
+<span class="sd">            (default = &#39;modern&#39;)</span>
+<span class="sd">        transformer : Callable function</span>
+<span class="sd">            The type of transform to use on the parameters.</span>
+<span class="sd">            (default = PowerTransformer)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">transformer</span>
+
+<div class="viewcode-block" id="QE.fit">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.QE.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Locate solitons in a set of images and fit them to the specified function set during class initialization.</span>
+
+<span class="sd">        The resulting parameters are transformed into a new distribution and used to retrieve a covariance and mean</span>
+<span class="sd">        value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts or dict</span>
+<span class="sd">            The data to be used in the fitting.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">SolitonQEClassDataset</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">one_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">one_pos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="p">)):</span>
+            <span class="n">one_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">one_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building QE metric.&quot;</span><span class="p">)</span>
+        <span class="n">one_soliton_params</span> <span class="o">=</span> <span class="n">find_soliton</span><span class="p">(</span><span class="n">one_data</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">one_pos</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">one_soliton_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">one_soliton_params</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+        <span class="n">qe_fit_params</span> <span class="o">=</span> <span class="n">preprocess_mhat_params</span><span class="p">(</span><span class="n">one_soliton_params</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">QE_pt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QE_pt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">qe_fit_params</span><span class="p">)</span>
+        <span class="n">train_params_trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">QE_pt</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">qe_fit_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QE_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">train_params_trans</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QE_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_params_trans</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QE_dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_means</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QE.transform">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.QE.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transform the data.</span>
+
+<span class="sd">        Applies the previously built metric to determine the probability that a soliton identified by the classifier and</span>
+<span class="sd">        object detector ML models is longitudinal.</span>
+
+<span class="sd">        The score is calculated by taking the metric, transforming the input data, and calculating the mahalanobis</span>
+<span class="sd">        distance between the metric and the transformed data. The chi squared is applied to this to calculate a score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts or dict</span>
+<span class="sd">            The data to be used for classifying into PIE types.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pred : list</span>
+<span class="sd">            A list of the quality scores for all found excitations.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Quality Estimate running..&quot;</span><span class="p">)</span>
+        <span class="n">warned</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s2">&quot;CL_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="s2">&quot;OD_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">cl_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">]</span>
+                <span class="n">od_pred</span> <span class="o">=</span> <span class="n">labels_conv</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="k">else</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">cl_pred</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">od_pred</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">pos</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">warned</span><span class="p">:</span>
+                <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Warning: ML or position labels not found in an entry.&quot;</span><span class="p">)</span>
+                <span class="n">warned</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">img_data</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">pos</span>
+                <span class="n">soliton_params</span> <span class="o">=</span> <span class="n">find_soliton</span><span class="p">(</span><span class="n">img_data</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">img_data</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+
+                <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">soliton_params</span> <span class="o">==</span> <span class="p">[]:</span>
+                        <span class="n">pred</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="n">process_params</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">process_params</span> <span class="o">=</span> <span class="n">preprocess_mhat_params</span><span class="p">(</span><span class="n">soliton_params</span><span class="p">,</span> <span class="n">use_minimum_as_center</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="n">pred</span> <span class="o">=</span> <span class="n">apply_metric</span><span class="p">(</span><span class="n">process_params</span><span class="p">,</span> <span class="n">transformer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_pt</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_cov</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_means</span><span class="p">,</span>
+                                            <span class="n">return_dist</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">dim</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">164</span><span class="p">):</span>
+                    <span class="n">pred</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">process_params</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">params_per_image</span> <span class="ow">in</span> <span class="n">soliton_params</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">params_per_image</span> <span class="o">==</span> <span class="p">[]:</span>
+                            <span class="n">pred</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                            <span class="n">process_params</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">process_params_per_image</span> <span class="o">=</span> <span class="n">preprocess_mhat_params</span><span class="p">(</span><span class="n">params_per_image</span><span class="p">,</span>
+                                                                              <span class="n">use_minimum_as_center</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="n">pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">apply_metric</span><span class="p">(</span><span class="n">process_params_per_image</span><span class="p">,</span> <span class="n">transformer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_pt</span><span class="p">,</span>
+                                                     <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_cov</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">QE_means</span><span class="p">,</span> <span class="n">return_dist</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+                            <span class="n">process_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process_params_per_image</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="p">[</span><span class="n">pred</span><span class="p">]</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="apply_metric">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.pi_models.apply_metric">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_metric</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
+                <span class="n">transformer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="n">return_dist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a transformed set, determine the mahalanobis distance or quality score.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    params : numpy array</span>
+<span class="sd">        The processed fit parameters for the excitation(s).</span>
+<span class="sd">    sigma : numpy array</span>
+<span class="sd">        The covariance matrix of the built metric.</span>
+<span class="sd">    mu : numpy array</span>
+<span class="sd">        The mean values of the built metric.</span>
+<span class="sd">    transformer : boolean or sklearn Transformer object</span>
+<span class="sd">        If False, parameters are not transformed.</span>
+<span class="sd">        If a Transformer object then the input data is transformed using the metric.</span>
+<span class="sd">        (default = False)</span>
+<span class="sd">    return_dist: boolean</span>
+<span class="sd">        If True, returns a list of the calculated Mahalanobis Distance(s).</span>
+<span class="sd">        If False, returns a list of the calculated quality score(s).</span>
+<span class="sd">        (default = False)</span>
+<span class="sd">    gamma: boolean</span>
+<span class="sd">        An optional argument that will apply the gamma function instead of the chi squared in the QE score.</span>
+<span class="sd">        (default = False)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    res : ndarray</span>
+<span class="sd">        An array of distances or quality scores.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">params_trans</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="k">if</span> <span class="n">transformer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span> <span class="k">else</span> <span class="n">params</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">params_trans</span><span class="p">:</span>
+        <span class="n">m_dist_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
+        <span class="n">m_dist_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">m_dist_x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">return_dist</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">m_dist_x</span><span class="p">))</span>  <span class="c1"># mahalanobis distance</span>
+        <span class="k">elif</span> <span class="n">gamma</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">m_dist_x</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">m_dist_x</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)))</span>  <span class="c1"># probability</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

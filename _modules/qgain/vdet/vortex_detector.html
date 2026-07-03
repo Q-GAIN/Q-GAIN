@@ -1,0 +1,1282 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qgain.vdet.vortex_detector &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qgain/vdet/vortex_detector';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/qgain.html">Q-GAIN Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qgain.vdet.vortex_detector</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The Vortex Detector Class and supporting modules.</span>
+
+<span class="sd">This uses the Q-GAIN detector module to set up a detector suitable for detecting vortices.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">Detector</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">rotate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_mean</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span> <span class="k">as</span> <span class="n">meas_label</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">regionprops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tensor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+
+<div class="viewcode-block" id="VortexDetector">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexDetector">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">VortexDetector</span><span class="p">(</span><span class="n">Detector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect vortices in images of BECs.</span>
+
+<span class="sd">    This uses the Q-GAIN library to set up a detector suitable for detecting vortices in images of BECs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        Optional keywords to be passed to the object detection model initialization.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a detector object suitable for vortices.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs : dict</span>
+<span class="sd">            Optional keywords to be passed to the object detection model initialization.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">process_fn</span><span class="o">=</span><span class="n">vortex_process_fn</span><span class="p">,</span>
+                         <span class="n">od_model</span><span class="o">=</span><span class="n">ObjectDetector2D</span><span class="p">,</span>
+                         <span class="n">od_dataset_fn</span><span class="o">=</span><span class="n">VortexODDataset</span><span class="p">,</span>
+                         <span class="n">od_loss_fn</span><span class="o">=</span><span class="n">MetzLoss2D</span><span class="p">,</span>
+                         <span class="n">od_aug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="s2">&quot;ML Controller&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;OD&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="s2">&quot;ML Controller&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tools</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">metrics</span> <span class="o">+=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">accu_metric</span><span class="p">}]</span>
+
+<div class="viewcode-block" id="VortexDetector.use_models">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexDetector.use_models">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use the vortex detector to make predictions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        model_paths : list</span>
+<span class="sd">            The names of the saved weights. These should end in &#39;object.pt&#39;.</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The target data to use the model on. By default this will be the data loaded into the detector object. It</span>
+<span class="sd">            is possible to use external data by providing a list of dicts or dicts of dicts to this argument.</span>
+<span class="sd">            (default = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">use_models</span><span class="p">(</span><span class="n">model_list</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;object detector&quot;</span><span class="p">,),</span> <span class="n">model_paths</span><span class="o">=</span><span class="n">model_paths</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">target_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">data</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">target_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;OD_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vortex_labels_to_data</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">threshold</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">target_data</span></div>
+
+
+<div class="viewcode-block" id="VortexDetector.plot_metrics">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexDetector.plot_metrics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;object detector&quot;</span><span class="p">),</span>
+                     <span class="o">*</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                     <span class="n">plot_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run plotting routines and display the results.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        types : list</span>
+<span class="sd">            The plotting tools to use.</span>
+<span class="sd">            (default = (&#39;object detector&#39;))</span>
+<span class="sd">        style : str</span>
+<span class="sd">            An optional argument to specify a matplotlib style file and change the overall look of the plots.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        save : bool</span>
+<span class="sd">            An optional argument that will save the output rather than display it.</span>
+<span class="sd">            (default = False)</span>
+<span class="sd">        plot_kwargs : dict of dicts</span>
+<span class="sd">            Optional arguments to be passed to the tool&#39;s callable function. This dictionary should contain the name of</span>
+<span class="sd">            the plotting tool as a key with its value being the keyword dictionary to pass to the function.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The data to generate plots from. By default this is the data loaded into the detector object. If using a</span>
+<span class="sd">            different target the function expects a similar structure to that of the SolDet module.</span>
+<span class="sd">            (default = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plotter_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ground_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]}}</span>
+        <span class="k">if</span> <span class="n">plot_kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plotter_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">plot_kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">plot_metrics</span><span class="p">(</span><span class="n">types</span><span class="o">=</span><span class="n">types</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="n">save</span><span class="p">,</span> <span class="n">plot_kwargs</span><span class="o">=</span><span class="n">plotter_kwargs</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VortexDetector.vortex_counter">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexDetector.vortex_counter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vortex_counter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count the number of identified objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list or dict or numpy array</span>
+<span class="sd">            The data to make predictions on.</span>
+<span class="sd">        model_path : str</span>
+<span class="sd">            The path to the saved weights for the model.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        count_list : list</span>
+<span class="sd">            A list of counts for each provided image.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">data</span><span class="p">)}]</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_models</span><span class="p">(</span><span class="n">model_paths</span><span class="o">=</span><span class="p">[</span><span class="n">model_path</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">res</span><span class="p">)</span>
+
+        <span class="n">count_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+            <span class="n">count_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">count_list</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ObjectCell">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.ObjectCell">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ObjectCell</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Object cell for use in 2D Object Detector.</span>
+
+<span class="sd">    This cell represents the base layer of the 2D Object Detector used in identifying the probability of a vortex</span>
+<span class="sd">    being present and its position.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    in_channels: int</span>
+<span class="sd">        The number of input channels in the image.</span>
+<span class="sd">    out_channels: int</span>
+<span class="sd">        The number of output channels in the image.</span>
+<span class="sd">    kernel: tuple</span>
+<span class="sd">        The 2D kernel size to use of shape (kH, kW)</span>
+<span class="sd">    pool: list</span>
+<span class="sd">        The size of the kernel to use during Max Pooling of the data.</span>
+<span class="sd">        (default = None)</span>
+<span class="sd">    dropout: float</span>
+<span class="sd">        How often neurons should drop out.</span>
+<span class="sd">        (default = 0.1)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">kernel</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">pool</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a single cell of NN layers for the vortex OD.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        in_channels: int</span>
+<span class="sd">            The number of input channels in the image.</span>
+<span class="sd">        out_channels: int</span>
+<span class="sd">            The number of output channels in the image.</span>
+<span class="sd">        kernel: tuple</span>
+<span class="sd">            The 2D kernel size to use of shape (kH, kW)</span>
+<span class="sd">        pool: list</span>
+<span class="sd">            The size of the kernel to use during Max Pooling of the data.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        dropout: float</span>
+<span class="sd">            How often neurons should drop out.</span>
+<span class="sd">            (default = 0.1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Network Layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_lay1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_lay2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Functional Layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">pool</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="ObjectCell.forward">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.ObjectCell.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform a single pass through the network.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x: Tensor</span>
+<span class="sd">            The target tensor to pass through the network</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        x: Tensor</span>
+<span class="sd">            The result of the forward pass</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x_dw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_lay1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x_dw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_lay2</span><span class="p">(</span><span class="n">x_dw</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x_dw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ObjectDetector2D">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.ObjectDetector2D">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ObjectDetector2D</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;2D Vortex Object Detector.</span>
+
+<span class="sd">    This pytorch object detector model identifies the position of excitations in two dimensions.</span>
+<span class="sd">    Based on the work done in https://arxiv.org/abs/2012.13097.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    layers : int</span>
+<span class="sd">        The number of layers to use in the model. Each layer creates an object_cell with corresponding parameters.</span>
+<span class="sd">        (default = 4)</span>
+<span class="sd">    in_channels : list or tuple</span>
+<span class="sd">        A list of input channels to the 2D convolutions for each layer.</span>
+<span class="sd">        (default = (1, 8, 16, 32))</span>
+<span class="sd">    out_channels : list or tuple</span>
+<span class="sd">        A list of output channels to the 2D convolutions for each layer.</span>
+<span class="sd">        (default = (8, 16, 32, 64))</span>
+<span class="sd">    pool : list or tuple</span>
+<span class="sd">        A list of pooling kernel sizes for each layer.</span>
+<span class="sd">        (default = (None, (2,2), None, (2,2)))</span>
+<span class="sd">    kernel : list or tuple</span>
+<span class="sd">        The 2D kernel size to use of shape (kH, kW) for each layer.</span>
+<span class="sd">        (default = (7, 7))</span>
+<span class="sd">    label_shape : list or tuple</span>
+<span class="sd">        The size of the position labels after converting from real positions to the compressed cell representation.</span>
+<span class="sd">        (default = (33, 33))</span>
+<span class="sd">    dropout : float</span>
+<span class="sd">        How often neurons should drop out.</span>
+<span class="sd">        (default = 0.1)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">layers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+                 <span class="n">out_channels</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">pool</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+                 <span class="n">kernel</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">label_shape</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        layers : int</span>
+<span class="sd">            The number of layers to use in the model. Each layer creates an object_cell with corresponding parameters.</span>
+<span class="sd">            (default = 4)</span>
+<span class="sd">        in_channels : list or tuple</span>
+<span class="sd">            A list of input channels to the 2D convolutions for each layer.</span>
+<span class="sd">            (default = (1, 8, 16, 32))</span>
+<span class="sd">        out_channels : list or tuple</span>
+<span class="sd">            A list of output channels to the 2D convolutions for each layer.</span>
+<span class="sd">            (default = (8, 16, 32, 64))</span>
+<span class="sd">        pool : list or tuple</span>
+<span class="sd">            A list of pooling kernel sizes for each layer.</span>
+<span class="sd">            (default = (None, (2,2), None, (2,2)))</span>
+<span class="sd">        kernel : list or tuple</span>
+<span class="sd">            The 2D kernel size to use of shape (kH, kW) for each layer.</span>
+<span class="sd">            (default = (7, 7))</span>
+<span class="sd">        label_shape : list or tuple</span>
+<span class="sd">            The size of the position labels after converting from real positions to the compressed cell representation.</span>
+<span class="sd">            (default = (33, 33))</span>
+<span class="sd">        dropout : float</span>
+<span class="sd">            How often neurons should drop out.</span>
+<span class="sd">            (default = 0.1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ObjectCell</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+                                          <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">pool</span><span class="o">=</span><span class="n">pool</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">))</span>
+
+        <span class="c1"># Output Layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveMaxPool2d</span><span class="p">(</span><span class="n">label_shape</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+                                      <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ObjectDetector2D.forward">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.ObjectDetector2D.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Take a tensor and identify any vortices and their positions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : tensor of shape (B, 1, H, W)</span>
+<span class="sd">            The input tensor to make a prediction on. The expected shape is of shape (B, 1, H, W), where B is the batch</span>
+<span class="sd">            size, H is the image height, and W is the image width.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        x : tensor of shape (B, 3, H // 4, W // 4)</span>
+<span class="sd">            The output tensor containing the probabilities for a vortex to be present in one of the cells and its</span>
+<span class="sd">            fractional position within a cell. Here B is the batch size and dimension 1 contains the probability (0),</span>
+<span class="sd">            the vertical position in the cell (1), and the horizontal position within the cell (2). For the position</span>
+<span class="sd">            values 0 to 1 indicate which side of the cell and by extension which pixel after conversion.</span>
+<span class="sd">            Dimension 2 indicates the number of cells in the vertical direction and dimension 3 indicates the number of</span>
+<span class="sd">            cells in the horizontal direction.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MetzLoss2D">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.MetzLoss2D">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MetzLoss2D</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Loss function for vortex detection.</span>
+
+<span class="sd">    Implementation of the loss function defined in: https://arxiv.org/abs/2012.13097</span>
+<span class="sd">    The first term is essentially the weighted cross entropy probability for the cell belonging to the &#39;vortex present&#39;</span>
+<span class="sd">    class.</span>
+<span class="sd">    The second term is a mean-squared error for the fractional position within the cell.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    CE_weight : float</span>
+<span class="sd">        The weight value used when calculating the cross entropy probability.</span>
+<span class="sd">    MSE_weight : float</span>
+<span class="sd">        The weight value used when calculating the mean-squared error.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ce_weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">mse_weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the loss functionality.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CE_weight</span> <span class="o">=</span> <span class="n">ce_weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MSE_weight</span> <span class="o">=</span> <span class="n">mse_weight</span>
+
+<div class="viewcode-block" id="MetzLoss2D.forward">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.MetzLoss2D.forward">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prediction</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Do a single forward pass of the loss function.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prediction : tensor</span>
+<span class="sd">            The input tensor representing the model output.</span>
+<span class="sd">        target : tensor</span>
+<span class="sd">            The input tensor representing the target label.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        loss : tensor</span>
+<span class="sd">            The result of the loss calculation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
+        <span class="n">ce_loss</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">CE_weight</span> <span class="o">*</span> <span class="n">target</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">prediction</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+                   <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">target</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">eps</span><span class="p">))</span>
+        <span class="n">mse_loss</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MSE_weight</span> <span class="o">*</span> <span class="n">target</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">*</span> <span class="p">((</span><span class="n">target</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span><span class="o">**</span><span class="mi">2</span>
+                                                        <span class="o">+</span> <span class="p">(</span><span class="n">target</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ce_loss</span> <span class="o">+</span> <span class="n">mse_loss</span><span class="p">)</span> <span class="o">/</span> <span class="n">prediction</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="VortexODDataset">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexODDataset">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">VortexODDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dataset class for the ML based 2D object detector.</span>
+
+<span class="sd">    This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is</span>
+<span class="sd">    expected to be at key &#39;data&#39;. It will also grab the positions at key &#39;positions&#39;.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list of dicts</span>
+<span class="sd">            The data to build a dataset from.</span>
+<span class="sd">    threshold : list or tuple</span>
+<span class="sd">        A list of values that influence the conversion between real positions and cell positions.</span>
+<span class="sd">        Threshold[0] is the minimum value to consider an excitation is present.</span>
+<span class="sd">        Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this</span>
+<span class="sd">        value is considered the same excitation.</span>
+<span class="sd">        (default = (0.5, 8))</span>
+<span class="sd">    dims : list or tuple</span>
+<span class="sd">        The shape of the image data.</span>
+<span class="sd">        (default = (132, 132))</span>
+<span class="sd">    augment: bool</span>
+<span class="sd">        Specifies whether or not to augment the input data with rotations, translations, and flips.</span>
+<span class="sd">        (default = False)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dims</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">132</span><span class="p">),</span>
+                 <span class="o">*</span><span class="p">,</span> <span class="n">augment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the dataset functionality.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts</span>
+<span class="sd">            The data to build a dataset from.</span>
+<span class="sd">        threshold : list or tuple</span>
+<span class="sd">            A list of values that influence the conversion between real positions and cell positions.</span>
+<span class="sd">            Threshold[0] is the minimum value to consider an excitation is present.</span>
+<span class="sd">            Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this</span>
+<span class="sd">            value is considered the same excitation.</span>
+<span class="sd">            (default = (0.5, 8))</span>
+<span class="sd">        dims : list or tuple</span>
+<span class="sd">            The shape of the image data in the form (height, width).</span>
+<span class="sd">            (default = (132, 132))</span>
+<span class="sd">        augment: bool</span>
+<span class="sd">            Specifies whether or not to augment the input data with rotations, translations, and flips.</span>
+<span class="sd">            (default = False)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span>
+
+        <span class="n">img_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">label_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Loaded image data is rectangular. Vortex Detector enforces square data.&quot;</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="n">img_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+            <span class="k">if</span> <span class="n">augment</span><span class="p">:</span>
+                <span class="c1"># Rotation</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+                <span class="n">rot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)]])</span>
+                <span class="n">aug_img</span> <span class="o">=</span> <span class="n">rotate</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]),</span> <span class="n">angle</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="n">reshape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">img_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aug_img</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                    <span class="n">rot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)]])</span>
+                    <span class="n">xy_rot</span> <span class="o">=</span> <span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]))</span> <span class="o">-</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">aug_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">@</span> <span class="n">rot</span>
+                    <span class="n">xy_rot</span> <span class="o">+=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">aug_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xy_rot</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+                <span class="c1"># hflip of rotation</span>
+                <span class="n">img_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">aug_img</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                    <span class="n">flip_pos</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">xy_rot</span><span class="o">.</span><span class="n">tolist</span><span class="p">()):</span>
+                        <span class="n">xy_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+                        <span class="n">xy_flip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xy_flip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">flip_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xy_flip</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flip_pos</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+                <span class="c1"># vflip of rotation</span>
+                <span class="n">img_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">aug_img</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                    <span class="n">flip_pos</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">xy_rot</span><span class="o">.</span><span class="n">tolist</span><span class="p">()):</span>
+                        <span class="n">xy_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+                        <span class="n">xy_flip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xy_flip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">flip_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xy_flip</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flip_pos</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+                <span class="c1"># Translation</span>
+                <span class="n">max_tr_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                                             <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">max_tr_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">max_tr_x</span><span class="p">,</span> <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                                                        <span class="p">:(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                <span class="n">max_tr_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">max_tr_x</span> <span class="o">*</span> <span class="mf">0.25</span><span class="p">))</span>
+
+                <span class="n">max_tr_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):,</span>
+                                          <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">max_tr_y</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_tr_y</span><span class="p">,</span> <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][:(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+                                                        <span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">max_tr_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">max_tr_y</span> <span class="o">*</span> <span class="mf">0.25</span><span class="p">))</span>
+
+                <span class="k">for</span> <span class="n">taugment</span><span class="p">,</span> <span class="n">tpos</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">img_data</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]),</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">label_data</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]),</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                    <span class="n">trans_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="o">-</span><span class="n">max_tr_x</span><span class="p">,</span> <span class="n">max_tr_x</span><span class="p">)</span>
+                    <span class="n">trans_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="o">-</span><span class="n">max_tr_y</span><span class="p">,</span> <span class="n">max_tr_y</span><span class="p">)</span>
+                    <span class="n">img_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">taugment</span><span class="p">,</span> <span class="p">(</span><span class="n">trans_x</span><span class="p">,</span> <span class="n">trans_y</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+
+                    <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                        <span class="n">trans_pos</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">tpos</span><span class="p">:</span>
+                            <span class="n">xy_trans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+                            <span class="n">xy_trans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">trans_x</span>
+                            <span class="n">xy_trans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">trans_y</span>
+                            <span class="n">trans_pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xy_trans</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+                        <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trans_pos</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+                <span class="c1"># Noise</span>
+                <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+                <span class="n">noise</span><span class="p">[</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">aug_img</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">noise</span>
+                <span class="n">img_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aug_img</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;positions&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">label_data</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img_data</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_to_labels</span><span class="p">(</span><span class="n">label_data</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">og_labels</span> <span class="o">=</span> <span class="n">label_data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the length of the dataset.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        length : int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a sample at the specified index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        idx : int</span>
+<span class="sd">            The sample index</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        image : ndarray</span>
+<span class="sd">            The image data at the specified index</span>
+<span class="sd">        pos : list of floats</span>
+<span class="sd">            A list of positions at the specified index</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">pos</span>
+
+<div class="viewcode-block" id="VortexODDataset.labels_to_data">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexODDataset.labels_to_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">labels_to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_out</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert the labels in cell space to positions in pixel space.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        label_out : ndarray</span>
+<span class="sd">            An array of probability and fractional position values in cell space.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        labels : list</span>
+<span class="sd">            positions in pixel space</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">label_out</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Invalid type. Label data should be provided as numpy array.&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">vortex_labels_to_data</span><span class="p">(</span><span class="n">label_out</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VortexODDataset.data_to_labels">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.VortexODDataset.data_to_labels">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">data_to_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_in</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert the positions in pixel space to positions and probability in cell space.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        label_in : list</span>
+<span class="sd">            A list of position lists.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        labels: ndarray</span>
+<span class="sd">            The positions and probabilities in the cell space.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Invalid type. Label data should be provided as a list.&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">vortex_data_to_labels</span><span class="p">(</span><span class="n">label_in</span><span class="p">,</span> <span class="n">xdim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ydim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="vortex_labels_to_data">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.vortex_labels_to_data">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vortex_labels_to_data</span><span class="p">(</span><span class="n">label_in</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Label conversion function.</span>
+
+<span class="sd">    Convert between vortex positions in pixel space and cell space. This new space is a compressed representation of</span>
+<span class="sd">    the positions in pixel space and the probability of them being present in a cell. The new space is a (3, 33, 33)</span>
+<span class="sd">    array of values with the first (33, 33) entries representing the probability of an excitation being located in a</span>
+<span class="sd">    cell, and the other two (33, 33) entries representing the fractional position of the excitation in that cell.</span>
+<span class="sd">    Each cell represents a window of 4 x 4 pixels (H x W).</span>
+
+<span class="sd">    This will convert from cell space to pixel space.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    label_in : ndarray</span>
+<span class="sd">        For each cell whose probability is above the threshold will have a position calculated. This position will be</span>
+<span class="sd">        based on the fractional position in the cell. If multiple excitations exists next to each other and fall below</span>
+<span class="sd">        the threshold the average positions will be calculated between the two.</span>
+<span class="sd">    threshold : list</span>
+<span class="sd">        A list of values that influence the conversion between real positions and cell positions.</span>
+<span class="sd">        Threshold[0] is the minimum value to consider that an excitation is present.</span>
+<span class="sd">        Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this</span>
+<span class="sd">        value is considered the same excitation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    label_out : list</span>
+<span class="sd">        The list of positions in pixel space.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">label_out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">label_in</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">33</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">33</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">label_in</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">label_out</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">4</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">label_in</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">label_in</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]])</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_out</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_out</span><span class="p">):</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_out</span><span class="p">):</span>
+                    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">label_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">label_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                        <span class="k">del</span> <span class="n">label_out</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">elif</span> <span class="n">label_in</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_in</span><span class="p">:</span>
+            <span class="n">l_out</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">33</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">33</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="n">l_out</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">4</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">label</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">label</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]])</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l_out</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l_out</span><span class="p">):</span>
+                    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l_out</span><span class="p">):</span>
+                        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">l_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">l_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">l_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                            <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">l_out</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l_out</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                            <span class="k">del</span> <span class="n">l_out</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">label_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_out</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Input has incorrect dimensions. Expected (N, 3, 33, 33) or (3, 33, 33) but got </span><span class="si">{</span><span class="n">label_in</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">label_out</span></div>
+
+
+
+<div class="viewcode-block" id="vortex_data_to_labels">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.vortex_data_to_labels">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vortex_data_to_labels</span><span class="p">(</span><span class="n">label_in</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">xdim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">132</span><span class="p">,</span> <span class="n">ydim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">132</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Label conversion function.</span>
+
+<span class="sd">    Convert between vortex positions in pixel space and cell space. This new space is a compressed representation of</span>
+<span class="sd">    the positions in pixel space and the probability of them being present in a cell. The new space is a (3, 33, 33)</span>
+<span class="sd">    array of values with the first (33, 33) entries representing the probability of an excitation being located in a</span>
+<span class="sd">    cell, and the other two (33, 33) entries representing the fractional position of the excitation in that cell.</span>
+<span class="sd">    Each cell represents a window of 4 x 4 pixels (H x W).</span>
+
+<span class="sd">    This will convert from pixel space to cell space.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    label_in : list</span>
+<span class="sd">        A list of positions in pixel space. Valid input can be a list of a single value for single image input, or a</span>
+<span class="sd">        list of sub lists of positions for multiple images. The output will be an array of (3, 33, 33).</span>
+<span class="sd">    xdim : int</span>
+<span class="sd">        The horizontal dimension of the image data.</span>
+<span class="sd">        (default = 132)</span>
+<span class="sd">    ydim : int</span>
+<span class="sd">        The vertical dimension of the image data.</span>
+<span class="sd">        (default = 132)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    label_out : ndarray</span>
+<span class="sd">        Array of (3, 33, 33) values in cell space.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">xdim</span><span class="p">,</span> <span class="n">ydim</span><span class="p">]</span>
+
+    <span class="c1"># Positions to Label</span>
+    <span class="n">label_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">label_in</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># Probability a soliton is present</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+                        <span class="c1"># Fractional position along x direction of cell</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+                        <span class="c1"># Fractional position along y direction of cell</span>
+                        <span class="n">label_out</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vortex positon beyond image dimensions.&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vortex positon beyond image dimensions.&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">label_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">label_in</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">label_in</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="c1"># Probability a soliton is present</span>
+                            <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+                            <span class="c1"># Fractional position along x direction of cell</span>
+                            <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+                            <span class="c1"># Fractional position along y direction of cell</span>
+                            <span class="n">label_out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vortex positon beyond image dimensions.&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vortex positon beyond image dimensions.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">label_out</span></div>
+
+
+
+<div class="viewcode-block" id="vortex_process_fn">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.vortex_process_fn">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vortex_process_fn</span><span class="p">(</span><span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="s2">&quot;unlabeled&quot;</span><span class="p">,</span>
+                      <span class="n">scale</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process function for vortex data.</span>
+
+<span class="sd">    This will load in a target numpy data file containing image arrays and prepare it for use by the vortex detector.</span>
+<span class="sd">    Corresponding position labels can be provided which expects a numpy array containing position data for each entry in</span>
+<span class="sd">    the image array data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_path : string</span>
+<span class="sd">        The target file containing the image data. This should be a numpy file of arrays of image data of shape</span>
+<span class="sd">        (N, H, W).</span>
+<span class="sd">    pos_path : string</span>
+<span class="sd">        The target file containing the position data for vortex locations. This should be a numpy object file of a</span>
+<span class="sd">        list or array of N lists or tuples containing the X, Y positions for each vortex.</span>
+<span class="sd">        (default = None)</span>
+<span class="sd">    tag : string or int</span>
+<span class="sd">        A descriptive label for the image.</span>
+<span class="sd">        (default = &#39;unlabeled&#39;)</span>
+<span class="sd">    scale : list or None</span>
+<span class="sd">        Specifies the min max values to use for scaling the data to lay between 0 and 1.</span>
+<span class="sd">        If None then no scaling is performed on the data.</span>
+<span class="sd">        (default = None)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data_samples : list</span>
+<span class="sd">        A list of dictionaries containing the collected pre-processed data</span>
+
+<span class="sd">        Each dictionary contains, at minimum:</span>
+<span class="sd">            The masked and unmasked image data of shape (132, 132).</span>
+<span class="sd">            The tag value.</span>
+<span class="sd">            The sub-directory.</span>
+<span class="sd">            The original image size.</span>
+<span class="sd">            The original data path.</span>
+
+<span class="sd">        If positions were provided these are also saved in the dictionary entries.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pos_path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">pos_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="n">data_samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">((</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Processing vortex data..&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">fullimgsize</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">yhigh</span> <span class="o">=</span> <span class="n">fullimgsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">xhigh</span> <span class="o">=</span> <span class="n">fullimgsize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">yhigh</span> <span class="o">!=</span> <span class="n">xhigh</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">xhigh</span> <span class="o">&gt;</span> <span class="n">yhigh</span><span class="p">:</span>
+                <span class="n">crop</span> <span class="o">=</span> <span class="p">(</span><span class="n">xhigh</span> <span class="o">-</span> <span class="n">yhigh</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">od_image</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="n">crop</span><span class="p">:</span><span class="o">-</span><span class="n">crop</span><span class="p">])</span>
+                <span class="n">yhigh</span> <span class="o">=</span> <span class="n">od_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">xhigh</span> <span class="o">=</span> <span class="n">od_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+                <span class="n">positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">crop</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">crop</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhigh</span> <span class="o">-</span> <span class="n">xhigh</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">od_image</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">crop</span><span class="p">:</span><span class="o">-</span><span class="n">crop</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">yhigh</span> <span class="o">=</span> <span class="n">od_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">xhigh</span> <span class="o">=</span> <span class="n">od_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+                <span class="n">positions</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">crop</span>
+                <span class="n">positions</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">od_image</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+            <span class="n">positions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">od_image</span> <span class="o">=</span> <span class="p">(</span><span class="n">od_image</span> <span class="o">-</span> <span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">scale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">yc</span><span class="p">,</span> <span class="n">xc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[:</span><span class="n">yhigh</span><span class="p">,</span> <span class="p">:</span><span class="n">xhigh</span><span class="p">]</span>
+        <span class="n">regions</span> <span class="o">=</span> <span class="n">regionprops</span><span class="p">(</span><span class="n">meas_label</span><span class="p">(</span><span class="n">od_image</span> <span class="o">&gt;</span> <span class="n">threshold_mean</span><span class="p">(</span><span class="n">od_image</span><span class="p">)))</span>
+
+        <span class="n">area</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+            <span class="n">area</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">region</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="n">regions</span><span class="p">[(</span><span class="n">area</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">area</span><span class="p">))</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="n">ceny</span><span class="p">,</span> <span class="n">cenx</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">centroid</span>
+        <span class="n">circ_r</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">axis_major_length</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">xc</span> <span class="o">-</span> <span class="n">cenx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">yc</span> <span class="o">-</span> <span class="n">ceny</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">circ_r</span>
+        <span class="n">cropped_od_image</span> <span class="o">=</span> <span class="n">od_image</span> <span class="o">*</span> <span class="n">mask</span>
+
+        <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;Original Data Size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fullimgsize</span>
+        <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;cloud_data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">od_image</span>
+        <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cropped_od_image</span>
+        <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag</span>
+        <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sub_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Vortex_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># re-sort to make the position ordering match that of the labeling function</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">vortex_data_to_labels</span><span class="p">([</span><span class="n">positions</span><span class="p">],</span> <span class="n">xdim</span><span class="o">=</span><span class="n">fullimgsize</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ydim</span><span class="o">=</span><span class="n">fullimgsize</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vortex_labels_to_data</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+        <span class="n">data_samples</span> <span class="o">+=</span> <span class="p">[</span><span class="n">sample</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">data_samples</span></div>
+
+
+
+<div class="viewcode-block" id="accu_metric">
+<a class="viewcode-back" href="../../../source/qgain.vdet.html#qgain.vdet.vortex_detector.accu_metric">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">accu_metric</span><span class="p">(</span><span class="n">pred</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">targ</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Accuracy metric for vortex object detector.</span>
+
+<span class="sd">    This checks the probability cell for the presence of an excitation and tracks how many are correct.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pred : Tensor</span>
+<span class="sd">        The output tensor of the model</span>
+<span class="sd">    targ : Tensor</span>
+<span class="sd">        The target labels</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    correct : float</span>
+<span class="sd">        The accuracy of correctly identified vortices.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">batch_correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">num_exc</span> <span class="o">=</span> <span class="p">(</span><span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">t_loc</span> <span class="o">=</span> <span class="n">targ</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">threshold</span>
+            <span class="n">p_loc</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">threshold</span>
+            <span class="n">batch_correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">t_loc</span><span class="p">,</span> <span class="n">p_loc</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">num_exc</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">batch_correct</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">batch_correct</span> <span class="o">/</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

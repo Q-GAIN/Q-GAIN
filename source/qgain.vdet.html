@@ -1,0 +1,894 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>VortexDetector Subpackage &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/qgain.vdet';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Further Information" href="../further.html" />
+    <link rel="prev" title="SolDet Subpackage" href="qgain.soldet.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="qgain.html">Q-GAIN Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/source/qgain.vdet.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>VortexDetector Subpackage</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.vdet.vortex_detector">qgain.vdet.vortex_detector module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.MetzLoss2D"><code class="docutils literal notranslate"><span class="pre">MetzLoss2D</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.MetzLoss2D.forward"><code class="docutils literal notranslate"><span class="pre">MetzLoss2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectCell"><code class="docutils literal notranslate"><span class="pre">ObjectCell</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectCell.forward"><code class="docutils literal notranslate"><span class="pre">ObjectCell.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectDetector2D"><code class="docutils literal notranslate"><span class="pre">ObjectDetector2D</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectDetector2D.forward"><code class="docutils literal notranslate"><span class="pre">ObjectDetector2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector"><code class="docutils literal notranslate"><span class="pre">VortexDetector</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector.plot_metrics"><code class="docutils literal notranslate"><span class="pre">VortexDetector.plot_metrics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector.use_models"><code class="docutils literal notranslate"><span class="pre">VortexDetector.use_models()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector.vortex_counter"><code class="docutils literal notranslate"><span class="pre">VortexDetector.vortex_counter()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexODDataset"><code class="docutils literal notranslate"><span class="pre">VortexODDataset</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexODDataset.data_to_labels"><code class="docutils literal notranslate"><span class="pre">VortexODDataset.data_to_labels()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexODDataset.labels_to_data"><code class="docutils literal notranslate"><span class="pre">VortexODDataset.labels_to_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.accu_metric"><code class="docutils literal notranslate"><span class="pre">accu_metric()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.vortex_data_to_labels"><code class="docutils literal notranslate"><span class="pre">vortex_data_to_labels()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.vortex_labels_to_data"><code class="docutils literal notranslate"><span class="pre">vortex_labels_to_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.vortex_process_fn"><code class="docutils literal notranslate"><span class="pre">vortex_process_fn()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="vortexdetector-subpackage">
+<h1>VortexDetector Subpackage<a class="headerlink" href="#vortexdetector-subpackage" title="Link to this heading">#</a></h1>
+<section id="module-qgain.vdet.vortex_detector">
+<span id="qgain-vdet-vortex-detector-module"></span><h2>qgain.vdet.vortex_detector module<a class="headerlink" href="#module-qgain.vdet.vortex_detector" title="Link to this heading">#</a></h2>
+<p>The Vortex Detector Class and supporting modules.</p>
+<p>This uses the Q-GAIN detector module to set up a detector suitable for detecting vortices.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.MetzLoss2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">MetzLoss2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ce_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mse_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#MetzLoss2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.MetzLoss2D" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Loss function for vortex detection.</p>
+<p>Implementation of the loss function defined in: <a class="reference external" href="https://arxiv.org/abs/2012.13097">https://arxiv.org/abs/2012.13097</a>
+The first term is essentially the weighted cross entropy probability for the cell belonging to the ‘vortex present’
+class.
+The second term is a mean-squared error for the fractional position within the cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CE_weight</strong> (<em>float</em>) – The weight value used when calculating the cross entropy probability.</p></li>
+<li><p><strong>MSE_weight</strong> (<em>float</em>) – The weight value used when calculating the mean-squared error.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.MetzLoss2D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#MetzLoss2D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.MetzLoss2D.forward" title="Link to this definition">#</a></dt>
+<dd><p>Do a single forward pass of the loss function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prediction</strong> (<em>tensor</em>) – The input tensor representing the model output.</p></li>
+<li><p><strong>target</strong> (<em>tensor</em>) – The input tensor representing the target label.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>loss</strong> – The result of the loss calculation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.ObjectCell">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">ObjectCell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#ObjectCell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.ObjectCell" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Object cell for use in 2D Object Detector.</p>
+<p>This cell represents the base layer of the 2D Object Detector used in identifying the probability of a vortex
+being present and its position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_channels</strong> (<em>int</em>) – The number of input channels in the image.</p></li>
+<li><p><strong>out_channels</strong> (<em>int</em>) – The number of output channels in the image.</p></li>
+<li><p><strong>kernel</strong> (<em>tuple</em>) – The 2D kernel size to use of shape (kH, kW)</p></li>
+<li><p><strong>pool</strong> (<em>list</em>) – The size of the kernel to use during Max Pooling of the data.
+(default = None)</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – How often neurons should drop out.
+(default = 0.1)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.ObjectCell.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#ObjectCell.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.ObjectCell.forward" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single pass through the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>) – The target tensor to pass through the network</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> – The result of the forward pass</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.ObjectDetector2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">ObjectDetector2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">8,</span> <span class="pre">16,</span> <span class="pre">32)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(8,</span> <span class="pre">16,</span> <span class="pre">32,</span> <span class="pre">64)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(None,</span> <span class="pre">(2,</span> <span class="pre">2),</span> <span class="pre">None,</span> <span class="pre">(2,</span> <span class="pre">2))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(7,</span> <span class="pre">7)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(33,</span> <span class="pre">33)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#ObjectDetector2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.ObjectDetector2D" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>2D Vortex Object Detector.</p>
+<p>This pytorch object detector model identifies the position of excitations in two dimensions.
+Based on the work done in <a class="reference external" href="https://arxiv.org/abs/2012.13097">https://arxiv.org/abs/2012.13097</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> (<em>int</em>) – The number of layers to use in the model. Each layer creates an object_cell with corresponding parameters.
+(default = 4)</p></li>
+<li><p><strong>in_channels</strong> (<em>list</em><em> or </em><em>tuple</em>) – A list of input channels to the 2D convolutions for each layer.
+(default = (1, 8, 16, 32))</p></li>
+<li><p><strong>out_channels</strong> (<em>list</em><em> or </em><em>tuple</em>) – A list of output channels to the 2D convolutions for each layer.
+(default = (8, 16, 32, 64))</p></li>
+<li><p><strong>pool</strong> (<em>list</em><em> or </em><em>tuple</em>) – A list of pooling kernel sizes for each layer.
+(default = (None, (2,2), None, (2,2)))</p></li>
+<li><p><strong>kernel</strong> (<em>list</em><em> or </em><em>tuple</em>) – The 2D kernel size to use of shape (kH, kW) for each layer.
+(default = (7, 7))</p></li>
+<li><p><strong>label_shape</strong> (<em>list</em><em> or </em><em>tuple</em>) – The size of the position labels after converting from real positions to the compressed cell representation.
+(default = (33, 33))</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – How often neurons should drop out.
+(default = 0.1)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.ObjectDetector2D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#ObjectDetector2D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.ObjectDetector2D.forward" title="Link to this definition">#</a></dt>
+<dd><p>Take a tensor and identify any vortices and their positions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensor</em><em> of </em><em>shape</em><em> (</em><em>B</em><em>, </em><em>1</em><em>, </em><em>H</em><em>, </em><em>W</em><em>)</em>) – The input tensor to make a prediction on. The expected shape is of shape (B, 1, H, W), where B is the batch
+size, H is the image height, and W is the image width.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>x</strong> – The output tensor containing the probabilities for a vortex to be present in one of the cells and its
+fractional position within a cell. Here B is the batch size and dimension 1 contains the probability (0),
+the vertical position in the cell (1), and the horizontal position within the cell (2). For the position
+values 0 to 1 indicate which side of the cell and by extension which pixel after conversion.
+Dimension 2 indicates the number of cells in the vertical direction and dimension 3 indicates the number of
+cells in the horizontal direction.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor of shape (B, 3, H // 4, W // 4)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexDetector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">VortexDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexDetector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexDetector" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="qgain.html#qgain.detector.Detector" title="qgain.detector.Detector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Detector</span></code></a></p>
+<p>Detect vortices in images of BECs.</p>
+<p>This uses the Q-GAIN library to set up a detector suitable for detecting vortices in images of BECs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em>) – Optional keywords to be passed to the object detection model initialization.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexDetector.plot_metrics">
+<span class="sig-name descname"><span class="pre">plot_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'object</span> <span class="pre">detector'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexDetector.plot_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexDetector.plot_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Run plotting routines and display the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> (<em>list</em>) – The plotting tools to use.
+(default = (‘object detector’))</p></li>
+<li><p><strong>style</strong> (<em>str</em>) – An optional argument to specify a matplotlib style file and change the overall look of the plots.
+(default = None)</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – An optional argument that will save the output rather than display it.
+(default = False)</p></li>
+<li><p><strong>plot_kwargs</strong> (<em>dict</em><em> of </em><em>dicts</em>) – Optional arguments to be passed to the tool’s callable function. This dictionary should contain the name of
+the plotting tool as a key with its value being the keyword dictionary to pass to the function.
+(default = None)</p></li>
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The data to generate plots from. By default this is the data loaded into the detector object. If using a
+different target the function expects a similar structure to that of the SolDet module.
+(default = None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexDetector.use_models">
+<span class="sig-name descname"><span class="pre">use_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexDetector.use_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexDetector.use_models" title="Link to this definition">#</a></dt>
+<dd><p>Use the vortex detector to make predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_paths</strong> (<em>list</em>) – The names of the saved weights. These should end in ‘object.pt’.</p></li>
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em>) – The target data to use the model on. By default this will be the data loaded into the detector object. It
+is possible to use external data by providing a list of dicts or dicts of dicts to this argument.
+(default = None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexDetector.vortex_counter">
+<span class="sig-name descname"><span class="pre">vortex_counter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexDetector.vortex_counter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexDetector.vortex_counter" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of identified objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>dict</em><em> or </em><em>numpy array</em>) – The data to make predictions on.</p></li>
+<li><p><strong>model_path</strong> (<em>str</em>) – The path to the saved weights for the model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>count_list</strong> – A list of counts for each provided image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexODDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">VortexODDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(132,</span> <span class="pre">132)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">augment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexODDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexODDataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>A dataset class for the ML based 2D object detector.</p>
+<p>This will work through a list, or dictionary, of dictionaries and grab the image data. This image data is
+expected to be at key ‘data’. It will also grab the positions at key ‘positions’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> of </em><em>dicts</em>) – The data to build a dataset from.</p></li>
+<li><p><strong>threshold</strong> (<em>list</em><em> or </em><em>tuple</em>) – A list of values that influence the conversion between real positions and cell positions.
+Threshold[0] is the minimum value to consider an excitation is present.
+Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this
+value is considered the same excitation.
+(default = (0.5, 8))</p></li>
+<li><p><strong>dims</strong> (<em>list</em><em> or </em><em>tuple</em>) – The shape of the image data.
+(default = (132, 132))</p></li>
+<li><p><strong>augment</strong> (<em>bool</em>) – Specifies whether or not to augment the input data with rotations, translations, and flips.
+(default = False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexODDataset.data_to_labels">
+<span class="sig-name descname"><span class="pre">data_to_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexODDataset.data_to_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexODDataset.data_to_labels" title="Link to this definition">#</a></dt>
+<dd><p>Convert the positions in pixel space to positions and probability in cell space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label_in</strong> (<em>list</em>) – A list of position lists.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>labels</strong> – The positions and probabilities in the cell space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.VortexODDataset.labels_to_data">
+<span class="sig-name descname"><span class="pre">labels_to_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#VortexODDataset.labels_to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.VortexODDataset.labels_to_data" title="Link to this definition">#</a></dt>
+<dd><p>Convert the labels in cell space to positions in pixel space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>label_out</strong> (<em>ndarray</em>) – An array of probability and fractional position values in cell space.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>labels</strong> – positions in pixel space</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.accu_metric">
+<span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">accu_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targ</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#accu_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.accu_metric" title="Link to this definition">#</a></dt>
+<dd><p>Accuracy metric for vortex object detector.</p>
+<p>This checks the probability cell for the presence of an excitation and tracks how many are correct.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – The output tensor of the model</p></li>
+<li><p><strong>targ</strong> (<em>Tensor</em>) – The target labels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>correct</strong> – The accuracy of correctly identified vortices.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.vortex_data_to_labels">
+<span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">vortex_data_to_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xdim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">132</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ydim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">132</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#vortex_data_to_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.vortex_data_to_labels" title="Link to this definition">#</a></dt>
+<dd><p>Label conversion function.</p>
+<p>Convert between vortex positions in pixel space and cell space. This new space is a compressed representation of
+the positions in pixel space and the probability of them being present in a cell. The new space is a (3, 33, 33)
+array of values with the first (33, 33) entries representing the probability of an excitation being located in a
+cell, and the other two (33, 33) entries representing the fractional position of the excitation in that cell.
+Each cell represents a window of 4 x 4 pixels (H x W).</p>
+<p>This will convert from pixel space to cell space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_in</strong> (<em>list</em>) – A list of positions in pixel space. Valid input can be a list of a single value for single image input, or a
+list of sub lists of positions for multiple images. The output will be an array of (3, 33, 33).</p></li>
+<li><p><strong>xdim</strong> (<em>int</em>) – The horizontal dimension of the image data.
+(default = 132)</p></li>
+<li><p><strong>ydim</strong> (<em>int</em>) – The vertical dimension of the image data.
+(default = 132)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>label_out</strong> – Array of (3, 33, 33) values in cell space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.vortex_labels_to_data">
+<span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">vortex_labels_to_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#vortex_labels_to_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.vortex_labels_to_data" title="Link to this definition">#</a></dt>
+<dd><p>Label conversion function.</p>
+<p>Convert between vortex positions in pixel space and cell space. This new space is a compressed representation of
+the positions in pixel space and the probability of them being present in a cell. The new space is a (3, 33, 33)
+array of values with the first (33, 33) entries representing the probability of an excitation being located in a
+cell, and the other two (33, 33) entries representing the fractional position of the excitation in that cell.
+Each cell represents a window of 4 x 4 pixels (H x W).</p>
+<p>This will convert from cell space to pixel space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_in</strong> (<em>ndarray</em>) – For each cell whose probability is above the threshold will have a position calculated. This position will be
+based on the fractional position in the cell. If multiple excitations exists next to each other and fall below
+the threshold the average positions will be calculated between the two.</p></li>
+<li><p><strong>threshold</strong> (<em>list</em>) – A list of values that influence the conversion between real positions and cell positions.
+Threshold[0] is the minimum value to consider that an excitation is present.
+Threshold[1] is the minimum distance two excitations can be considered seperate. Any distances under this
+value is considered the same excitation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>label_out</strong> – The list of positions in pixel space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qgain.vdet.vortex_detector.vortex_process_fn">
+<span class="sig-prename descclassname"><span class="pre">qgain.vdet.vortex_detector.</span></span><span class="sig-name descname"><span class="pre">vortex_process_fn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'unlabeled'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qgain/vdet/vortex_detector.html#vortex_process_fn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qgain.vdet.vortex_detector.vortex_process_fn" title="Link to this definition">#</a></dt>
+<dd><p>Process function for vortex data.</p>
+<p>This will load in a target numpy data file containing image arrays and prepare it for use by the vortex detector.
+Corresponding position labels can be provided which expects a numpy array containing position data for each entry in
+the image array data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_path</strong> (<em>string</em>) – The target file containing the image data. This should be a numpy file of arrays of image data of shape
+(N, H, W).</p></li>
+<li><p><strong>pos_path</strong> (<em>string</em>) – The target file containing the position data for vortex locations. This should be a numpy object file of a
+list or array of N lists or tuples containing the X, Y positions for each vortex.
+(default = None)</p></li>
+<li><p><strong>tag</strong> (<em>string</em><em> or </em><em>int</em>) – A descriptive label for the image.
+(default = ‘unlabeled’)</p></li>
+<li><p><strong>scale</strong> (<em>list</em><em> or </em><em>None</em>) – Specifies the min max values to use for scaling the data to lay between 0 and 1.
+If None then no scaling is performed on the data.
+(default = None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p><strong>data_samples</strong> – A list of dictionaries containing the collected pre-processed data</p>
+<dl class="simple">
+<dt>Each dictionary contains, at minimum:</dt><dd><p>The masked and unmasked image data of shape (132, 132).
+The tag value.
+The sub-directory.
+The original image size.
+The original data path.</p>
+</dd>
+</dl>
+<p>If positions were provided these are also saved in the dictionary entries.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="qgain.soldet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SolDet Subpackage</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../further.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Further Information</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qgain.vdet.vortex_detector">qgain.vdet.vortex_detector module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.MetzLoss2D"><code class="docutils literal notranslate"><span class="pre">MetzLoss2D</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.MetzLoss2D.forward"><code class="docutils literal notranslate"><span class="pre">MetzLoss2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectCell"><code class="docutils literal notranslate"><span class="pre">ObjectCell</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectCell.forward"><code class="docutils literal notranslate"><span class="pre">ObjectCell.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectDetector2D"><code class="docutils literal notranslate"><span class="pre">ObjectDetector2D</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.ObjectDetector2D.forward"><code class="docutils literal notranslate"><span class="pre">ObjectDetector2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector"><code class="docutils literal notranslate"><span class="pre">VortexDetector</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector.plot_metrics"><code class="docutils literal notranslate"><span class="pre">VortexDetector.plot_metrics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector.use_models"><code class="docutils literal notranslate"><span class="pre">VortexDetector.use_models()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexDetector.vortex_counter"><code class="docutils literal notranslate"><span class="pre">VortexDetector.vortex_counter()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexODDataset"><code class="docutils literal notranslate"><span class="pre">VortexODDataset</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexODDataset.data_to_labels"><code class="docutils literal notranslate"><span class="pre">VortexODDataset.data_to_labels()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.VortexODDataset.labels_to_data"><code class="docutils literal notranslate"><span class="pre">VortexODDataset.labels_to_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.accu_metric"><code class="docutils literal notranslate"><span class="pre">accu_metric()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.vortex_data_to_labels"><code class="docutils literal notranslate"><span class="pre">vortex_data_to_labels()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.vortex_labels_to_data"><code class="docutils literal notranslate"><span class="pre">vortex_labels_to_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qgain.vdet.vortex_detector.vortex_process_fn"><code class="docutils literal notranslate"><span class="pre">vortex_process_fn()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

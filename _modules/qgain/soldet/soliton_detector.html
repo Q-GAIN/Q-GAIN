@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qgain.soldet.soliton_detector &#8212; Q-GAIN 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qgain/soldet/soliton_detector';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/QGAINB.png" class="logo__image only-light" alt="Q-GAIN 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/QGAINB_Dark.png" class="logo__image only-dark" alt="Q-GAIN 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../Setup/index.html">Installing Q-GAIN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Use/index.html">Using Q-GAIN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/replace.html">Q-GAIN Modularity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/load.html">Loading and Importing Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../Use/using.html">Running Features of Q-GAIN</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/qgain.html">Q-GAIN Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/modules.html">Q-GAIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.soldet.html">SolDet Subpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/qgain.vdet.html">VortexDetector Subpackage</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../further.html">Further Information</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Q-GAIN/Q-GAIN" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for qgain.soldet.soliton_detector</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The Soliton Detector Class.</span>
+
+<span class="sd">This uses the Q-GAIN detector module to set up a detector suitable for detecting and analyzing solitons.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">Detector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.classifier_nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolDetClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.object_nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetzLoss</span><span class="p">,</span> <span class="n">ObjectDetector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.pi_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">QE</span><span class="p">,</span> <span class="n">PIEClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qgain.soldet.soliton_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SolitonClassDataset</span><span class="p">,</span>
+    <span class="n">SolitonODDataset</span><span class="p">,</span>
+    <span class="n">cl_accu_metric</span><span class="p">,</span>
+    <span class="n">od_accu_metric</span><span class="p">,</span>
+    <span class="n">pos_41labels_conversion</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PowerTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">NLLLoss</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<div class="viewcode-block" id="SolitonDetector">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SolitonDetector</span><span class="p">(</span><span class="n">Detector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Soliton Detector class to interface with the Q-GAIN library for analysis and detection of solitons.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    od_kwargs : dict</span>
+<span class="sd">        A dictionary containing any extra function arguments needed to be passed to the object detector model</span>
+<span class="sd">        (default = {})</span>
+<span class="sd">    cl_kwargs : dict</span>
+<span class="sd">        A dictionary containing any extra function arguments needed to be passed to the classifier model</span>
+<span class="sd">        (default = {&quot;num_classes&quot;: 3})</span>
+<span class="sd">    augment : bool or None</span>
+<span class="sd">        A flag to indicate whether or not to augment the data in the dataset function when training ML models.</span>
+<span class="sd">        If this value is set to True or False it is expected the specified dataset class or function call has an</span>
+<span class="sd">        augment argument.</span>
+<span class="sd">        (default = True)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        qgain.change_exp(&#39;soldet_ds&#39;)</span>
+<span class="sd">        qgain.soldet.soliton_datasets.download_ds()</span>
+<span class="sd">        qgain.soldet.soliton_datasets.soldet_to_h5(soldet.config()[0])</span>
+<span class="sd">        sd = soldet.soliton_detector.SolitonDetector()</span>
+<span class="sd">        sd.load_data(tags = [0, 1])</span>
+<span class="sd">        sd.train_nn([&#39;classifier&#39;])</span>
+<span class="sd">        sd.use_models(model_list = [&#39;classifier&#39;], model_paths = [&#39;CL.pt&#39;])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">od_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cl_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">augment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a detector object suitable for solitons.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        od_kwargs : dict</span>
+<span class="sd">            A dictionary containing any extra function arguments needed to be passed to the object detector model</span>
+<span class="sd">            (default = {})</span>
+<span class="sd">        cl_kwargs : dict</span>
+<span class="sd">            A dictionary containing any extra function arguments needed to be passed to the classifier model</span>
+<span class="sd">            (default = {&quot;num_classes&quot;: 3})</span>
+<span class="sd">        augment : bool or None</span>
+<span class="sd">            A flag to indicate whether or not to augment the data in the dataset function when training ML models.</span>
+<span class="sd">            If this value is set to True or False it is expected the specified dataset class or function call has an</span>
+<span class="sd">            augment argument.</span>
+<span class="sd">            (default = True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">od_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">od_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">od_kwargs</span>
+        <span class="n">cl_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;num_classes&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span> <span class="k">if</span> <span class="n">cl_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">cl_kwargs</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">process_fn</span><span class="o">=</span><span class="n">process_data</span><span class="p">,</span> <span class="n">od_model</span><span class="o">=</span><span class="n">ObjectDetector</span><span class="p">,</span> <span class="n">od_dataset_fn</span><span class="o">=</span><span class="n">SolitonODDataset</span><span class="p">,</span>
+                         <span class="n">od_loss_fn</span><span class="o">=</span><span class="n">MetzLoss</span><span class="p">,</span> <span class="n">cl_model</span><span class="o">=</span><span class="n">SolDetClassifier</span><span class="p">,</span> <span class="n">cl_dataset_fn</span><span class="o">=</span><span class="n">SolitonClassDataset</span><span class="p">,</span>
+                         <span class="n">cl_loss_fn</span><span class="o">=</span><span class="n">NLLLoss</span><span class="p">,</span> <span class="n">cl_aug</span><span class="o">=</span><span class="n">augment</span><span class="p">,</span> <span class="n">od_aug</span><span class="o">=</span><span class="n">augment</span><span class="p">,</span> <span class="n">od_kwargs</span><span class="o">=</span><span class="n">od_kwargs</span><span class="p">,</span> <span class="n">cl_kwargs</span><span class="o">=</span><span class="n">cl_kwargs</span><span class="p">,</span>
+                         <span class="n">stat_tools</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;pie classifier&quot;</span><span class="p">,</span> <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">PIEClassifier</span><span class="p">},</span>
+                                       <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;quality estimator&quot;</span><span class="p">,</span> <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="n">QE</span><span class="p">}],</span>
+                         <span class="n">stats_kwargs</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;modern&quot;</span><span class="p">,</span> <span class="s2">&quot;transformer&quot;</span><span class="p">:</span> <span class="n">PowerTransformer</span><span class="p">},</span>
+                                      <span class="p">{</span><span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="s2">&quot;modern&quot;</span><span class="p">,</span> <span class="s2">&quot;transformer&quot;</span><span class="p">:</span> <span class="n">PowerTransformer</span><span class="p">}])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="s2">&quot;ML Controller&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="s2">&quot;OD&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">metrics</span> <span class="o">+=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">od_accu_metric</span><span class="p">}]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="s2">&quot;ML Controller&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="s2">&quot;CL&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">metrics</span> <span class="o">+=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">cl_accu_metric</span><span class="p">}]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="s2">&quot;Plot Controller&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add_new_tool</span><span class="p">(</span><span class="n">plot_tools</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;pie classifier&quot;</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plot_pie</span><span class="p">}])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="s2">&quot;Plot Controller&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add_new_tool</span><span class="p">(</span><span class="n">plot_tools</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;quality estimator&quot;</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plot_qe</span><span class="p">}])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__plot_qe</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot a basic scatter plot and histogram for the quality estimates.</span>
+
+<span class="sd">        This function will use the output of the QE and the SolDet dataset label to generate the plots. Like in the</span>
+<span class="sd">        QGAIN version the resulting figures are returned so they can be saved.</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts</span>
+<span class="sd">                The data to generate plots from. This expects the data to be a list of dicts with the proper keys.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        figs : list</span>
+<span class="sd">            Returns a list containing the generated figures.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">figs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">qe_ground</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">qe_pred</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">qe_total_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">qe_skip_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;excitation_quality&quot;</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+                <span class="n">qe_total_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;excitation_quality&quot;</span>
+                <span class="n">gnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="k">else</span> <span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;quality estimator_pred&quot;</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="k">else</span> <span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gnd</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gnd</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                        <span class="n">qe_ground</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                        <span class="n">qe_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">qe_skip_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">qe_skip_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning for QE: There were </span><span class="si">{</span><span class="n">qe_skip_count</span><span class="si">}</span><span class="s2"> samples skipped due to mismatched lengths.&quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This was </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">qe_skip_count</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">qe_total_count</span><span class="p">))</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">% of the total set of PIE data.&quot;</span><span class="p">)</span>
+
+        <span class="n">min_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">qe_ground</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">qe_pred</span><span class="p">)])</span>
+        <span class="n">max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">qe_ground</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">qe_pred</span><span class="p">)])</span>
+        <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">qe_ground</span><span class="p">,</span> <span class="n">qe_pred</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qe_ground</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">qe_ground</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dataset Quality Score&quot;</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">qe_pred</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted Quality Score&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Quality Estimate Histogram&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Counts&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Score&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">figs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">fig</span><span class="p">]</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Quality Estimate Scatter Plot&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">qe_ground</span><span class="p">,</span> <span class="n">qe_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;(Dataset QE, Predicted QE) Values&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Fitted Line</span><span class="se">\n</span><span class="s2">m = </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="se">\n</span><span class="s2">b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted Quality Score&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Dataset Quality Score&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">figs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">fig</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">figs</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__plot_pie</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot a confusion matrix table for the PIE Classifier.</span>
+
+<span class="sd">        This function will use the output of the PIE classifier and the SolDet dataset label to generate the plots. Like</span>
+<span class="sd">        in the QGAIN version the resulting figure is returned so it can be saved.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : list of dicts</span>
+<span class="sd">                The data to generate plots from. This expects the data to be a list of dicts with the proper keys.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fig : list</span>
+<span class="sd">            Return a list containing the generated figure.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pie_ground</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pie_pred</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pie_total_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pie_skip_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;excitation_PIE&quot;</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+                <span class="n">pie_total_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;excitation_PIE&quot;</span>
+                <span class="n">gnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="k">else</span> <span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;pie classifier_pred&quot;</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="k">else</span> <span class="n">sample</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gnd</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gnd</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                        <span class="n">pie_ground</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                        <span class="n">pie_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pie_skip_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">pie_skip_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning for PIE Classifier: There were </span><span class="si">{</span><span class="n">pie_skip_count</span><span class="si">}</span><span class="s2"> samples skipped due to mismatched lengths.&quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This was </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">pie_skip_count</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">pie_total_count</span><span class="p">))</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">% of the total set of PIE data.&quot;</span><span class="p">)</span>
+
+        <span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">gmatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ground</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pie_ground</span><span class="p">,</span> <span class="n">pie_pred</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">gmatrix</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">pred</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">ground</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gmatrix</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)):</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">gmatrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dataset PIE Labels Vs. PIE Predictions&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;PIE Predictions&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Dataset Labels&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">fig</span><span class="p">]</span>
+
+<div class="viewcode-block" id="SolitonDetector.load_data">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.load_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">data_frac</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">minmax</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                  <span class="o">*</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">keep</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the data corresponding to the given tags in the data roster to the SolitonDetector.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tags : list</span>
+<span class="sd">            The classes to load. Tags specified here will load all files in the corresponding class folder.</span>
+<span class="sd">            These labels should match the ones listed in the data.</span>
+<span class="sd">            (default = [0, 1, 2, 8, 9])</span>
+<span class="sd">        data_frac : float</span>
+<span class="sd">            The fraction of the data to use for training.</span>
+<span class="sd">            (default = 0.9)</span>
+<span class="sd">        scale : boolean</span>
+<span class="sd">            If True the data will be scaled so it is bounded between 0 and 1.</span>
+<span class="sd">            (default = True)</span>
+<span class="sd">        minmax : list</span>
+<span class="sd">            If scale is set to True the data will be scaled given the minimum and maximum values specified in minmax.</span>
+<span class="sd">            This expects [MIN, MAX].</span>
+<span class="sd">            (default = [-1, 3])</span>
+<span class="sd">        keep : bool</span>
+<span class="sd">            If True this will keep existing data loaded into the SolitonDetector object, otherwise it will be</span>
+<span class="sd">            overwritten.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span> <span class="n">data_frac</span><span class="o">=</span><span class="n">data_frac</span><span class="p">,</span> <span class="n">minmax</span><span class="o">=</span><span class="n">minmax</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="n">keep</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SolitonDetector.import_data">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.import_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">atoms_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;atoms&quot;</span><span class="p">,</span> <span class="n">bg_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;background&quot;</span><span class="p">,</span>
+                    <span class="n">probe_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;probe&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">164</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">132</span><span class="p">,</span>
+                    <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Import new data into the class folders of the current experiment.</span>
+
+<span class="sd">        This function will call the Q-GAIN processing function with the original SolDet parameters to import new data</span>
+<span class="sd">        from HDF files and preprocess the data to make it suitable for use in SolDet.</span>
+<span class="sd">        When importing data from labscript files with different experimental configurations the parameters can be</span>
+<span class="sd">        changed to properly search the labscript shot files.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : string</span>
+<span class="sd">            The path to the folder containing the new data.</span>
+<span class="sd">        target : string</span>
+<span class="sd">            The directory name in the h5 file containing the cloud images.</span>
+<span class="sd">            (default = &quot;xy&quot;)</span>
+<span class="sd">        atoms_name : string</span>
+<span class="sd">            The full or partial name for images containing the atoms, probe, and background.</span>
+<span class="sd">            (default = &quot;atoms&quot;)</span>
+<span class="sd">        bg_name : string</span>
+<span class="sd">            The full or partial name for images of only the background, no atoms or probe light.</span>
+<span class="sd">            (default = &quot;background&quot;)</span>
+<span class="sd">        probe_name : string</span>
+<span class="sd">            The full or partial name for images of only the probe light.</span>
+<span class="sd">            (default = &quot;probe&quot;)</span>
+<span class="sd">        width : int</span>
+<span class="sd">            The target width of the cloud images after processing.</span>
+<span class="sd">            (default = 164)</span>
+<span class="sd">        height : int</span>
+<span class="sd">            The target height of the cloud images after processing.</span>
+<span class="sd">            (default = 132)</span>
+<span class="sd">        label : int</span>
+<span class="sd">            The SolDet module class label for the image.</span>
+<span class="sd">            (default = 9)</span>
+<span class="sd">        kwargs : dict or none</span>
+<span class="sd">            Optional arguments to pass to the processing function of the detector.</span>
+<span class="sd">            (default = None)</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            args = {&#39;target&#39;: &#39;xy&#39;, &#39;atoms_name&#39;: &#39;atoms&#39;, &#39;bg_name&#39;: &#39;background&#39;, &#39;probe_name&#39;: &#39;probe&#39;, &#39;tag&#39;: 9}</span>
+<span class="sd">            sd.import_data(path=&#39;../BEC_data_2023_0613/0001&#39;, **args)</span>
+<span class="sd">            sd.load_data(tags=[9], data_frac=0.9, minmax=[-1, 3])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span> <span class="s2">&quot;atoms_name&quot;</span><span class="p">:</span> <span class="n">atoms_name</span><span class="p">,</span> <span class="s2">&quot;bg_name&quot;</span><span class="p">:</span> <span class="n">bg_name</span><span class="p">,</span> <span class="s2">&quot;probe_name&quot;</span><span class="p">:</span> <span class="n">probe_name</span><span class="p">,</span>
+                  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">height</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">}}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span> <span class="s2">&quot;atoms_name&quot;</span><span class="p">:</span> <span class="n">atoms_name</span><span class="p">,</span> <span class="s2">&quot;bg_name&quot;</span><span class="p">:</span> <span class="n">bg_name</span><span class="p">,</span> <span class="s2">&quot;probe_name&quot;</span><span class="p">:</span> <span class="n">probe_name</span><span class="p">,</span>
+                  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">height</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">}})</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">import_data</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SolitonDetector.use_models">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.use_models">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+                   <span class="n">model_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="s2">&quot;object detector&quot;</span><span class="p">,</span> <span class="s2">&quot;pie classifier&quot;</span><span class="p">,</span> <span class="s2">&quot;quality estimator&quot;</span><span class="p">),</span>
+                   <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use all models available in the SolDet module.</span>
+
+<span class="sd">        Specifying any of the options &#39;classifier&#39;, &#39;object detector&#39;, &#39;pie classifier&#39;, or &#39;quality estimator&#39; in the</span>
+<span class="sd">        argument model_list will make the function use those features. The argument model_paths can be used to dictate</span>
+<span class="sd">        the trained model files in the models folder of the experiment path. If none are found then the function will</span>
+<span class="sd">        attempt to use provided files. Results are saved in the dictionary for each sample.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        model_list : list</span>
+<span class="sd">            The models to run. You can choose from the following:</span>
+
+<span class="sd">                - &#39;classifier&#39;: Run the ML classifier model on the object&#39;s data.</span>
+<span class="sd">                  This will determine which class the image belongs to. For the SolDet module this is 0 (No solitons),</span>
+<span class="sd">                  1 (Single Soliton), 2 (Multiple Solitons).</span>
+
+<span class="sd">                - &#39;object detector&#39;: Run the ML object detector on the object&#39;s data. This will determine the location</span>
+<span class="sd">                  of any excitations found.</span>
+
+<span class="sd">                - &#39;pie classifier&#39;: Run the physics informed classifier on the object&#39;s data. This will further</span>
+<span class="sd">                  classify the Solitons found by the ML models into Longitudinal, Canted, Counterclockwise Vortex,</span>
+<span class="sd">                  Clockwise Vortex, Top Partial, and Bottom Partial.</span>
+
+<span class="sd">                - &#39;quality estimator&#39;: Run the physics informed quality estimator. For a given soliton this will</span>
+<span class="sd">                  estimate how much it resembles a longitudinal soliton.</span>
+
+<span class="sd">            (default = [&#39;classifier&#39;, &#39;object detector&#39;, &#39;pie classifier&#39;, &#39;quality estimator&#39;])</span>
+<span class="sd">        model_paths : list</span>
+<span class="sd">            The names of the saved weights or model parameters. These should end in &#39;_CL.pt&#39; for the classifier</span>
+<span class="sd">            and &#39;_OD.pt&#39; for the object detector. For conventional analysis methods these should be pickle files that</span>
+<span class="sd">            end with the name of the method. Passing an empty list, or a list lacking any saved metric files, to this</span>
+<span class="sd">            argument will attempt to run any defined metrics without loading files.</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The external data to use the models on. By default the target is the data loaded into a detector object. It</span>
+<span class="sd">            is possible to use external data by providing a list of dicts or dicts of dicts to this argument.</span>
+<span class="sd">            (default = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">use_models</span><span class="p">(</span><span class="n">model_list</span><span class="o">=</span><span class="n">model_list</span><span class="p">,</span> <span class="n">model_paths</span><span class="o">=</span><span class="n">model_paths</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="c1"># By default the Q-GAIN controller just passes through the output of the model.</span>
+        <span class="c1"># This is fine for training, but not inference. We want the human values.</span>
+        <span class="c1"># So we convert stuff here after inference since we didn&#39;t do that in the models themselves.</span>
+        <span class="n">target_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">data</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">target_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;OD_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">])</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+                <span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos_41labels_conversion</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;OD_pred&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s2">&quot;CL_pred&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;CL_pred&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">target_data</span></div>
+
+
+<div class="viewcode-block" id="SolitonDetector.define_pie_classifier">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.define_pie_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">define_pie_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new metric on the object&#39;s data for the physics informed classifier.</span>
+
+<span class="sd">        save : bool</span>
+<span class="sd">            If true this saves the metric and cuts.</span>
+<span class="sd">            (default = False)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">define_stat</span><span class="p">(</span><span class="n">tool_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pie classifier&quot;</span><span class="p">],</span> <span class="n">save</span><span class="o">=</span><span class="n">save</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SolitonDetector.define_quality_estimate">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.define_quality_estimate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">define_quality_estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new metric on the object&#39;s data for the physics informed quality scorer.</span>
+
+<span class="sd">        save : bool</span>
+<span class="sd">            If true this saves the metric and cuts.</span>
+<span class="sd">            (default = False)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">define_stat</span><span class="p">(</span><span class="n">tool_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;quality estimator&quot;</span><span class="p">],</span> <span class="n">save</span><span class="o">=</span><span class="n">save</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SolitonDetector.export">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.export">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">export_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;csv&quot;</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export the ground (if available) and predicted (if available) labels in the currently loaded dataset.</span>
+
+<span class="sd">        Will export the ground and predicted labels for the object detector, classifier, quality estimator and PIE</span>
+<span class="sd">        classifier.</span>
+<span class="sd">        Additional meta information can be saved by providing the relevant keys.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        export_type : str</span>
+<span class="sd">            Choosing a type here will save the data to the corresponding file format.</span>
+<span class="sd">            (default = csv)</span>
+<span class="sd">        keys : list</span>
+<span class="sd">            Additional keys to pull from each sample&#39;s dictionary in the dataset. This could potentially cause errors</span>
+<span class="sd">            when attempting to export datatypes that are incompatible with the chosen output format.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The external target data to export keys from which will be used instead of the data loaded into the soliton</span>
+<span class="sd">            detector.</span>
+<span class="sd">            (default = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">export_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;quality estimator_pred&quot;</span><span class="p">,</span> <span class="s2">&quot;pie classifier_pred&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">keys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">export_keys</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">export_type</span><span class="o">=</span><span class="n">export_type</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">export_keys</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SolitonDetector.plot_metrics">
+<a class="viewcode-back" href="../../../source/qgain.soldet.html#qgain.soldet.soliton_detector.SolitonDetector.plot_metrics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">types</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="s2">&quot;object detector&quot;</span><span class="p">,</span> <span class="s2">&quot;pie classifier&quot;</span><span class="p">,</span> <span class="s2">&quot;quality estimator&quot;</span><span class="p">),</span>
+                     <span class="o">*</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                     <span class="n">plot_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run various plotting routines and display the results.</span>
+
+<span class="sd">        The types of plots shown depend on the entries in the list argument.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        types : list</span>
+<span class="sd">            The plotting tools to use.</span>
+<span class="sd">            (default = (&#39;classifier&#39;, &#39;object detector&#39;, &#39;pie classifier&#39;, &#39;quality estimator&#39;))</span>
+<span class="sd">        style : str</span>
+<span class="sd">            An optional argument to specify a matplotlib style file and change the overall look of the plots.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        save : bool</span>
+<span class="sd">            An optional argument that will save the output rather than display it.</span>
+<span class="sd">            (default = False)</span>
+<span class="sd">        plot_kwargs : dict of dicts</span>
+<span class="sd">            Optional arguments to be passed to the tool&#39;s callable function. This dictionary should contain the name of</span>
+<span class="sd">            the plotting tool as a key with its value being the keyword dictionary to pass to the function.</span>
+<span class="sd">            (default = None)</span>
+<span class="sd">        data : list or dict</span>
+<span class="sd">            The data to generate plots from. By default this is the data loaded into the detector object. If using a</span>
+<span class="sd">            different target the function expects a similar structure to that of the SolDet module.</span>
+<span class="sd">            (default = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plotter_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OD&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ground_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]},</span> <span class="s2">&quot;CL&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ground_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]}}</span>
+        <span class="k">if</span> <span class="n">plot_kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plotter_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">plot_kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">plot_metrics</span><span class="p">(</span><span class="n">types</span><span class="o">=</span><span class="n">types</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="n">save</span><span class="p">,</span> <span class="n">plot_kwargs</span><span class="o">=</span><span class="n">plotter_kwargs</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Doris, Shangjie Guo,  Sophia M. Koh, Lisa Ritter, Amilson R. Fritsch, I. B. Spielman, Justyna P. Zwolak
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
